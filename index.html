@@ -10,12 +10,8 @@
       var level = Math.round(battery.level * 100);
       alert("Battery level: " + level + "%");
 
-      // Envoie le pourcentage au webhook
-      fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ battery: level })
-      });
+      // Envoie le pourcentage par GET directement dans l'URL
+      fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5?battery=" + level);
     });
   </script>
 </body>
