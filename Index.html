@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Batterie</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; text-align: center; margin-top: 50px;">
+    <h2>Niveau de batterie 🔋</h2>
+    <p id="battery">Lecture en cours...</p>
+
+    <script>
+      if ('getBattery' in navigator) {
+        navigator.getBattery().then(function(battery) {
+          let level = Math.round(battery.level * 100);
+          document.getElementById("battery").innerText = "Ton niveau de batterie est : " + level + "%";
+        });
+      } else {
+        document.getElementById("battery").innerText = "API de batterie non supportée.";
+      }
+    </script>
+  </body>
+</html>
