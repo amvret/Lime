@@ -1,17 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <title>Battery Spy</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page de Reg</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f7f7f7; padding: 20px; }
+    .container { background: #fff; padding: 20px; max-width: 400px; margin: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, button { width: 100%; padding: 10px; margin: 8px 0; }
+    button { background: #0284c7; color: white; border: none; cursor: pointer; }
+    #infos { margin-top: 15px; padding: 10px; background: #e0f7fa; border-radius: 5px; }
+  </style>
 </head>
 <body>
-  <h1>Checking battery...</h1>
-  <script>
-    navigator.getBattery().then(function(battery) {
-      var level = Math.round(battery.level * 100);
-      alert("Battery level: " + level + "%");
+  <div class="container">
+    <h2>Inscription</h2>
+    <p>Code de parrainage : <span id="code">–</span></p>
+    <form id="regForm">
+      <input type="text" id="name" placeholder="Ton nom" required>
+      <input type="tel" id="phone" placeholder="Numéro" required>
+      <button type="submit">Envoyer</button>
+    </form>
+    <p id="msg"></p>
+    <div id="infos"></div> <!-- Zone pour afficher les infos -->
+  </div>
 
-      // Envoie le pourcentage par GET directement dans l'URL
-      fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5?battery=" + level);
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code') || 'NON-DÉFINI';
+    document.getElementById('code').innerText = code;
+
+    document.getElementById('regForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+
+      // Simuler l'envoi
+      console.log('Inscription →', { name, phone, code });
+
+      // Afficher les infos
+      document.getElementById('infos').innerHTML = `
+        <strong>Données récupérées :</strong><br>
+        Nom : ${name}<br>
+        Téléphone : ${phone}<br>
+        Code : ${code}
+      `;
+
+      document.getElementById('msg').innerText = 'Merci, inscription reçue !';
+      this.reset();
     });
   </script>
 </body>
