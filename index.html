@@ -1,144 +1,189 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE html><html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connexion Lime</title>
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
     body {
       margin: 0;
-      padding: 0;
-      background-color: #00e045;
-    }
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }.background {
+  background: url('https://i.imgur.com/AVktJnm.png') no-repeat center top;
+  background-size: cover;
+  height: 50vh;
+  position: relative;
+}
 
-    .top-image {
-      width: 100%;
-      height: 300px;
-      background-image: url('https://i.imgur.com/AVktJnm.png');
-      background-size: cover;
-      background-position: center;
-    }
+.container {
+  background-color: #fff;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  margin-top: -40px;
+  padding: 30px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .form-container {
-      background-color: white;
-      border-top-left-radius: 30px;
-      border-top-right-radius: 30px;
-      margin-top: -50px;
-      padding: 30px 20px;
-      text-align: center;
-    }
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 120px;
+}
 
-    .logo {
-      width: 100px;
-      margin-bottom: 20px;
-    }
+h2 {
+  text-align: center;
+  color: #2ecc71;
+  margin: 20px 0;
+}
 
-    .form-group {
-      display: flex;
-      align-items: center;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      background-color: #f5f5f5;
-      overflow: hidden;
-    }
+.form-group {
+  margin-bottom: 20px;
+}
 
-    .prefix {
-      background-color: #e0e0e0;
-      padding: 12px;
-      font-size: 16px;
-      border-right: 1px solid #ccc;
-      display: flex;
-      align-items: center;
-    }
+.phone-input {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
-    .prefix input {
-      width: 50px;
-      border: none;
-      background: none;
-      text-align: center;
-      font-size: 16px;
-    }
+.prefix {
+  background: #eee;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    .form-group input[type="tel"],
-    .form-group input[type="password"] {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      background: none;
-      font-size: 16px;
-    }
+.prefix:hover {
+  background: #ddd;
+}
 
-    .form-group input:focus {
-      outline: none;
-    }
+.input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  outline: none;
+  color: green;
+}
 
-    .btn {
-      background-color: #00e045;
-      color: white;
-      font-weight: bold;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      width: 100%;
-      font-size: 18px;
-      cursor: pointer;
-    }
+.input::placeholder {
+  color: green;
+}
 
-    .btn:hover {
-      background-color: #00c03a;
-    }
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: green;
+}
 
-    .link {
-      margin-top: 15px;
-      display: block;
-      color: #00e045;
-      text-decoration: none;
-      font-size: 15px;
-    }
+.form-group input[type="password"]::placeholder {
+  color: green;
+}
 
-    .link:hover {
-      text-decoration: underline;
-    }
+.btn {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
-    @media screen and (min-width: 500px) {
-      .form-container {
-        width: 400px;
-        margin: -50px auto 0;
-      }
-    }
+.btn:hover {
+  background-color: #27ae60;
+}
+
+.link {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.link a {
+  color: #2ecc71;
+  text-decoration: none;
+}
+
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+}
+
+.country-option {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.country-option:hover {
+  background: #f0f0f0;
+}
+
   </style>
 </head>
 <body>
-
-  <!-- Image en haut -->
-  <div class="top-image"></div>
-
-  <!-- Formulaire -->
-  <div class="form-container">
-    <img src="https://i.imgur.com/ZCXUO3X.png" alt="Lime Logo" class="logo">
-
-    <!-- Téléphone avec préfixe modifiable -->
-    <div class="form-group">
-      <div class="prefix">
-        <input type="text" value="+221" />
-      </div>
-      <input type="tel" placeholder="Numéro de téléphone" />
-    </div>
-
-    <!-- Mot de passe -->
-    <div class="form-group">
-      <input type="password" placeholder="Mot de passe" />
-    </div>
-
-    <button class="btn">Se connecter</button>
-    <a href="#" class="link">Aller à l'inscription ></a>
+  <div class="background"></div>  <div class="container">
+    <img src="https://i.imgur.com/ZCXUO3X.png" alt="Logo Lime" class="logo">
+    <h2>Connexion</h2><div class="form-group">
+  <div class="phone-input">
+    <div class="prefix" id="prefix" onclick="openModal()">+221</div>
+    <input type="text" class="input" placeholder="Entrez votre numéro de téléphone">
   </div>
+</div>
 
-</body>
+<div class="form-group">
+  <input type="password" placeholder="Entrez votre mot de passe">
+</div>
+
+<button class="btn">Se connecter</button>
+
+<div class="link">
+  <a href="#">Aller à l'inscription ></a>
+</div>
+
+  </div>  <!-- Modal -->  <div id="modal">
+    <div id="modal-content">
+      <h3>Sélectionner l'indicatif du pays</h3>
+      <div class="country-option" onclick="setPrefix('+221')">🇸🇳 Senegal (+221)</div>
+      <div class="country-option" onclick="setPrefix('+226')">🇧🇫 Burkina Faso (+226)</div>
+      <div class="country-option" onclick="setPrefix('+229')">🇧🇯 Benin (+229)</div>
+      <div class="country-option" onclick="setPrefix('+237')">🇨🇲 Cameroon (+237)</div>
+    </div>
+  </div>  <script>
+    function openModal() {
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function setPrefix(prefix) {
+      document.getElementById("prefix").innerText = prefix;
+      document.getElementById("modal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("modal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script></body>
 </html>
