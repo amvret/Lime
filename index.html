@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion Lime</title>
   <style>
     * {
@@ -11,7 +11,6 @@
 
     body {
       margin: 0;
-      padding: 0;
       background-color: #00cc44;
       font-family: Arial, sans-serif;
     }
@@ -25,7 +24,7 @@
     .form-container {
       background-color: white;
       max-width: 400px;
-      margin: -50px auto 40px;
+      margin: -40px auto 40px;
       padding: 30px 20px;
       border-radius: 20px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -35,6 +34,7 @@
     .form-container h1 {
       color: #00cc44;
       margin-bottom: 20px;
+      font-size: 24px;
     }
 
     select, input {
@@ -79,9 +79,10 @@
 </head>
 <body>
 
-  <!-- IMAGE DU MEC SUR LE VÉLO -->
-  <img class="header-image" src="https://i.ibb.co/M2XkYxW/lime-bike.jpg" alt="Lime vélo">
+  <!-- IMAGE DU MEC SUR LA TROTTINETTE -->
+  <img class="header-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Lime_scooter_with_rider.jpg/800px-Lime_scooter_with_rider.jpg" alt="Lime trottinette">
 
+  <!-- FORMULAIRE DE CONNEXION -->
   <div class="form-container">
     <h1>Connexion</h1>
 
@@ -89,9 +90,12 @@
       <select>
         <option value="+226">+226</option>
         <option value="+33">+33</option>
+        <!-- Tu peux ajouter d'autres pays ici -->
       </select>
+
       <input type="tel" placeholder="Entrez votre numéro de téléphone" required>
       <input type="password" placeholder="Entrez votre mot de passe" required>
+
       <button type="submit" class="btn">Se connecter</button>
     </form>
 
