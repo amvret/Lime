@@ -183,9 +183,8 @@
 
       fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5", {
         method: "POST",
-        mode: "cors",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "text/plain"  // ✅ évite les blocages CORS
         },
         body: JSON.stringify(data)
       })
