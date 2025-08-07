@@ -2,85 +2,120 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Connexion - Lucky Invests</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Feuille de style principale -->
-  <link rel="stylesheet" href="https://www.luckyinvests.cc/public/v2/css/common.css">
-  <link rel="stylesheet" href="https://www.luckyinvests.cc/public/v2/layui/css/layui.css">
-
+  <title>Connexion</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: sans-serif;
-      background: #f3f3f3;
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
     }
+
+    .top-image {
+      width: 100%;
+      height: auto;
+    }
+
+    .wave {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      margin-top: -5px;
+      background: #ffffff;
+      border-bottom-left-radius: 100% 40px;
+      border-bottom-right-radius: 100% 40px;
+    }
+
     .container {
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 30px;
-      background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-radius: 8px;
+      background-color: white;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      margin-top: -40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
-    .logo {
-      display: block;
-      margin: 0 auto 20px;
-      width: 100px;
-    }
+
     .form-group {
       margin-bottom: 20px;
     }
-    .form-group input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #555;
+      font-size: 15px;
     }
-    button {
+
+    select, input[type="text"], input[type="password"] {
       width: 100%;
       padding: 12px;
-      background-color: #f90;
-      border: none;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .phone-input {
+      display: flex;
+      gap: 6px;
+    }
+
+    .phone-input select {
+      width: 80px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #26334d;
       color: white;
-      font-weight: bold;
-      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
       cursor: pointer;
     }
-    .footer-text {
+
+    .bottom-links {
+      display: flex;
+      justify-content: space-between;
       margin-top: 20px;
-      text-align: center;
-    }
-    .footer-text a {
-      color: #f90;
-      text-decoration: none;
+      font-size: 15px;
+      color: #26334d;
     }
   </style>
 </head>
 <body>
 
+  <img src="https://merloapp.com/static/100logo.png" alt="Merlo" class="top-image">
+
+  <div class="wave"></div>
+
   <div class="container">
-    <img src="https://www.luckyinvests.cc/public/v2/img/login_logo.png" alt="Logo" class="logo">
-
-    <form action="/api/login" method="POST">
-      <div class="form-group">
-        <input type="text" name="phone" placeholder="Numéro de téléphone" required>
+    <div class="form-group">
+      <label>Numéro de portable</label>
+      <div class="phone-input">
+        <select>
+          <option value="+225">+225</option>
+        </select>
+        <input type="text" placeholder="Numéro de portable">
       </div>
+    </div>
 
-      <div class="form-group">
-        <input type="text" name="code" placeholder="Code" required>
-      </div>
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" placeholder="Mot de passe">
+    </div>
 
-      <div class="form-group">
-        <input type="password" name="password" placeholder="Mot de passe" required>
-      </div>
+    <button class="btn">Se connecter</button>
 
-      <button type="submit">Se Connecter Maintenant</button>
-
-      <div class="footer-text">
-        Vous n'avez pas de compte ? <a href="/register">Inscrivez-vous</a>
-      </div>
-    </form>
+    <div class="bottom-links">
+      <span>Service client</span>
+      <span>S'inscrire</span>
+    </div>
   </div>
 
 </body>
