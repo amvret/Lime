@@ -31,12 +31,30 @@
       margin-top: 0;
       color: #888;
     }
-    label {
-      display: block;
-      font-weight: bold;
-      margin: 20px 0 8px;
+
+    /* Téléphone flottant */
+    .phone-group {
+      position: relative;
+      margin-top: 20px;
     }
-    .phone-input {
+    .phone-group label {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      background-color: #f7f7f7;
+      padding: 0 4px;
+      color: #aaa;
+      transition: 0.2s ease all;
+      pointer-events: none;
+    }
+    .phone-input:focus + label,
+    .phone-input:not(:placeholder-shown) + label {
+      top: -8px;
+      font-size: 12px;
+      color: #2968ff;
+    }
+    .phone-wrapper {
       display: flex;
       align-items: center;
       border: 1px solid #ddd;
@@ -44,22 +62,25 @@
       padding: 10px;
       background-color: #f7f7f7;
     }
-    .phone-input select {
+    .phone-wrapper select {
       border: none;
       background: transparent;
       font-size: 16px;
       margin-right: 10px;
       outline: none;
     }
-    .phone-input input {
+    .phone-wrapper input {
       border: none;
       outline: none;
       font-size: 16px;
       flex: 1;
       background: transparent;
     }
+
+    /* Mot de passe */
     .password-input {
       position: relative;
+      margin-top: 20px;
     }
     .password-input input {
       width: 100%;
@@ -78,18 +99,20 @@
       transform: translateY(-50%);
       cursor: pointer;
     }
+
     button {
       width: 100%;
       padding: 14px;
       background-color: #2968ff;
       color: white;
       border: none;
-      border-radius: 30px;
+      border-radius: 8px;
       font-size: 16px;
       font-weight: bold;
       margin-top: 30px;
       cursor: pointer;
     }
+
     .signup {
       margin-top: 20px;
       text-align: center;
@@ -106,17 +129,20 @@
     <h2>Bienvenue à nous rejoindre</h2>
     <p>Connectez-vous à votre compte</p>
 
-    <label>Numéro de Téléphone</label>
-    <div class="phone-input">
-      <select>
-        <option value="+221">+221</option>
-      </select>
-      <input type="tel" placeholder="Veuillez entrer votre numéro de télé">
+    <!-- Téléphone animé -->
+    <div class="phone-group">
+      <div class="phone-wrapper">
+        <select>
+          <option value="+221">+221</option>
+        </select>
+        <input type="tel" class="phone-input" placeholder=" " required>
+        <label>Numéro de Téléphone</label>
+      </div>
     </div>
 
-    <label>Mot de passe de Connexion</label>
+    <!-- Mot de passe sans animation -->
     <div class="password-input">
-      <input type="password" placeholder="Mot de passe de Connexion" id="password-field" maxlength="50">
+      <input type="password" id="password-field" maxlength="50" placeholder="">
       <svg class="toggle-password" id="togglePassword" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="#5e5e5e">
         <path d="M0 0h24v24H0z" fill="none"/>
         <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.03 0-5.5-2.47-5.5-5.5S8.97 6.5 12 6.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5zm0-9c-1.93 0-3.5 1.57-3.5 3.5S10.07 15.5 12 15.5s3.5-1.57 3.5-3.5S13.93 8.5 12 8.5z"/>
