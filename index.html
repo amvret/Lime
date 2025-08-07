@@ -31,30 +31,13 @@
       margin-top: 0;
       color: #888;
     }
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 20px 0 8px;
+    }
 
-    /* Téléphone flottant */
-    .phone-group {
-      position: relative;
-      margin-top: 20px;
-    }
-    .phone-group label {
-      position: absolute;
-      top: 50%;
-      left: 15px;
-      transform: translateY(-50%);
-      background-color: #f7f7f7;
-      padding: 0 4px;
-      color: #aaa;
-      transition: 0.2s ease all;
-      pointer-events: none;
-    }
-    .phone-input:focus + label,
-    .phone-input:not(:placeholder-shown) + label {
-      top: -8px;
-      font-size: 12px;
-      color: #2968ff;
-    }
-    .phone-wrapper {
+    .phone-input {
       display: flex;
       align-items: center;
       border: 1px solid #ddd;
@@ -62,14 +45,14 @@
       padding: 10px;
       background-color: #f7f7f7;
     }
-    .phone-wrapper select {
+    .phone-input select {
       border: none;
       background: transparent;
       font-size: 16px;
       margin-right: 10px;
       outline: none;
     }
-    .phone-wrapper input {
+    .phone-input input {
       border: none;
       outline: none;
       font-size: 16px;
@@ -77,10 +60,8 @@
       background: transparent;
     }
 
-    /* Mot de passe */
     .password-input {
       position: relative;
-      margin-top: 20px;
     }
     .password-input input {
       width: 100%;
@@ -92,6 +73,7 @@
       background-color: #f7f7f7;
       outline: none;
     }
+
     .toggle-password {
       position: absolute;
       top: 50%;
@@ -106,7 +88,7 @@
       background-color: #2968ff;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 30px;
       font-size: 16px;
       font-weight: bold;
       margin-top: 30px;
@@ -129,27 +111,29 @@
     <h2>Bienvenue à nous rejoindre</h2>
     <p>Connectez-vous à votre compte</p>
 
-    <!-- Téléphone animé -->
-    <div class="phone-group">
-      <div class="phone-wrapper">
-        <select>
-          <option value="+221">+221</option>
-        </select>
-        <input type="tel" class="phone-input" placeholder=" " required>
-        <label>Numéro de Téléphone</label>
-      </div>
+    <label>Numéro de Téléphone</label>
+    <div class="phone-input">
+      <select>
+        <option value="+221">+221</option>
+        <option value="+225">+225</option>
+        <option value="+226">+226</option>
+        <option value="+228">+228</option>
+        <option value="+229">+229</option>
+        <option value="+237">+237</option>
+      </select>
+      <input type="tel" placeholder="Veuillez entrer votre numéro de télé">
     </div>
 
-    <!-- Mot de passe sans animation -->
+    <label>Mot de Passe de Connexion</label>
     <div class="password-input">
-      <input type="password" id="password-field" maxlength="50" placeholder="">
-      <svg class="toggle-password" id="togglePassword" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="#5e5e5e">
-        <path d="M0 0h24v24H0z" fill="none"/>
-        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.03 0-5.5-2.47-5.5-5.5S8.97 6.5 12 6.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5zm0-9c-1.93 0-3.5 1.57-3.5 3.5S10.07 15.5 12 15.5s3.5-1.57 3.5-3.5S13.93 8.5 12 8.5z"/>
+      <input type="password" placeholder="Mot de Passe de Connexion" id="password-field" maxlength="50">
+      <svg class="toggle-password" id="togglePassword" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#5e5e5e" viewBox="0 0 24 24">
+        <path d="M12 6a9.77 9.77 0 018.94 6A9.77 9.77 0 0112 18a9.77 9.77 0 01-8.94-6A9.77 9.77 0 0112 6m0-2C6.48 4 1.73 7.61 0 12c1.73 4.39 6.48 8 12 8s10.27-3.61 12-8c-1.73-4.39-6.48-8-12-8zm0 5a3 3 0 013 3 3 3 0 01-3 3 3 3 0 01-3-3 3 3 0 013-3m0 10c-2.5 0-4.71-1.28-6-3.22a5.96 5.96 0 006-3.78 5.96 5.96 0 006 3.78C16.71 17.72 14.5 19 12 19z"/>
+        <line id="eye-line" x1="3" y1="3" x2="21" y2="21" stroke="#5e5e5e" stroke-width="2" style="display: none;"/>
       </svg>
     </div>
 
-    <button>Connecter Maintenant</button>
+    <button>Se Connecter Maintenant</button>
 
     <div class="signup">
       Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a>
@@ -159,10 +143,15 @@
   <script>
     const toggle = document.getElementById('togglePassword');
     const password = document.getElementById('password-field');
+    const eyeLine = document.getElementById('eye-line');
 
     toggle.addEventListener('click', () => {
       const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
       password.setAttribute('type', type);
+
+      if (eyeLine) {
+        eyeLine.style.display = type === 'password' ? 'none' : 'block';
+      }
     });
   </script>
 </body>
