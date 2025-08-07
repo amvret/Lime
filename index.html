@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion</title>
   <style>
     * {
@@ -11,31 +11,28 @@
 
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #ffffff;
     }
 
     .top-image {
       width: 100%;
-      height: auto;
+      display: block;
     }
 
     .wave {
-      position: relative;
-      width: 100%;
-      height: 80px;
-      margin-top: -5px;
-      background: #ffffff;
+      height: 60px;
+      background-color: white;
       border-bottom-left-radius: 100% 40px;
       border-bottom-right-radius: 100% 40px;
+      margin-top: -5px;
     }
 
     .container {
       background-color: white;
       max-width: 500px;
-      margin: 0 auto;
+      margin: -30px auto 0;
       padding: 30px 20px;
-      margin-top: -40px;
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
@@ -51,21 +48,39 @@
       font-size: 15px;
     }
 
-    select, input[type="text"], input[type="password"] {
+    .phone-group {
+      display: flex;
+      width: 100%;
+    }
+
+    .phone-group select,
+    .phone-group input[type="text"] {
+      font-size: 16px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-right: none;
+      outline: none;
+    }
+
+    .phone-group select {
+      width: 90px;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+
+    .phone-group input[type="text"] {
+      flex: 1;
+      border-left: none;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+
+    input[type="password"] {
       width: 100%;
       padding: 12px;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 6px;
-    }
-
-    .phone-input {
-      display: flex;
-      gap: 6px;
-    }
-
-    .phone-input select {
-      width: 80px;
     }
 
     .btn {
@@ -97,7 +112,7 @@
   <div class="container">
     <div class="form-group">
       <label>Numéro de portable</label>
-      <div class="phone-input">
+      <div class="phone-group">
         <select>
           <option value="+225">+225</option>
         </select>
