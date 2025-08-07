@@ -4,170 +4,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f8f8;
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
-
-    .card {
-      background: #fff;
-      padding: 30px 25px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    .container {
       width: 90%;
-      max-width: 360px;
+      max-width: 400px;
     }
-
-    h2 {
-      font-size: 20px;
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
       margin-bottom: 5px;
-      text-align: center;
     }
-
     p {
-      text-align: center;
-      color: #888;
-      margin-bottom: 25px;
+      color: #777;
+      margin-top: 0;
+      margin-bottom: 30px;
     }
-
     label {
       display: block;
-      font-weight: bold;
-      font-size: 14px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      font-weight: 500;
     }
-
     .phone-input {
       display: flex;
-      background: #f1f1f1;
-      border-radius: 10px;
-      padding: 0 10px;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .phone-input select {
-      border: none;
-      background: transparent;
-      font-size: 15px;
-      padding: 12px 5px;
-      outline: none;
-    }
-
-    .phone-input input {
-      border: none;
-      background: transparent;
-      flex: 1;
-      padding: 12px 8px;
-      font-size: 15px;
-      outline: none;
-    }
-
-    .password-input {
-      position: relative;
-      background: #f1f1f1;
-      border-radius: 10px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
       margin-bottom: 20px;
     }
-
-    .password-input input {
-      width: 100%;
-      padding: 12px 40px 12px 12px;
+    .phone-input select {
       border: none;
-      background: transparent;
-      font-size: 15px;
+      padding: 12px;
+      background: #f9f9f9;
+      font-size: 14px;
       outline: none;
     }
-
+    .phone-input input {
+      flex: 1;
+      border: none;
+      padding: 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    .password-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .password-container input {
+      width: 100%;
+      padding: 12px 44px 12px 12px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+    }
     .toggle-password {
       position: absolute;
-      top: 50%;
       right: 12px;
+      top: 50%;
       transform: translateY(-50%);
+      background: none;
+      border: none;
       cursor: pointer;
+      padding: 4px;
     }
-
-    .toggle-password img {
-      width: 20px;
-      height: 20px;
+    .toggle-password svg {
+      width: 24px;
+      height: 24px;
     }
-
     button {
       width: 100%;
-      padding: 14px;
-      background: #3f65ff;
+      background-color: #3b6cff;
       color: white;
-      font-size: 15px;
-      font-weight: bold;
+      padding: 14px;
+      font-size: 16px;
       border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .bottom-text {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .bottom-text a {
-      color: #3f65ff;
+      border-radius: 999px;
       font-weight: bold;
+      cursor: pointer;
+    }
+    .bottom-text {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .bottom-text a {
+      color: #3b6cff;
       text-decoration: none;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Bienvenue à nous rejoindre</h2>
+  <div class="container">
+    <h1>Bienvenue à nous rejoindre</h1>
     <p>Connectez-vous à votre compte</p>
 
-    <form method="POST">
-      <label>Numéro de Téléphone</label>
-      <div class="phone-input">
-        <select name="code" required>
-          <option value="+221">+221</option>
-          <option value="+225">+225</option>
-          <option value="+226">+226</option>
-          <option value="+228">+228</option>
-          <option value="+229">+229</option>
-          <option value="+237">+237</option>
-        </select>
-        <input type="tel" name="phone" placeholder="Veuillez entrer votre numéro" required>
-      </div>
+    <label for="phone">Numéro de Téléphone</label>
+    <div class="phone-input">
+      <select name="code" id="code">
+        <option value="+221">+221</option>
+        <option value="+225">+225</option>
+        <option value="+226">+226</option>
+        <option value="+228">+228</option>
+        <option value="+229">+229</option>
+        <option value="+237">+237</option>
+      </select>
+      <input type="tel" placeholder="Veuillez entrer votre numéro de téléphone" />
+    </div>
 
-      <label>Mot de Passe de Connexion</label>
-      <div class="password-input">
-        <input type="password" name="password" placeholder="Mot de Passe de Connexion" id="password">
-        <span class="toggle-password" onclick="togglePassword()">
-          <img src="https://img.icons8.com/ios-glyphs/30/visible--v1.png" alt="Voir">
-        </span>
-      </div>
+    <label for="password">Code de Connexion</label>
+    <div class="password-container">
+      <input type="password" id="password" placeholder="Code de Connexion" />
+      <button type="button" class="toggle-password" onclick="togglePassword()">
+        <!-- Icône œil barré (mot de passe caché) -->
+        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M17.94 17.94A10.5 10.5 0 0 1 12 19.5C7.05 19.5 2.73 16.29 1.5 12c.57-1.73 1.65-3.28 3.06-4.5m3.07-2.12A10.44 10.44 0 0 1 12 4.5c4.95 0 9.27 3.21 10.5 7.5a10.56 10.56 0 0 1-2.53 4.34M1 1l22 22" />
+        </svg>
+      </button>
+    </div>
 
-      <button type="submit">Se Connecter Maintenant</button>
-    </form>
+    <button type="submit">Se Connecter Maintenant</button>
 
     <div class="bottom-text">
-      Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a>
+      Vous n’avez pas de compte ? <a href="#">Inscrivez-vous</a>
     </div>
   </div>
 
   <script>
     function togglePassword() {
-      const input = document.getElementById("password");
-      input.type = input.type === "password" ? "text" : "password";
+      const input = document.getElementById('password');
+      const icon = document.getElementById('eye-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.innerHTML = `
+          <circle cx="12" cy="12" r="10" stroke="none"/>
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+          <circle cx="12" cy="12" r="3"/>
+        `;
+      } else {
+        input.type = 'password';
+        icon.innerHTML = `
+          <path d="M17.94 17.94A10.5 10.5 0 0 1 12 19.5C7.05 19.5 2.73 16.29 1.5 12c.57-1.73 1.65-3.28 3.06-4.5m3.07-2.12A10.44 10.44 0 0 1 12 4.5c4.95 0 9.27 3.21 10.5 7.5a10.56 10.56 0 0 1-2.53 4.34M1 1l22 22" />
+        `;
+      }
     }
   </script>
 </body>
