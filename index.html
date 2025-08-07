@@ -17,26 +17,39 @@
       align-items: center;
       min-height: 100vh;
       position: relative;
+      overflow: hidden;
     }
+
+    .wave-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 0;
+    }
+
     .logo {
-      margin-top: 50px;
+      margin-top: 40px;
       z-index: 2;
     }
+
     .logo img {
       width: 160px;
       height: auto;
     }
+
     .container {
-      background-color: #fff;
+      background-color: #ffffff;
       width: 90%;
       max-width: 400px;
-      margin-top: 40px;
+      margin-top: 30px;
       border-radius: 20px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       padding: 30px 20px;
       position: relative;
       z-index: 2;
     }
+
     .input-group {
       display: flex;
       align-items: center;
@@ -46,11 +59,13 @@
       margin-bottom: 15px;
       color: #999;
     }
+
     .input-group span {
       color: #009fe3;
       margin-right: 8px;
       font-weight: bold;
     }
+
     .input-group input {
       border: none;
       background: transparent;
@@ -59,6 +74,7 @@
       font-size: 16px;
       color: #333;
     }
+
     .btn {
       width: 100%;
       padding: 14px;
@@ -71,27 +87,27 @@
       cursor: pointer;
       margin-top: 10px;
     }
+
     .bottom-text {
       text-align: center;
       margin-top: 15px;
       font-size: 14px;
       color: #888;
     }
+
     .bottom-text a {
       color: #666;
       text-decoration: none;
       font-weight: bold;
       margin-left: 5px;
     }
-    .background-wave {
+
+    .orange-bg {
       position: absolute;
       bottom: 0;
-      left: 0;
       width: 100%;
       height: 250px;
       background-color: #ffb830;
-      border-top-left-radius: 60px;
-      border-top-right-radius: 60px;
       z-index: 1;
     }
   </style>
@@ -119,7 +135,13 @@
     </div>
   </div>
 
-  <div class="background-wave"></div>
+  <!-- Orange background -->
+  <div class="orange-bg"></div>
+
+  <!-- SVG wave that creates the white zigzag style -->
+  <svg class="wave-bg" viewBox="0 0 500 150" preserveAspectRatio="none" height="100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.00,49.98 C150.00,150.00 349.65,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: white;"></path>
+  </svg>
 
 </body>
 </html>
