@@ -1,138 +1,87 @@
 <!DOCTYPE html>
-<html>
- 
+<html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Se connecter</title>
-    <link rel="stylesheet" href="/public/v2/layui/css/layui.css">
-    <link rel="stylesheet" href="/public/v2/css/common.css">
-    <!-- Meta Pixel Code -->
-    <script>
-        ! function(f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function() {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '535168576253856');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=535168576253856&ev=PageView&noscript=1" /></noscript>
-    <!-- End Meta Pixel Code -->
+  <meta charset="UTF-8">
+  <title>Connexion - Lucky Invests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Feuille de style principale -->
+  <link rel="stylesheet" href="https://www.luckyinvests.cc/public/v2/css/common.css">
+  <link rel="stylesheet" href="https://www.luckyinvests.cc/public/v2/layui/css/layui.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f3f3f3;
+    }
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .logo {
+      display: block;
+      margin: 0 auto 20px;
+      width: 100px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #f90;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .footer-text {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .footer-text a {
+      color: #f90;
+      text-decoration: none;
+    }
+  </style>
 </head>
- 
-<body class="login_body">
-    <div class="login_header">
-        <div class="login_title">Bienvenue à nous rejoindre</div>
-        <div class="login_desc">Connectez-vous à votre compte</div>
-    </div>
- 
-    <div class="login_bg">
-        <div class="main">
-            <div class="login_form">
-                <form class="layui-form layui-form-pane">
- 
-                    <div class="form_container">
-                        <div class="label">Numéro de Téléphone</div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label flex_space" id="area_code">
-                                <input type="hidden" name="area_code" id="area_code_val">
-                                <p class="area_code_text">code</p>
-                                <i class="layui-icon layui-icon-down layui-font-12"></i>
-                            </label>
-                            <div class="layui-input-block" style="border: none">
-                                <input type="text" name="username" value="" style="border: none" lay-verify="required" placeholder="Veuillez entrer votre numéro de téléphone" autocomplete="off" class="layui-input" lay-affix="clear">
-                            </div>
-                        </div>
-                        <div class="label">Mot de Passe de Connexion</div>
-                        <div class="layui-form-item">
- 
-                            <div class="layui-input-wrap" style="border: none;background: none;">
- 
-                                <input type="password" name="password" value="" lay-verify="required" placeholder="Mot de Passe de Connexion" autocomplete="off" class="layui-input" lay-affix="eye" style="border-radius:8px;">
-                            </div>
-                        </div>
- 
- 
-                        <div style="margin-top: 30px;">
-                            <button class="layui-btn  layui-btn-lg layui-btn-fluid layui-btn-radius login_btn" lay-submit lay-filter="login">Se Connecter Maintenant</button>
-                            <a href="/register" class="register_link">Vous n'avez pas de compte ? <span style="color: #4568E8;font-weight: 700">Inscrivez-vous</span></a>
-                        </div>
- 
-                    </div>
-                </form>
-            </div>
- 
- 
-        </div>
-    </div>
- 
- 
- 
- 
-    <script src="/public/v1/layui/layui.js"></script>
-    <script>
-        layui.use(function() {
-            var $ = layui.jquery;
-            var form = layui.form;
-            var layer = layui.layer;
-            var dropdown = layui.dropdown;
- 
-            dropdown.render({
-                elem: '#area_code',
-                data: [{
-                    title: '+221',
-                    id: 221
-                }, {
-                    title: '+225',
-                    id: 225
-                }, {
-                    title: '+226',
-                    id: 226
-                }, {
-                    title: '+228',
-                    id: 228
-                }, {
-                    title: '+229',
-                    id: 229
-                }, {
-                    title: '+237',
-                    id: 237
-                }],
-                click: function(obj) {
-                    $('.area_code_text').text(obj.title)
-                    $('#area_code_val').val(obj.title)
-                    layer.msg(obj.title)
-                }
-            });
-            form.on('submit(login)', function(data) {
-                var data = data.field;
-                $.post('/doLogin', data, function(res) {
-                    console.log(res)
-                    layer.msg(res.msg);
-                    if (res.status == 1) {
-                        window.location.href = window.location.origin
- 
-                    }
-                })
-                return false;
-            });
- 
-        });
-    </script>
+<body>
+
+  <div class="container">
+    <img src="https://www.luckyinvests.cc/public/v2/img/login_logo.png" alt="Logo" class="logo">
+
+    <form action="/api/login" method="POST">
+      <div class="form-group">
+        <input type="text" name="phone" placeholder="Numéro de téléphone" required>
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="code" placeholder="Code" required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Mot de passe" required>
+      </div>
+
+      <button type="submit">Se Connecter Maintenant</button>
+
+      <div class="footer-text">
+        Vous n'avez pas de compte ? <a href="/register">Inscrivez-vous</a>
+      </div>
+    </form>
+  </div>
+
 </body>
- 
 </html>
