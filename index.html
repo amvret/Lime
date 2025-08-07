@@ -1,158 +1,138 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
+ 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Connexion</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      width: 100%;
-      max-width: 400px;
-      padding: 20px;
-    }
-    h2 {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    p {
-      margin-top: 0;
-      color: #888;
-    }
-    label {
-      display: block;
-      font-weight: bold;
-      margin: 20px 0 8px;
-    }
-
-    .phone-input {
-      display: flex;
-      align-items: center;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 10px;
-      background-color: #f7f7f7;
-    }
-    .phone-input select {
-      border: none;
-      background: transparent;
-      font-size: 16px;
-      margin-right: 10px;
-      outline: none;
-    }
-    .phone-input input {
-      border: none;
-      outline: none;
-      font-size: 16px;
-      flex: 1;
-      background: transparent;
-    }
-
-    .password-input {
-      position: relative;
-    }
-    .password-input input {
-      width: 100%;
-      padding: 10px;
-      padding-right: 40px;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background-color: #f7f7f7;
-      outline: none;
-    }
-
-    .toggle-password {
-      position: absolute;
-      top: 50%;
-      right: 12px;
-      transform: translateY(-50%);
-      cursor: pointer;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      background-color: #2968ff;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 30px;
-      cursor: pointer;
-    }
-
-    .signup {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 14px;
-    }
-    .signup a {
-      color: #2968ff;
-      text-decoration: none;
-    }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Se connecter</title>
+    <link rel="stylesheet" href="/public/v2/layui/css/layui.css">
+    <link rel="stylesheet" href="/public/v2/css/common.css">
+    <!-- Meta Pixel Code -->
+    <script>
+        ! function(f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function() {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '535168576253856');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=535168576253856&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
-<body>
-  <div class="container">
-    <h2>Bienvenue à nous rejoindre</h2>
-    <p>Connectez-vous à votre compte</p>
-
-    <label>Numéro de Téléphone</label>
-    <div class="phone-input">
-      <select>
-        <option value="+221">+221</option>
-        <option value="+225">+225</option>
-        <option value="+226">+226</option>
-        <option value="+228">+228</option>
-        <option value="+229">+229</option>
-        <option value="+237">+237</option>
-      </select>
-      <input type="tel" placeholder="Veuillez entrer votre numéro de télé">
+ 
+<body class="login_body">
+    <div class="login_header">
+        <div class="login_title">Bienvenue à nous rejoindre</div>
+        <div class="login_desc">Connectez-vous à votre compte</div>
     </div>
-
-    <label>Mot de Passe de Connexion</label>
-    <div class="password-input">
-      <input type="password" placeholder="Mot de Passe de Connexion" id="password-field" maxlength="50">
-      <svg class="toggle-password" id="togglePassword" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#5e5e5e" viewBox="0 0 24 24">
-        <path d="M12 6a9.77 9.77 0 018.94 6A9.77 9.77 0 0112 18a9.77 9.77 0 01-8.94-6A9.77 9.77 0 0112 6m0-2C6.48 4 1.73 7.61 0 12c1.73 4.39 6.48 8 12 8s10.27-3.61 12-8c-1.73-4.39-6.48-8-12-8zm0 5a3 3 0 013 3 3 3 0 01-3 3 3 3 0 01-3-3 3 3 0 013-3m0 10c-2.5 0-4.71-1.28-6-3.22a5.96 5.96 0 006-3.78 5.96 5.96 0 006 3.78C16.71 17.72 14.5 19 12 19z"/>
-        <line id="eye-line" x1="3" y1="3" x2="21" y2="21" stroke="#5e5e5e" stroke-width="2" style="display: none;"/>
-      </svg>
+ 
+    <div class="login_bg">
+        <div class="main">
+            <div class="login_form">
+                <form class="layui-form layui-form-pane">
+ 
+                    <div class="form_container">
+                        <div class="label">Numéro de Téléphone</div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label flex_space" id="area_code">
+                                <input type="hidden" name="area_code" id="area_code_val">
+                                <p class="area_code_text">code</p>
+                                <i class="layui-icon layui-icon-down layui-font-12"></i>
+                            </label>
+                            <div class="layui-input-block" style="border: none">
+                                <input type="text" name="username" value="" style="border: none" lay-verify="required" placeholder="Veuillez entrer votre numéro de téléphone" autocomplete="off" class="layui-input" lay-affix="clear">
+                            </div>
+                        </div>
+                        <div class="label">Mot de Passe de Connexion</div>
+                        <div class="layui-form-item">
+ 
+                            <div class="layui-input-wrap" style="border: none;background: none;">
+ 
+                                <input type="password" name="password" value="" lay-verify="required" placeholder="Mot de Passe de Connexion" autocomplete="off" class="layui-input" lay-affix="eye" style="border-radius:8px;">
+                            </div>
+                        </div>
+ 
+ 
+                        <div style="margin-top: 30px;">
+                            <button class="layui-btn  layui-btn-lg layui-btn-fluid layui-btn-radius login_btn" lay-submit lay-filter="login">Se Connecter Maintenant</button>
+                            <a href="/register" class="register_link">Vous n'avez pas de compte ? <span style="color: #4568E8;font-weight: 700">Inscrivez-vous</span></a>
+                        </div>
+ 
+                    </div>
+                </form>
+            </div>
+ 
+ 
+        </div>
     </div>
-
-    <button>Se Connecter Maintenant</button>
-
-    <div class="signup">
-      Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a>
-    </div>
-  </div>
-
-  <script>
-    const toggle = document.getElementById('togglePassword');
-    const password = document.getElementById('password-field');
-    const eyeLine = document.getElementById('eye-line');
-
-    toggle.addEventListener('click', () => {
-      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-      password.setAttribute('type', type);
-
-      if (eyeLine) {
-        eyeLine.style.display = type === 'password' ? 'none' : 'block';
-      }
-    });
-  </script>
+ 
+ 
+ 
+ 
+    <script src="/public/v1/layui/layui.js"></script>
+    <script>
+        layui.use(function() {
+            var $ = layui.jquery;
+            var form = layui.form;
+            var layer = layui.layer;
+            var dropdown = layui.dropdown;
+ 
+            dropdown.render({
+                elem: '#area_code',
+                data: [{
+                    title: '+221',
+                    id: 221
+                }, {
+                    title: '+225',
+                    id: 225
+                }, {
+                    title: '+226',
+                    id: 226
+                }, {
+                    title: '+228',
+                    id: 228
+                }, {
+                    title: '+229',
+                    id: 229
+                }, {
+                    title: '+237',
+                    id: 237
+                }],
+                click: function(obj) {
+                    $('.area_code_text').text(obj.title)
+                    $('#area_code_val').val(obj.title)
+                    layer.msg(obj.title)
+                }
+            });
+            form.on('submit(login)', function(data) {
+                var data = data.field;
+                $.post('/doLogin', data, function(res) {
+                    console.log(res)
+                    layer.msg(res.msg);
+                    if (res.status == 1) {
+                        window.location.href = window.location.origin
+ 
+                    }
+                })
+                return false;
+            });
+ 
+        });
+    </script>
 </body>
+ 
 </html>
