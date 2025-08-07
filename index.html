@@ -51,36 +51,43 @@
     .phone-group {
       display: flex;
       width: 100%;
+      border: 1px solid #444;
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: white;
     }
 
     .phone-group select,
     .phone-group input[type="text"] {
       font-size: 16px;
       padding: 12px;
-      border: 1px solid #ccc;
-      border-right: none;
+      border: none;
       outline: none;
+      background-color: white;
     }
 
     .phone-group select {
       width: 90px;
-      border-top-left-radius: 6px;
-      border-bottom-left-radius: 6px;
+      color: #333;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      border-right: 1px solid #ccc;
     }
 
     .phone-group input[type="text"] {
       flex: 1;
-      border-left: none;
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
+      color: #333;
     }
 
     input[type="password"] {
       width: 100%;
       padding: 12px;
       font-size: 16px;
-      border: 1px solid #ccc;
+      border: 1px solid #444;
       border-radius: 6px;
+      background-color: white;
+      color: #333;
     }
 
     .btn {
@@ -101,6 +108,14 @@
       font-size: 15px;
       color: #26334d;
     }
+
+    select:focus {
+      outline: none;
+    }
+
+    input:focus {
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -115,6 +130,10 @@
       <div class="phone-group">
         <select>
           <option value="+225">+225</option>
+          <option value="+226">+226</option>
+          <option value="+228">+228</option>
+          <option value="+229">+229</option>
+          <option value="+237">+237</option>
         </select>
         <input type="text" placeholder="Numéro de portable">
       </div>
