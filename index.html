@@ -10,153 +10,133 @@
     }
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fff;
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 30px 20px;
+      height: 100vh;
     }
-
-    h1 {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    p {
-      color: #666;
-      margin-top: 0;
-      margin-bottom: 30px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
-
-    .input-group {
+    .container {
       width: 100%;
       max-width: 400px;
-      margin-bottom: 20px;
-      position: relative;
+      padding: 20px;
     }
-
+    h2 {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    p {
+      margin-top: 0;
+      color: #888;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 20px 0 8px;
+    }
     .phone-input {
       display: flex;
       align-items: center;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      background-color: #f9f9f9;
-      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #f7f7f7;
     }
-
     .phone-input select {
       border: none;
-      background: none;
+      background: transparent;
       font-size: 16px;
       margin-right: 10px;
       outline: none;
     }
-
     .phone-input input {
       border: none;
-      background: none;
+      outline: none;
       font-size: 16px;
       flex: 1;
-      outline: none;
+      background: transparent;
     }
-
-    .password-container {
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      background-color: #f9f9f9;
-      padding: 12px;
-      display: flex;
-      align-items: center;
+    .password-input {
+      position: relative;
     }
-
-    .password-container input {
-      border: none;
-      background: none;
-      font-size: 16px;
-      flex: 1;
-      outline: none;
-    }
-
-    .password-container svg {
-      width: 22px;
-      height: 22px;
-      cursor: pointer;
-    }
-
-    button {
-      background-color: #2b6cff;
-      color: #fff;
-      border: none;
-      border-radius: 24px;
-      padding: 14px;
-      font-size: 16px;
+    .password-input input {
       width: 100%;
-      max-width: 400px;
-      margin-top: 20px;
+      padding: 10px;
+      padding-right: 40px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f7f7f7;
+      outline: none;
+    }
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
       cursor: pointer;
     }
-
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #2968ff;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 30px;
+      cursor: pointer;
+    }
     .signup {
       margin-top: 20px;
+      text-align: center;
       font-size: 14px;
     }
-
     .signup a {
-      color: #2b6cff;
+      color: #2968ff;
       text-decoration: none;
-      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Bienvenue à nous rejoindre</h1>
-  <p>Connectez-vous à votre compte</p>
+  <div class="container">
+    <h2>Bienvenue à nous rejoindre</h2>
+    <p>Connectez-vous à votre compte</p>
 
-  <div class="input-group">
     <label>Numéro de Téléphone</label>
     <div class="phone-input">
       <select>
         <option value="+221">+221</option>
-        <option value="+225">+225</option>
-        <option value="+226">+226</option>
-        <option value="+229">+229</option>
       </select>
-      <input type="tel" placeholder="Veuillez entrer votre numéro de téléphone" />
+      <input type="tel" placeholder="Veuillez entrer votre numéro de télé">
     </div>
-  </div>
 
-  <div class="input-group">
     <label>Mot de passe de Connexion</label>
-    <div class="password-container">
-      <input type="password" placeholder="Mot de passe de Connexion" id="passwordInput" maxlength="40" />
-      <svg id="togglePassword" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+    <div class="password-input">
+      <input type="password" placeholder="Mot de passe de Connexion" id="password-field" maxlength="50">
+      <svg class="toggle-password" id="togglePassword" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20" fill="#5e5e5e">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 13c-3.03 0-5.5-2.47-5.5-5.5S8.97 6.5 12 6.5s5.5 2.47 5.5 5.5-2.47 5.5-5.5 5.5zm0-9c-1.93 0-3.5 1.57-3.5 3.5S10.07 15.5 12 15.5s3.5-1.57 3.5-3.5S13.93 8.5 12 8.5z"/>
       </svg>
     </div>
+
+    <button>Connecter Maintenant</button>
+
+    <div class="signup">
+      Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a>
+    </div>
   </div>
 
-  <button type="submit">Se connecter maintenant</button>
-
-  <p class="signup">Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a></p>
-
   <script>
-    const togglePassword = document.getElementById("togglePassword");
-    const passwordInput = document.getElementById("passwordInput");
+    const toggle = document.getElementById('togglePassword');
+    const password = document.getElementById('password-field');
 
-    togglePassword.addEventListener("click", function () {
-      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-      passwordInput.setAttribute("type", type);
+    toggle.addEventListener('click', () => {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
     });
   </script>
 </body>
