@@ -5,153 +5,159 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      background-color: #fff;
-      color: #000;
+      padding: 30px 20px;
     }
 
     h1 {
       font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
     p {
-      margin-top: 0;
       color: #666;
-    }
-
-    form {
-      width: 90%;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+      margin-top: 0;
+      margin-bottom: 30px;
     }
 
     label {
       font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .input-group {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+      position: relative;
     }
 
     .phone-input {
       display: flex;
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      overflow: hidden;
-      background-color: #f5f5f5;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background-color: #f9f9f9;
+      padding: 12px;
     }
 
-    select {
+    .phone-input select {
       border: none;
-      background-color: #f5f5f5;
-      padding: 10px;
+      background: none;
       font-size: 16px;
+      margin-right: 10px;
+      outline: none;
     }
 
-    input[type="tel"], input[type="password"] {
+    .phone-input input {
+      border: none;
+      background: none;
+      font-size: 16px;
       flex: 1;
+      outline: none;
+    }
+
+    .password-container {
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background-color: #f9f9f9;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-container input {
       border: none;
-      padding: 10px;
+      background: none;
       font-size: 16px;
-      background-color: #f5f5f5;
+      flex: 1;
+      outline: none;
     }
 
-    .password-wrapper {
-      position: relative;
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      background-color: #f5f5f5;
-    }
-
-    .password-wrapper input {
-      width: 100%;
-      padding: 10px;
-      padding-right: 40px;
-      font-size: 16px;
-      border: none;
-      background-color: #f5f5f5;
-    }
-
-    .toggle-password {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
+    .password-container svg {
+      width: 22px;
+      height: 22px;
       cursor: pointer;
     }
 
     button {
-      background-color: #3366ff;
-      color: white;
+      background-color: #2b6cff;
+      color: #fff;
       border: none;
-      border-radius: 30px;
-      padding: 15px;
+      border-radius: 24px;
+      padding: 14px;
       font-size: 16px;
-      font-weight: bold;
+      width: 100%;
+      max-width: 400px;
+      margin-top: 20px;
       cursor: pointer;
     }
 
-    .bottom-text {
-      text-align: center;
-      margin-top: 10px;
+    .signup {
+      margin-top: 20px;
+      font-size: 14px;
     }
 
-    .bottom-text a {
-      color: #3366ff;
+    .signup a {
+      color: #2b6cff;
       text-decoration: none;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
-
   <h1>Bienvenue à nous rejoindre</h1>
   <p>Connectez-vous à votre compte</p>
 
-  <form>
-    <label for="phone">Numéro de Téléphone</label>
+  <div class="input-group">
+    <label>Numéro de Téléphone</label>
     <div class="phone-input">
-      <select name="country-code" required>
+      <select>
         <option value="+221">+221</option>
         <option value="+225">+225</option>
         <option value="+226">+226</option>
-        <option value="+228">+228</option>
         <option value="+229">+229</option>
-        <option value="+237">+237</option>
       </select>
-      <input type="tel" name="phone" placeholder="Veuillez entrer votre numéro de téléphone" required>
+      <input type="tel" placeholder="Veuillez entrer votre numéro de téléphone" />
     </div>
+  </div>
 
-    <label for="password">Mot de passe de Connexion</label>
-    <div class="password-wrapper">
-      <input type="password" name="password" id="password" placeholder="Mot de passe de Connexion" required maxlength="20" />
-      <span class="toggle-password" onclick="togglePassword()">👁️</span>
+  <div class="input-group">
+    <label>Mot de passe de Connexion</label>
+    <div class="password-container">
+      <input type="password" placeholder="Mot de passe de Connexion" id="passwordInput" maxlength="40" />
+      <svg id="togglePassword" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+      </svg>
     </div>
+  </div>
 
-    <button type="submit">Connecter Maintenant</button>
+  <button type="submit">Se connecter maintenant</button>
 
-    <div class="bottom-text">
-      Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a>
-    </div>
-  </form>
+  <p class="signup">Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a></p>
 
   <script>
-    function togglePassword() {
-      const passwordInput = document.getElementById('password');
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-      } else {
-        passwordInput.type = 'password';
-      }
-    }
-  </script>
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("passwordInput");
 
+    togglePassword.addEventListener("click", function () {
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+    });
+  </script>
 </body>
 </html>
