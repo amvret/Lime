@@ -2,9 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion</title>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -14,163 +13,131 @@
 
     .header {
       width: 100%;
-      height: auto;
+      height: 45vh; /* hauteur visible comme sur l'image */
       position: relative;
+      overflow: hidden;
     }
 
     .header img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
-    }
-
-    .toggle-buttons {
-      display: flex;
-      justify-content: center;
-      position: absolute;
-      bottom: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      border-radius: 40px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      width: 88%;
-      height: 50px;
-    }
-
-    .toggle-buttons button {
-      flex: 1;
-      padding: 10px 0;
-      border: none;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .toggle-buttons button:first-child {
-      background-color: black;
-      color: white;
-      border-top-left-radius: 40px;
-      border-bottom-left-radius: 40px;
-    }
-
-    .toggle-buttons button:last-child {
-      background-color: white;
-      color: black;
-      border-top-right-radius: 40px;
-      border-bottom-right-radius: 40px;
     }
 
     .login-card {
       background: white;
-      margin: 0 auto;
-      margin-top: -30px; /* plus remonté comme demandé */
+      margin: -50px auto 0; /* remonte la fiche blanche */
       padding: 25px 20px 35px;
       border-radius: 15px;
       max-width: 500px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    .input-group {
+    .login-toggle {
       display: flex;
-      align-items: center;
-      border-bottom: 1px solid #ccc;
+      justify-content: center;
       margin-bottom: 20px;
-      padding-bottom: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      width: 90%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    .input-group .material-icons {
-      margin-right: 10px;
-      font-size: 20px;
-    }
-
-    .input-group input {
+    .login-toggle button {
       flex: 1;
+      padding: 14px 0;
       border: none;
-      outline: none;
+      font-weight: bold;
       font-size: 16px;
-      background: transparent;
     }
 
-    .country-code-select {
-      background: transparent;
-      border: none;
-      font-size: 16px;
-      outline: none;
-      cursor: pointer;
-      margin-right: 5px;
+    .login-toggle .active {
+      background-color: black;
+      color: white;
     }
 
-    .checkbox {
-      margin-bottom: 20px;
+    .login-toggle .inactive {
+      background-color: white;
+      color: black;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
       font-size: 14px;
     }
 
-    .login-btn {
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .form-group .icon {
+      margin-right: 8px;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .checkbox input {
+      margin-right: 8px;
+    }
+
+    .submit-btn {
       width: 100%;
-      padding: 12px;
-      background-color: #e64510;
+      background-color: #f04923;
       color: white;
+      padding: 14px;
       border: none;
       border-radius: 10px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 10px;
     }
 
-    @media screen and (max-width: 480px) {
-      .login-card {
-        margin: -25px 15px 0;
-      }
-
-      .toggle-buttons {
-        width: 92%;
-        height: 48px;
-      }
-
-      .toggle-buttons button {
-        font-size: 14px;
-      }
+    .submit-btn:hover {
+      background-color: #d63d1e;
     }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <img src="https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true" alt="Background">
-    <div class="toggle-buttons">
-      <button>Se connecter</button>
-      <button>Créer un compte</button>
-    </div>
+    <img src="https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true" alt="Image de fond" />
   </div>
 
   <div class="login-card">
-    <div class="input-group">
-      <span class="material-icons">person</span>
-      <select class="country-code-select">
-        <option value="+237">+237</option>
-        <option value="+33">+33</option>
-        <option value="+1">+1</option>
-        <option value="+225">+225</option>
-        <option value="+229">+229</option>
-        <option value="+221">+221</option>
-      </select>
-      <input type="tel" placeholder="Entrez votre numéro de portable">
+    <div class="login-toggle">
+      <button class="active">Se connecter</button>
+      <button class="inactive">Créer un compte</button>
     </div>
 
-    <div class="input-group">
-      <span class="material-icons">lock</span>
-      <input type="password" placeholder="Veuillez entrer votre mot de passe">
+    <div class="form-group">
+      <label for="password"><span class="icon">🔒</span>Veuillez entrer votre mot de passe</label>
+      <input type="password" id="password" placeholder="Mot de passe" />
     </div>
 
     <div class="checkbox">
-      <input type="checkbox" id="remember">
+      <input type="checkbox" id="remember" />
       <label for="remember">Se souvenir du mot de passe</label>
     </div>
 
-    <button class="login-btn">Connectez-vous à votre compte</button>
+    <button class="submit-btn">Connectez-vous à votre compte</button>
   </div>
 
 </body>
