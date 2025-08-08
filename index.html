@@ -2,141 +2,146 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      background: #f2f2f2;
     }
 
-    .header {
-      width: 100%;
-      height: 45vh; /* hauteur visible comme sur l'image */
+    /* SECTION IMAGE EN HAUT */
+    .header-image {
       position: relative;
-      overflow: hidden;
-    }
-
-    .header img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      height: 260px; /* Hauteur exacte inspirée de la capture */
+      background: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true') no-repeat center center;
+      background-size: cover;
     }
 
-    .login-card {
-      background: white;
-      margin: -50px auto 0; /* remonte la fiche blanche */
-      padding: 25px 20px 35px;
-      border-radius: 15px;
-      max-width: 500px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .login-toggle {
+    /* BOUTONS PAR DESSUS L’IMAGE */
+    .toggle-buttons {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-      border-radius: 999px;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       overflow: hidden;
-      width: 90%;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    .login-toggle button {
-      flex: 1;
-      padding: 14px 0;
+    .toggle-buttons button {
+      padding: 12px 22px;
       border: none;
+      cursor: pointer;
       font-weight: bold;
       font-size: 16px;
     }
 
-    .login-toggle .active {
-      background-color: black;
+    .toggle-buttons .active {
+      background: black;
       color: white;
     }
 
-    .login-toggle .inactive {
-      background-color: white;
+    .toggle-buttons .inactive {
+      background: white;
       color: black;
     }
 
+    /* FORMULAIRE */
+    .form-container {
+      margin-top: 50px;
+      background: white;
+      padding: 30px 20px;
+      border-radius: 20px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
     .form-group {
-      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
     }
 
-    .form-group input[type="text"],
-    .form-group input[type="password"] {
+    .form-group input {
+      border: none;
+      outline: none;
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
+      margin-left: 10px;
+      font-size: 16px;
     }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 14px;
-    }
-
-    .form-group .icon {
-      margin-right: 8px;
+    .form-group img {
+      width: 20px;
     }
 
     .checkbox {
-      display: flex;
-      align-items: center;
       margin-bottom: 20px;
-    }
-
-    .checkbox input {
-      margin-right: 8px;
     }
 
     .submit-btn {
       width: 100%;
-      background-color: #f04923;
-      color: white;
       padding: 14px;
+      background: #e53914;
       border: none;
-      border-radius: 10px;
-      font-size: 16px;
+      color: white;
       font-weight: bold;
+      font-size: 16px;
+      border-radius: 10px;
       cursor: pointer;
     }
 
-    .submit-btn:hover {
-      background-color: #d63d1e;
+    /* RESPONSIVE */
+    @media (max-width: 500px) {
+      .form-container {
+        margin-top: 50px;
+        border-radius: 20px;
+        padding: 25px 15px;
+      }
+
+      .toggle-buttons button {
+        padding: 10px 18px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <img src="https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true" alt="Image de fond" />
-  </div>
-
-  <div class="login-card">
-    <div class="login-toggle">
+  <!-- IMAGE + BOUTONS -->
+  <div class="header-image">
+    <div class="toggle-buttons">
       <button class="active">Se connecter</button>
       <button class="inactive">Créer un compte</button>
     </div>
+  </div>
 
+  <!-- FORMULAIRE -->
+  <div class="form-container">
     <div class="form-group">
-      <label for="password"><span class="icon">🔒</span>Veuillez entrer votre mot de passe</label>
-      <input type="password" id="password" placeholder="Mot de passe" />
+      <img src="https://img.icons8.com/ios-filled/50/phone.png" alt="phone" />
+      <span style="margin-right: 10px;">+237</span>
+      <input type="tel" placeholder="Entrez votre numéro de portable" />
     </div>
-
+    <div class="form-group">
+      <img src="https://img.icons8.com/ios-filled/50/lock.png" alt="lock" />
+      <input type="password" placeholder="Veuillez entrer votre mot de passe" />
+    </div>
     <div class="checkbox">
       <input type="checkbox" id="remember" />
       <label for="remember">Se souvenir du mot de passe</label>
     </div>
-
     <button class="submit-btn">Connectez-vous à votre compte</button>
   </div>
 
