@@ -2,244 +2,158 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
-    }
-
-    .header-image {
-      position: relative;
-      width: 100%;
-      height: 260px;
-      background: url('train_cut.jpg') no-repeat center center;
+      background-color: #f2f2f2;
+      background-image: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true');
       background-size: cover;
+      background-position: top center;
+      background-repeat: no-repeat;
     }
 
-    .toggle-buttons {
-      position: absolute;
-      bottom: -25px;
-      left: 50%;
-      transform: translateX(-50%);
+    .switch-container {
       display: flex;
-      border-radius: 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
+      justify-content: center;
+      margin-top: 180px;
+      position: relative;
+      z-index: 2;
     }
 
-    .toggle-buttons button {
-      padding: 12px 22px;
+    .switch {
+      display: flex;
+      background-color: #fff;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .switch button {
+      flex: 1;
+      padding: 10px 20px;
       border: none;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
       font-size: 16px;
     }
 
-    .toggle-buttons .active {
-      background: black;
+    .switch .active {
+      background-color: black;
       color: white;
     }
 
-    .toggle-buttons .inactive {
-      background: white;
+    .switch button:not(.active) {
+      background-color: white;
       color: black;
     }
 
     .form-container {
-      margin-top: 50px;
-      background: white;
-      padding: 30px 20px;
+      background-color: white;
       border-radius: 20px;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 90%;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
     }
 
-    .form-group {
+    .input-group {
       display: flex;
       align-items: center;
       border-bottom: 1px solid #ccc;
       margin-bottom: 20px;
-      padding-bottom: 8px;
+      padding-bottom: 10px;
     }
 
-    .form-group input {
+    .input-group img.icon {
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    .phone-prefix {
+      display: flex;
+      align-items: center;
+      border-right: 1px solid #ccc;
+      padding-right: 10px;
+      margin-right: 10px;
+    }
+
+    .phone-prefix img {
+      width: 16px;
+      margin-right: 5px;
+    }
+
+    .phone-prefix span {
+      font-size: 15px;
+    }
+
+    .input-group input {
+      flex: 1;
       border: none;
       outline: none;
-      width: 100%;
-      margin-left: 10px;
       font-size: 16px;
     }
 
-    .form-group img {
-      width: 20px;
-    }
-
-    .country-code {
-      margin-right: 10px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .checkbox {
+    .checkbox-group {
+      display: flex;
+      align-items: center;
       margin-bottom: 20px;
     }
 
+    .checkbox-group input {
+      margin-right: 10px;
+    }
+
     .submit-btn {
-      width: 100%;
-      padding: 14px;
-      background: #e53914;
-      border: none;
+      background-color: #e74010;
       color: white;
-      font-weight: bold;
+      padding: 15px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
       font-size: 16px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    /* OVERLAY ET MENU DÉROULANT */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      z-index: 10;
-    }
-
-    .country-selector {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: white;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      padding: 20px;
-      max-height: 80%;
-      overflow-y: auto;
-      display: none;
-      z-index: 11;
-    }
-
-    .country-search {
-      display: flex;
-      margin-bottom: 15px;
-    }
-
-    .country-search input {
-      flex: 1;
-      padding: 10px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px 0 0 8px;
-      outline: none;
-    }
-
-    .country-search button {
-      background: #e53914;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 0 8px 8px 0;
-      cursor: pointer;
-    }
-
-    .country-option {
-      background: linear-gradient(to right, #e53914, #9b0aa6);
-      color: white;
-      padding: 14px 18px;
-      border-radius: 10px;
-      margin-bottom: 10px;
       font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       cursor: pointer;
-    }
-
-    @media (max-width: 500px) {
-      .form-container {
-        margin-top: 50px;
-        border-radius: 20px;
-        padding: 25px 15px;
-      }
-
-      .toggle-buttons button {
-        padding: 10px 18px;
-        font-size: 14px;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- IMAGE + BOUTONS -->
-  <div class="header-image">
-    <div class="toggle-buttons">
+  <div class="switch-container">
+    <div class="switch">
       <button class="active">Se connecter</button>
-      <button class="inactive">Créer un compte</button>
+      <button>Créer un compte</button>
     </div>
   </div>
 
-  <!-- FORMULAIRE -->
   <div class="form-container">
-    <div class="form-group">
-      <img src="https://img.icons8.com/ios-filled/50/phone.png" alt="phone" />
-      <span class="country-code" onclick="openSelector()">+237 ▼</span>
-      <input type="tel" placeholder="Entrez votre numéro de portable" />
-    </div>
-    <div class="form-group">
-      <img src="https://img.icons8.com/ios-filled/50/lock.png" alt="lock" />
-      <input type="password" placeholder="Veuillez entrer votre mot de passe" />
-    </div>
-    <div class="checkbox">
-      <input type="checkbox" id="remember" />
-      <label for="remember">Se souvenir du mot de passe</label>
-    </div>
-    <button class="submit-btn">Connectez-vous à votre compte</button>
+    <form>
+      <div class="input-group">
+        <div class="phone-prefix">
+          <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="smartphone" width="20">
+          <span>&#9660;</span> <!-- flèche vers le bas -->
+          <span style="margin-left: 5px;">+237</span>
+        </div>
+        <input type="tel" placeholder="Entrez votre numéro de portable" />
+      </div>
+
+      <div class="input-group">
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="lock" class="icon">
+        <input type="password" placeholder="Veuillez entrer votre mot de passe" />
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="remember" />
+        <label for="remember">Se souvenir du mot de passe</label>
+      </div>
+
+      <button type="submit" class="submit-btn">Connectez-vous à votre compte</button>
+    </form>
   </div>
-
-  <!-- OVERLAY + SÉLECTEUR D’INDICATIF -->
-  <div class="overlay" onclick="closeSelector()"></div>
-  <div class="country-selector" id="selector">
-    <div class="country-search">
-      <input type="text" id="search" placeholder="Sélectionner l’indicatif régional">
-      <button>🔍 Rechercher</button>
-    </div>
-    <div class="country-option" onclick="selectCode('+237')">+237 <span>République du Cameroun</span></div>
-    <div class="country-option" onclick="selectCode('+228')">+228 <span>République togolaise</span></div>
-    <div class="country-option" onclick="selectCode('+229')">+229 <span>République du Bénin</span></div>
-    <div class="country-option" onclick="selectCode('+226')">+226 <span>Burkina Faso</span></div>
-    <div class="country-option" onclick="selectCode('+225')">+225 <span>République de Côte d'Ivoire</span></div>
-  </div>
-
-  <script>
-    function openSelector() {
-      document.querySelector('.overlay').style.display = 'block';
-      document.querySelector('.country-selector').style.display = 'block';
-    }
-
-    function closeSelector() {
-      document.querySelector('.overlay').style.display = 'none';
-      document.querySelector('.country-selector').style.display = 'none';
-    }
-
-    function selectCode(code) {
-      document.querySelector('.country-code').innerHTML = code + ' ▼';
-      closeSelector();
-    }
-  </script>
 
 </body>
 </html>
