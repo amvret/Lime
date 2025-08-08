@@ -2,128 +2,138 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Connexion</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
+      font-family: sans-serif;
+      background-color: #f2f2f2;
     }
 
-    .header {
-      position: relative;
+    .background-image {
       width: 100%;
-      height: 250px;
-      background: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true') center center / cover no-repeat;
+      height: 240px;
+      background-image: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true');
+      background-size: cover;
+      background-position: center;
+      position: relative;
     }
 
-    .toggle {
+    .tab-container {
       position: absolute;
-      top: 180px;
+      bottom: -25px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       border-radius: 30px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    .toggle button {
-      padding: 12px 25px;
-      border: none;
-      font-size: 16px;
+    .tab {
+      padding: 12px 24px;
       font-weight: bold;
+      font-size: 15px;
+      border: none;
+      outline: none;
       cursor: pointer;
     }
 
-    .toggle .active {
-      background: black;
+    .active-tab {
+      background-color: black;
       color: white;
     }
 
-    .toggle .inactive {
-      background: white;
+    .inactive-tab {
+      background-color: white;
       color: black;
     }
 
     .form-container {
-      margin: -10px auto 20px;
-      background: white;
-      width: 92%;
-      max-width: 400px;
+      background-color: white;
+      margin: 0 16px;
+      margin-top: 60px;
+      padding: 24px 16px;
       border-radius: 16px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      padding: 18px 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    .form-group {
+    .input-group {
       display: flex;
       align-items: center;
+      margin-bottom: 18px;
       border-bottom: 1px solid #ccc;
-      margin-bottom: 15px;
       padding-bottom: 6px;
     }
 
-    .form-group img, .form-group span {
-      margin-right: 10px;
-      font-size: 18px;
+    .input-group img {
+      width: 20px;
+      margin-right: 8px;
     }
 
-    .form-group input {
+    .input-group input {
+      flex: 1;
       border: none;
       outline: none;
-      flex: 1;
-      font-size: 15px;
+      font-size: 14px;
     }
 
-    .remember {
+    .checkbox-group {
       display: flex;
       align-items: center;
-      margin-bottom: 15px;
+      margin: 16px 0;
+      font-size: 14px;
     }
 
-    .remember input {
+    .checkbox-group input {
       margin-right: 8px;
     }
 
     .submit-btn {
-      width: 100%;
-      padding: 14px;
-      background: #e53910;
+      background-color: #e84313;
       color: white;
       border: none;
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
       font-size: 15px;
       font-weight: bold;
-      border-radius: 10px;
       cursor: pointer;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <div class="toggle">
-      <button class="active">Se connecter</button>
-      <button class="inactive">Créer un compte</button>
+  <div class="background-image">
+    <div class="tab-container">
+      <button class="tab active-tab">Se connecter</button>
+      <button class="tab inactive-tab">Créer un compte</button>
     </div>
   </div>
 
   <div class="form-container">
-    <div class="form-group">
-      <span>📱</span>
-      <span>+237</span>
-      <input type="tel" placeholder="Entrez votre numéro de portable">
-    </div>
-    <div class="form-group">
-      <span>🔒</span>
-      <input type="password" placeholder="Veuillez entrer votre mot de passe">
-    </div>
-    <div class="remember">
-      <input type="checkbox" id="remember">
-      <label for="remember">Se souvenir du mot de passe</label>
-    </div>
-    <button class="submit-btn">Connectez‑vous à votre compte</button>
+    <form>
+      <div class="input-group">
+        <img src="https://cdn-icons-png.flaticon.com/128/747/747376.png" alt="Phone Icon">
+        <span>+237</span>
+        <input type="text" placeholder="Entrez votre numéro de portable">
+      </div>
+
+      <div class="input-group">
+        <img src="https://cdn-icons-png.flaticon.com/128/3064/3064155.png" alt="Lock Icon">
+        <input type="password" placeholder="Veuillez entrer votre mot de passe">
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="remember">
+        <label for="remember">Se souvenir du mot de passe</label>
+      </div>
+
+      <button type="submit" class="submit-btn">Connectez-vous à votre compte</button>
+    </form>
   </div>
+
 </body>
 </html>
