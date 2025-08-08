@@ -2,85 +2,88 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Connexion</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      background-color: #f1f1f1;
     }
 
-    /* Section image */
-    .header-image {
-      width: 100%;
-      height: 260px;
-      background: url('image.jpg') no-repeat center center;
+    .header {
+      background: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true') no-repeat center center;
       background-size: cover;
+      height: 220px; /* ← Comme sur ta maquette */
+      min-height: 220px;
       position: relative;
     }
 
-    /* Boutons en haut */
-    .header-buttons {
+    .top-buttons {
       position: absolute;
       bottom: -25px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       background: white;
-      border-radius: 40px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 30px;
       overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 10;
     }
 
-    .header-buttons button {
-      padding: 10px 25px;
+    .top-buttons button {
+      padding: 15px 25px;
       border: none;
-      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
+      font-size: 16px;
     }
 
-    .header-buttons button:first-child {
+    .top-buttons .active {
       background-color: black;
       color: white;
-      border-radius: 40px 0 0 40px;
     }
 
-    .header-buttons button:last-child {
-      background-color: white;
-      color: black;
-      border-radius: 0 40px 40px 0;
-    }
-
-    /* Formulaire */
-    .form-container {
-      margin: 60px 15px 0;
+    .container {
       background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      width: 100%;
+      max-width: 500px;
+      padding: 25px 20px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      margin: -10vh auto 0 auto;
+      position: relative;
+      z-index: 5;
     }
 
     .form-group {
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #ddd;
       margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
       padding-bottom: 8px;
     }
 
-    .form-group img {
-      width: 20px;
-      margin-right: 10px;
-    }
-
-    .form-group select,
     .form-group input {
       border: none;
       outline: none;
-      font-size: 16px;
       flex: 1;
-      background: none;
+      padding: 10px 0;
+      font-size: 16px;
+      background: transparent;
+    }
+
+    .indicatif-select {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-right: 10px;
     }
 
     .checkbox-group {
@@ -93,58 +96,144 @@
       margin-right: 10px;
     }
 
-    .login-btn {
+    .submit-btn {
       width: 100%;
-      background-color: #e03811;
+      background: #e53910;
       color: white;
+      border: none;
       padding: 15px;
       font-size: 16px;
-      border: none;
+      font-weight: bold;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .dropdown {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 20px;
+      z-index: 50;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+
+    .dropdown input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .dropdown button {
+      background: #d93025;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      margin-left: 10px;
+    }
+
+    .indicatif-item {
+      padding: 15px;
+      border-radius: 10px;
+      background: linear-gradient(to right, #e53935, #8e24aa);
+      color: white;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 20;
+    }
+
+    @media (min-width: 600px) {
+      .container {
+        border-radius: 20px;
+        margin-top: -60px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- IMAGE -->
-  <div class="header-image">
-    <div class="header-buttons">
-      <button>Se connecter</button>
+  <div class="header">
+    <div class="top-buttons">
+      <button class="active">Se connecter</button>
       <button>Créer un compte</button>
     </div>
   </div>
 
-  <!-- FORMULAIRE -->
-  <div class="form-container">
-    <!-- Numéro -->
+  <div class="container">
     <div class="form-group">
-      <img src="https://img.icons8.com/ios-filled/50/000000/phone.png" alt="phone" />
-      <select>
-        <option value="+237">+237</option>
-        <option value="+226">+226</option>
-        <option value="+225">+225</option>
-        <option value="+33">+33</option>
-      </select>
-      <input type="tel" placeholder="Entrez votre numéro de portable" />
+      <div class="indicatif-select" onclick="toggleDropdown()">
+        📱 <span id="selectedIndicatif">+237</span> ▼
+      </div>
+      <input type="text" placeholder="Entrez votre numéro de portable" />
     </div>
 
-    <!-- Mot de passe -->
     <div class="form-group">
-      <img src="https://img.icons8.com/ios-filled/50/000000/lock.png" alt="lock" />
-      <input type="password" placeholder="Veuillez entrer votre mot de passe" />
+      🔒 <input type="password" placeholder="Veuillez entrer votre mot de passe" />
     </div>
 
-    <!-- Se souvenir -->
     <div class="checkbox-group">
       <input type="checkbox" id="remember" />
       <label for="remember">Se souvenir du mot de passe</label>
     </div>
 
-    <!-- Bouton connexion -->
-    <button class="login-btn">Connectez-vous à votre compte</button>
+    <button class="submit-btn">Connectez-vous à votre compte</button>
   </div>
 
+  <div class="overlay" id="overlay" onclick="toggleDropdown()"></div>
+
+  <div class="dropdown" id="dropdown">
+    <div style="display: flex;">
+      <input type="text" placeholder="Sélectionner l'indicatif régional" id="searchInput" onkeyup="searchIndicatif()">
+      <button>🔍 Rechercher</button>
+    </div>
+
+    <div id="indicatifList">
+      <div class="indicatif-item" onclick="selectIndicatif('+237')">+237 <span>République du Cameroun</span></div>
+      <div class="indicatif-item" onclick="selectIndicatif('+228')">+228 <span>République togolaise</span></div>
+      <div class="indicatif-item" onclick="selectIndicatif('+229')">+229 <span>République du Bénin</span></div>
+      <div class="indicatif-item" onclick="selectIndicatif('+226')">+226 <span>Burkina Faso</span></div>
+      <div class="indicatif-item" onclick="selectIndicatif('+225')">+225 <span>République de Côte d'Ivoire</span></div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdown");
+      const overlay = document.getElementById("overlay");
+      const isVisible = dropdown.style.display === "block";
+      dropdown.style.display = isVisible ? "none" : "block";
+      overlay.style.display = isVisible ? "none" : "block";
+    }
+
+    function selectIndicatif(code) {
+      document.getElementById("selectedIndicatif").innerText = code;
+      toggleDropdown();
+    }
+
+    function searchIndicatif() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const items = document.querySelectorAll("#indicatifList .indicatif-item");
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        item.style.display = text.includes(input) ? "flex" : "none";
+      });
+    }
+  </script>
 </body>
 </html>
