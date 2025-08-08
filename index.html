@@ -15,16 +15,14 @@
       background: #f2f2f2;
     }
 
-    /* SECTION IMAGE EN HAUT */
     .header-image {
       position: relative;
       width: 100%;
-      height: 260px; /* Hauteur exacte inspirée de la capture */
-      background: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true') no-repeat center center;
+      height: 260px;
+      background: url('train_cut.jpg') no-repeat center center;
       background-size: cover;
     }
 
-    /* BOUTONS PAR DESSUS L’IMAGE */
     .toggle-buttons {
       position: absolute;
       bottom: -25px;
@@ -54,7 +52,6 @@
       color: black;
     }
 
-    /* FORMULAIRE */
     .form-container {
       margin-top: 50px;
       background: white;
@@ -86,6 +83,12 @@
       width: 20px;
     }
 
+    .country-code {
+      margin-right: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+
     .checkbox {
       margin-bottom: 20px;
     }
@@ -102,7 +105,69 @@
       cursor: pointer;
     }
 
-    /* RESPONSIVE */
+    /* OVERLAY ET MENU DÉROULANT */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      z-index: 10;
+    }
+
+    .country-selector {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      padding: 20px;
+      max-height: 80%;
+      overflow-y: auto;
+      display: none;
+      z-index: 11;
+    }
+
+    .country-search {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .country-search input {
+      flex: 1;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+    }
+
+    .country-search button {
+      background: #e53914;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+    }
+
+    .country-option {
+      background: linear-gradient(to right, #e53914, #9b0aa6);
+      color: white;
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
     @media (max-width: 500px) {
       .form-container {
         margin-top: 50px;
@@ -131,7 +196,7 @@
   <div class="form-container">
     <div class="form-group">
       <img src="https://img.icons8.com/ios-filled/50/phone.png" alt="phone" />
-      <span style="margin-right: 10px;">+237</span>
+      <span class="country-code" onclick="openSelector()">+237 ▼</span>
       <input type="tel" placeholder="Entrez votre numéro de portable" />
     </div>
     <div class="form-group">
@@ -144,6 +209,37 @@
     </div>
     <button class="submit-btn">Connectez-vous à votre compte</button>
   </div>
+
+  <!-- OVERLAY + SÉLECTEUR D’INDICATIF -->
+  <div class="overlay" onclick="closeSelector()"></div>
+  <div class="country-selector" id="selector">
+    <div class="country-search">
+      <input type="text" id="search" placeholder="Sélectionner l’indicatif régional">
+      <button>🔍 Rechercher</button>
+    </div>
+    <div class="country-option" onclick="selectCode('+237')">+237 <span>République du Cameroun</span></div>
+    <div class="country-option" onclick="selectCode('+228')">+228 <span>République togolaise</span></div>
+    <div class="country-option" onclick="selectCode('+229')">+229 <span>République du Bénin</span></div>
+    <div class="country-option" onclick="selectCode('+226')">+226 <span>Burkina Faso</span></div>
+    <div class="country-option" onclick="selectCode('+225')">+225 <span>République de Côte d'Ivoire</span></div>
+  </div>
+
+  <script>
+    function openSelector() {
+      document.querySelector('.overlay').style.display = 'block';
+      document.querySelector('.country-selector').style.display = 'block';
+    }
+
+    function closeSelector() {
+      document.querySelector('.overlay').style.display = 'none';
+      document.querySelector('.country-selector').style.display = 'none';
+    }
+
+    function selectCode(code) {
+      document.querySelector('.country-code').innerHTML = code + ' ▼';
+      closeSelector();
+    }
+  </script>
 
 </body>
 </html>
