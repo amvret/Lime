@@ -19,7 +19,7 @@
       position: relative;
       width: 100%;
       height: 260px;
-      background: url('https://www.reisereporter.de/resizer/v2/RTR47EGRXBHC5ACFYNXFEGJ5MU.jpg?auth=1b0a223c51fca3feb4d0a64ec62c490a490d1b9308d6668b71a7be682c84082c&quality=70&width=1284&height=722&smart=true') no-repeat center center;
+      background: url('train_cut.jpg') no-repeat center center;
       background-size: cover;
     }
 
@@ -79,6 +79,12 @@
       font-size: 16px;
     }
 
+    .form-group svg.phone-icon {
+      width: 20px;
+      height: 20px;
+      fill: black;
+    }
+
     .form-group img {
       width: 20px;
     }
@@ -87,6 +93,16 @@
       margin-right: 10px;
       cursor: pointer;
       position: relative;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+    }
+
+    .country-code svg.arrow-icon {
+      width: 12px;
+      height: 12px;
+      margin-left: 5px;
+      fill: black;
     }
 
     .checkbox {
@@ -194,8 +210,15 @@
   <!-- FORMULAIRE -->
   <div class="form-container">
     <div class="form-group">
-      <img src="https://img.icons8.com/ios-filled/50/phone.png" alt="phone" />
-      <span class="country-code" onclick="openSelector()">+237 ▼</span>
+      <!-- Icône téléphone noir (SVG) -->
+      <svg class="phone-icon" viewBox="0 0 24 24"><path d="M17 1H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM12 21a1.25 1.25 0 1 1 0-2.5A1.25 1.25 0 0 1 12 21Zm5-3.5h-10V4h10Z"/></svg>
+      
+      <span class="country-code" onclick="openSelector()">
+        <span id="currentCode">+237</span>
+        <!-- Flèche vers le bas (SVG) -->
+        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+      </span>
+      
       <input type="tel" placeholder="Entrez votre numéro de portable" />
     </div>
     <div class="form-group">
@@ -235,7 +258,7 @@
     }
 
     function selectCode(code) {
-      document.querySelector('.country-code').innerHTML = code + ' ▼';
+      document.getElementById('currentCode').textContent = code;
       closeSelector();
     }
   </script>
