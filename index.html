@@ -1,232 +1,178 @@
 <!doctype html>
-
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Connexion — Votre marque</title>
-  <meta name="color-scheme" content="dark light" />
+  <title>Omaflixx — Connexion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    /* -----------------------
-       RESET & TOKENS
-    ----------------------- */
-    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --bg:#0b0f14;
+      --panel:#0f1620;
+      --accent:#7a4bff;      /* palette originale, distincte de Netflix */
+      --accent-strong:#5f2cff;
+      --text:#e8eef6;
+      --muted:#a9b4c4;
+      --danger:#ff5d5d;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, Noto Sans, "Apple Color Emoji","Segoe UI Emoji";}:root{
-  --bg-image: url('https://nesflix.uk/bgimage.jpg'); /* 🔁 Remplace par TON image */
-  --overlay: rgba(0,0,0,.45);
-  --card-bg: rgba(20,20,20,.65);
-  --card-blur: 18px;
-  --card-radius: 22px;
-  --card-border: 1px solid rgba(255,255,255,.16);
-  --field-bg: rgba(255,255,255,.08);
-  --field-border: 1px solid rgba(255,255,255,.16);
-  --field-radius: 14px;
-  --focus: 0 0 0 3px rgba(255,255,255,.18);
-  --danger: #e50914;
-  --text-1: #ffffff;
-  --text-2: rgba(255,255,255,.8);
-  --muted: rgba(255,255,255,.55);
-  --shadow-lg: 0 20px 50px rgba(0,0,0,.55);
-  --shadow-md: 0 10px 30px rgba(0,0,0,.35);
-  --transition: 180ms cubic-bezier(.2,.7,.2,1);
-  --maxw: 960px;
-}
-
-/* -----------------------
-   BACKDROP
------------------------ */
-.page{
-  min-height:100%;
-  display:grid;place-items:center;
-  background-image: linear-gradient(var(--overlay),var(--overlay)), var(--bg-image);
-  background-size: cover; background-position:center; background-repeat:no-repeat;
-}
-
-/* -----------------------
-   WRAPPER & HEADER
------------------------ */
-.wrap{width:100%; max-width:var(--maxw); padding: clamp(16px, 4vw, 40px);}
-
-.hero{
-  display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;
-  margin-bottom: clamp(16px, 5vh, 32px);
-  user-select:none;
-}
-.brand{font-weight:800; letter-spacing:.06em; font-size: clamp(28px, 7vw, 64px); color: var(--text-1);
-  text-transform:uppercase;}
-.subtitle{color: var(--text-2); font-size: clamp(16px, 3.5vw, 22px); line-height:1.2;}
-
-/* -----------------------
-   CARD
------------------------ */
-.card{
-  width:100%; max-width: 760px; margin-inline:auto;
-  background: var(--card-bg);
-  backdrop-filter: blur(var(--card-blur));
-  border-radius: var(--card-radius);
-  border: var(--card-border);
-  box-shadow: var(--shadow-lg);
-  padding: clamp(14px, 3.8vw, 28px);
-  transform: translateY(0);
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-.card:hover{ transform: translateY(-1px); box-shadow: 0 24px 60px rgba(0,0,0,.6); }
-
-.card h2{ margin: 4px 0 12px; font-size: clamp(22px, 5.5vw, 36px); color: var(--text-1); text-align:center;}
-
-/* -----------------------
-   FORM
------------------------ */
-form{display:grid; gap:14px;}
-
-.field{ position:relative; display:flex; align-items:center; gap:10px; background:var(--field-bg); border:var(--field-border); border-radius:var(--field-radius); padding: 10px 14px; }
-
-.field:focus-within{ outline:none; box-shadow: var(--focus); }
-
-.field input{ flex:1; background:transparent; border:0; color:var(--text-1); font-size: clamp(16px, 4vw, 18px); outline:none; padding: 10px 4px; min-width: 0;}
-
-.icon{ opacity:.9; display:inline-grid; place-items:center; width:24px; height:24px; }
-
-/* Password toggle */
-.btn-eye{ background:none; border:0; cursor:pointer; width:28px; height:28px; opacity:.9; }
-
-/* Country select */
-.prefix{ position:relative; }
-.prefix button{ background:rgba(255,255,255,.06); border:var(--field-border); border-radius:10px; padding:8px 10px; color:var(--text-1); font-weight:600; font-variant-numeric: tabular-nums; cursor:pointer; }
-.prefix button:focus{ outline:none; box-shadow: var(--focus); }
-
-.list{ position:absolute; top: calc(100% + 8px); left:0; right:auto; min-width: 220px; max-height: 260px; overflow:auto; background: rgba(15,15,15,.96); border: 1px solid rgba(255,255,255,.15); border-radius: 12px; box-shadow: var(--shadow-md); padding:6px; display:none; z-index:40; }
-.list.open{ display:block; animation: pop var(--transition); }
-.list-item{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; cursor:pointer; color:var(--text-2); }
-.list-item:hover{ background: rgba(255,255,255,.08); color: var(--text-1);} 
-.dial{font-weight:700; color:var(--text-1)}
-
-@keyframes pop{ from{ opacity:0; transform: translateY(-4px) scale(.98);} to{ opacity:1; transform:none;}}
-
-/* Submit */
-.btn-primary{ appearance:none; border:0; border-radius:14px; padding:14px 18px; font-weight:800; font-size: clamp(16px, 4.2vw, 20px); cursor:pointer; background: var(--danger); color:#fff; box-shadow: 0 8px 18px rgba(229,9,20,.35); transition: transform var(--transition), box-shadow var(--transition), filter var(--transition); }
-.btn-primary:hover{ transform: translateY(-1px); filter: brightness(1.02); box-shadow: 0 12px 26px rgba(229,9,20,.45); }
-.btn-primary:active{ transform: translateY(0); }
-
-.muted{ color: var(--muted); text-align:center; margin-top:6px; }
-.muted a{ color:#fff; text-underline-offset: 4px; }
-
-/* -----------------------
-   RESPONSIVE TWEAKS
------------------------ */
-@media (min-width: 780px){
-  .card{ padding: 32px; }
-  .field{ padding: 12px 16px; }
-  .prefix button{ padding:10px 12px; }
-}
-
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 10% -10%, #1a2140 0%, transparent 60%),
+                  radial-gradient(900px 600px at 110% 10%, #2c1448 0%, transparent 55%),
+                  radial-gradient(800px 500px at -10% 110%, #103449 0%, transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      display:grid; place-items:center;
+      min-height:100%;
+    }
+    .wrap{
+      width:min(92vw, 440px);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)) , var(--panel);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      padding:28px 24px 26px;
+      border-radius:var(--radius);
+      backdrop-filter: blur(6px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; justify-content:center;
+      margin-bottom:8px;
+    }
+    .logo{
+      width:28px; height:28px; border-radius:7px;
+      background: conic-gradient(from 210deg, var(--accent), var(--accent-strong));
+      box-shadow:0 6px 18px rgba(122,75,255,.45), inset 0 0 12px rgba(255,255,255,.25);
+    }
+    .title{
+      font-weight:800; letter-spacing:.4px; font-size:28px;
+      background: linear-gradient(90deg, #fff, #c4c9ff);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    h1{
+      margin:14px 0 18px; text-align:center; font-size:26px; font-weight:700;
+    }
+    form{display:grid; gap:14px; margin-top:6px;}
+    .field{
+      position:relative;
+    }
+    label{
+      display:block; font-size:13px; color:var(--muted); margin-bottom:6px;
+    }
+    input{
+      width:100%; border:1px solid rgba(255,255,255,.12); background:#0c1220;
+      color:var(--text); border-radius:12px; padding:14px 44px 14px 14px;
+      font-size:16px; outline:0; transition:border .2s, box-shadow .2s, background .2s;
+    }
+    input::placeholder{color:#7f8aa3}
+    input:focus{
+      border-color: rgba(122,75,255,.7);
+      box-shadow:0 0 0 4px rgba(122,75,255,.25);
+      background:#0b1120;
+    }
+    .icon{
+      position:absolute; right:12px; top:34px; width:22px; height:22px; display:grid; place-items:center; cursor:pointer;
+      opacity:.9;
+    }
+    .icon svg{display:block}
+    .actions{margin-top:4px; display:grid; gap:10px}
+    .btn{
+      appearance:none; border:0; border-radius:12px; padding:14px 16px; font-size:16px; font-weight:700;
+      background:linear-gradient(180deg, var(--accent), var(--accent-strong));
+      color:white; cursor:pointer; transition:transform .06s ease, filter .2s ease, box-shadow .2s ease;
+      box-shadow:0 10px 25px rgba(95,44,255,.35);
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn:hover{filter:brightness(1.03)}
+    .helper{
+      text-align:center; color:var(--muted); font-size:14px; margin-top:2px;
+    }
+    .helper a{color:#cdd3ff; text-decoration:underline dotted}
+    .error{
+      display:none; margin-top:2px; color:var(--danger); font-size:13px;
+    }
+    .legal{
+      margin-top:20px; color:#7d8aa0; font-size:12px; text-align:center; line-height:1.4;
+    }
+    @media (min-width: 768px){
+      body{padding:24px}
+      .wrap{padding:34px 28px 30px}
+    }
   </style>
 </head>
 <body>
-  <main class="page">
-    <div class="wrap">
-      <header class="hero" aria-hidden="false">
-        <div class="brand">VOTRE&nbsp;MARQUE</div>
-        <p class="subtitle">Connectez‑vous avec votre numéro de téléphone</p>
-      </header><section class="card" role="region" aria-label="Carte de connexion">
-    <h2>Se connecter</h2>
-    <form id="loginForm" autocomplete="on" novalidate>
-      <!-- Téléphone -->
-      <div class="field" aria-live="polite">
-        <span class="icon" aria-hidden="true">📞</span>
+  <main class="wrap" role="main" aria-labelledby="headline">
+    <div class="brand" aria-label="Omaflixx">
+      <span class="logo" aria-hidden="true"></span>
+      <span class="title">Omaflixx</span>
+    </div>
+    <h1 id="headline">Se connecter</h1>
 
-        <div class="prefix">
-          <button type="button" id="dialBtn" aria-expanded="false" aria-controls="dialList">+33</button>
-          <div class="list" id="dialList" role="listbox" aria-label="Sélectionner l'indicatif">
-            <!-- ⚠️ Liste courte d'exemple. Ajoute tes pays selon besoin. -->
-            <div class="list-item" data-code="+33" role="option"><span>France</span><span class="dial">+33</span></div>
-            <div class="list-item" data-code="+226" role="option"><span>Burkina Faso</span><span class="dial">+226</span></div>
-            <div class="list-item" data-code="+32" role="option"><span>Belgique</span><span class="dial">+32</span></div>
-            <div class="list-item" data-code="+41" role="option"><span>Suisse</span><span class="dial">+41</span></div>
-            <div class="list-item" data-code="+1" role="option"><span>États‑Unis / Canada</span><span class="dial">+1</span></div>
-            <div class="list-item" data-code="+44" role="option"><span>Royaume‑Uni</span><span class="dial">+44</span></div>
-          </div>
-        </div>
-
-        <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="Numéro de téléphone" aria-label="Numéro de téléphone" required />
-      </div>
-
-      <!-- Password -->
+    <form id="loginForm" method="post" action="/api/login" novalidate>
       <div class="field">
-        <span class="icon" aria-hidden="true">🔒</span>
-        <input id="password" name="password" type="password" placeholder="Mot de passe" autocomplete="current-password" required />
-        <button class="btn-eye" type="button" id="togglePwd" aria-label="Afficher/masquer le mot de passe">👁️</button>
+        <label for="phone">Numéro de téléphone</label>
+        <input id="phone" name="phone" inputmode="tel" autocomplete="tel"
+               placeholder="06 12 34 56 78" required aria-describedby="phoneError" />
+        <div class="error" id="phoneError">Veuillez saisir un numéro valide.</div>
       </div>
 
-      <button class="btn-primary" type="submit">Se connecter</button>
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input id="password" name="password" type="password" autocomplete="current-password"
+               placeholder="••••••••" required minlength="6" aria-describedby="passError" />
+        <button type="button" class="icon" id="togglePass" aria-label="Afficher le mot de passe">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+        <div class="error" id="passError">Mot de passe trop court.</div>
+      </div>
 
-      <p class="muted">Vous n'avez pas de compte ? <a href="#" rel="nofollow">S'inscrire maintenant</a></p>
+      <div class="actions">
+        <button class="btn" type="submit">Se connecter</button>
+      </div>
+      <p class="helper">Vous n'avez pas de compte ? <a href="/inscription">S'inscrire maintenant</a></p>
     </form>
-  </section>
 
-  <footer class="muted" style="margin-top:18px">© 2025 Votre société. Tous droits réservés.</footer>
-</div>
+    <p class="legal">© <span id="year"></span> Omaflixx. Tous droits réservés.</p>
+  </main>
 
-  </main>  <script>
-    // ----------------------------
-    // Indicatifs — ouverture/fermeture
-    // ----------------------------
-    const dialBtn = document.getElementById('dialBtn');
-    const dialList = document.getElementById('dialList');
-    dialBtn.addEventListener('click', () => {
-      const open = dialList.classList.toggle('open');
-      dialBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    document.addEventListener('click', (e)=>{
-      if(!dialList.contains(e.target) && !dialBtn.contains(e.target)) dialList.classList.remove('open');
-    });
-    dialList.querySelectorAll('.list-item').forEach(item=>{
-      item.addEventListener('click', ()=>{
-        dialBtn.textContent = item.dataset.code;
-        dialList.classList.remove('open');
-        document.getElementById('phone').focus();
-      });
+  <script>
+    // Afficher / masquer le mot de passe
+    const toggle = document.getElementById('togglePass');
+    const pass   = document.getElementById('password');
+    toggle.addEventListener('click', () => {
+      const visible = pass.type === 'text';
+      pass.type = visible ? 'password' : 'text';
+      toggle.setAttribute('aria-label', visible ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
+      toggle.innerHTML = visible
+        ? `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.86 20.86 0 0 1 5.06-6.94"/><path d="M1 1l22 22"/><path d="M14.12 14.12A3 3 0 0 1 9.88 9.88"/></svg>`;
     });
 
-    // ----------------------------
-    // Mot de passe — switch visibilité
-    // ----------------------------
-    const togglePwd = document.getElementById('togglePwd');
-    const pwd = document.getElementById('password');
-    togglePwd.addEventListener('click', ()=>{
-      const isPw = pwd.type === 'password';
-      pwd.type = isPw ? 'text' : 'password';
-      togglePwd.setAttribute('aria-pressed', isPw ? 'true' : 'false');
-    });
-
-    // ----------------------------
-    // Soumission — vers VOTRE backend
-    // ⚠️ Utilise une API que vous contrôlez. N'envoyez jamais d'identifiants
-    // vers un tiers. Exemple POST JSON ci-dessous.
-    // ----------------------------
+    // Validation légère côté client
     const form = document.getElementById('loginForm');
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const payload = {
-        phone: `${document.getElementById('dialBtn').textContent}${document.getElementById('phone').value}`.replace(/\s+/g,''),
-        password: document.getElementById('password').value
-      };
-
-      try{
-        const res = await fetch('/api/login', { // 🔁 remplace par TON endpoint
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          credentials: 'include'
-        });
-        if(!res.ok) throw new Error('Échec de la connexion');
-        // Redirection après succès
-        window.location.href = '/app';
-      }catch(err){
-        alert('Connexion impossible. Vérifiez vos identifiants.');
-        console.error(err);
-      }
+    const phone = document.getElementById('phone');
+    const phoneErr = document.getElementById('phoneError');
+    const passErr = document.getElementById('passError');
+    form.addEventListener('submit', (e) => {
+      let ok = true;
+      phoneErr.style.display = 'none';
+      passErr.style.display = 'none';
+      const digits = phone.value.replace(/\D/g,'');
+      if (digits.length < 9) { phoneErr.style.display = 'block'; ok = false; }
+      if (pass.value.length < 6) { passErr.style.display = 'block'; ok = false; }
+      if (!ok) e.preventDefault();
     });
-  </script></body>
+
+    // Année automatique
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
