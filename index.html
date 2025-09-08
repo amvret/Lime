@@ -3,176 +3,107 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Omaflixx — Connexion</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <title>Omaflixx - Connexion</title>
   <style>
-    :root{
-      --bg:#0b0f14;
-      --panel:#0f1620;
-      --accent:#7a4bff;      /* palette originale, distincte de Netflix */
-      --accent-strong:#5f2cff;
-      --text:#e8eef6;
-      --muted:#a9b4c4;
-      --danger:#ff5d5d;
-      --radius:18px;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: url("bgimage.jpg") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 700px at 10% -10%, #1a2140 0%, transparent 60%),
-                  radial-gradient(900px 600px at 110% 10%, #2c1448 0%, transparent 55%),
-                  radial-gradient(800px 500px at -10% 110%, #103449 0%, transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      display:grid; place-items:center;
-      min-height:100%;
+
+    .login-container {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 40px 30px;
+      border-radius: 8px;
+      max-width: 350px;
+      width: 100%;
+      text-align: center;
     }
-    .wrap{
-      width:min(92vw, 440px);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)) , var(--panel);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:var(--shadow);
-      padding:28px 24px 26px;
-      border-radius:var(--radius);
-      backdrop-filter: blur(6px);
+
+    .login-container h1 {
+      color: #e50914; /* rouge Netflix */
+      font-size: 28px;
+      margin-bottom: 10px;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px; justify-content:center;
-      margin-bottom:8px;
+
+    .login-container p {
+      margin: 0 0 25px;
+      font-size: 16px;
     }
-    .logo{
-      width:28px; height:28px; border-radius:7px;
-      background: conic-gradient(from 210deg, var(--accent), var(--accent-strong));
-      box-shadow:0 6px 18px rgba(122,75,255,.45), inset 0 0 12px rgba(255,255,255,.25);
+
+    .login-container input {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
     }
-    .title{
-      font-weight:800; letter-spacing:.4px; font-size:28px;
-      background: linear-gradient(90deg, #fff, #c4c9ff);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      background: #333;
+      color: #fff;
     }
-    h1{
-      margin:14px 0 18px; text-align:center; font-size:26px; font-weight:700;
+
+    .login-container button {
+      width: 100%;
+      padding: 14px;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
     }
-    form{display:grid; gap:14px; margin-top:6px;}
-    .field{
-      position:relative;
+
+    .login-container button:hover {
+      background: #f6121d;
     }
-    label{
-      display:block; font-size:13px; color:var(--muted); margin-bottom:6px;
+
+    .login-container .signup {
+      margin-top: 20px;
+      font-size: 14px;
     }
-    input{
-      width:100%; border:1px solid rgba(255,255,255,.12); background:#0c1220;
-      color:var(--text); border-radius:12px; padding:14px 44px 14px 14px;
-      font-size:16px; outline:0; transition:border .2s, box-shadow .2s, background .2s;
+
+    .login-container .signup a {
+      color: #e50914;
+      text-decoration: none;
+      font-weight: bold;
     }
-    input::placeholder{color:#7f8aa3}
-    input:focus{
-      border-color: rgba(122,75,255,.7);
-      box-shadow:0 0 0 4px rgba(122,75,255,.25);
-      background:#0b1120;
+
+    .login-container .signup a:hover {
+      text-decoration: underline;
     }
-    .icon{
-      position:absolute; right:12px; top:34px; width:22px; height:22px; display:grid; place-items:center; cursor:pointer;
-      opacity:.9;
-    }
-    .icon svg{display:block}
-    .actions{margin-top:4px; display:grid; gap:10px}
-    .btn{
-      appearance:none; border:0; border-radius:12px; padding:14px 16px; font-size:16px; font-weight:700;
-      background:linear-gradient(180deg, var(--accent), var(--accent-strong));
-      color:white; cursor:pointer; transition:transform .06s ease, filter .2s ease, box-shadow .2s ease;
-      box-shadow:0 10px 25px rgba(95,44,255,.35);
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn:hover{filter:brightness(1.03)}
-    .helper{
-      text-align:center; color:var(--muted); font-size:14px; margin-top:2px;
-    }
-    .helper a{color:#cdd3ff; text-decoration:underline dotted}
-    .error{
-      display:none; margin-top:2px; color:var(--danger); font-size:13px;
-    }
-    .legal{
-      margin-top:20px; color:#7d8aa0; font-size:12px; text-align:center; line-height:1.4;
-    }
-    @media (min-width: 768px){
-      body{padding:24px}
-      .wrap{padding:34px 28px 30px}
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <main class="wrap" role="main" aria-labelledby="headline">
-    <div class="brand" aria-label="Omaflixx">
-      <span class="logo" aria-hidden="true"></span>
-      <span class="title">Omaflixx</span>
-    </div>
-    <h1 id="headline">Se connecter</h1>
-
-    <form id="loginForm" method="post" action="/api/login" novalidate>
-      <div class="field">
-        <label for="phone">Numéro de téléphone</label>
-        <input id="phone" name="phone" inputmode="tel" autocomplete="tel"
-               placeholder="06 12 34 56 78" required aria-describedby="phoneError" />
-        <div class="error" id="phoneError">Veuillez saisir un numéro valide.</div>
-      </div>
-
-      <div class="field">
-        <label for="password">Mot de passe</label>
-        <input id="password" name="password" type="password" autocomplete="current-password"
-               placeholder="••••••••" required minlength="6" aria-describedby="passError" />
-        <button type="button" class="icon" id="togglePass" aria-label="Afficher le mot de passe">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/>
-            <circle cx="12" cy="12" r="3"/>
-          </svg>
-        </button>
-        <div class="error" id="passError">Mot de passe trop court.</div>
-      </div>
-
-      <div class="actions">
-        <button class="btn" type="submit">Se connecter</button>
-      </div>
-      <p class="helper">Vous n'avez pas de compte ? <a href="/inscription">S'inscrire maintenant</a></p>
+  <div class="login-container">
+    <h1>OMAFLIXX</h1>
+    <p>Connectez-vous avec votre numéro de téléphone</p>
+    <form action="/connexion" method="post">
+      <input type="text" name="phone" placeholder="Numéro de téléphone" required />
+      <input type="password" name="password" placeholder="Mot de passe" required />
+      <button type="submit">Se connecter</button>
     </form>
-
-    <p class="legal">© <span id="year"></span> Omaflixx. Tous droits réservés.</p>
-  </main>
-
-  <script>
-    // Afficher / masquer le mot de passe
-    const toggle = document.getElementById('togglePass');
-    const pass   = document.getElementById('password');
-    toggle.addEventListener('click', () => {
-      const visible = pass.type === 'text';
-      pass.type = visible ? 'password' : 'text';
-      toggle.setAttribute('aria-label', visible ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
-      toggle.innerHTML = visible
-        ? `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>`
-        : `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.86 20.86 0 0 1 5.06-6.94"/><path d="M1 1l22 22"/><path d="M14.12 14.12A3 3 0 0 1 9.88 9.88"/></svg>`;
-    });
-
-    // Validation légère côté client
-    const form = document.getElementById('loginForm');
-    const phone = document.getElementById('phone');
-    const phoneErr = document.getElementById('phoneError');
-    const passErr = document.getElementById('passError');
-    form.addEventListener('submit', (e) => {
-      let ok = true;
-      phoneErr.style.display = 'none';
-      passErr.style.display = 'none';
-      const digits = phone.value.replace(/\D/g,'');
-      if (digits.length < 9) { phoneErr.style.display = 'block'; ok = false; }
-      if (pass.value.length < 6) { passErr.style.display = 'block'; ok = false; }
-      if (!ok) e.preventDefault();
-    });
-
-    // Année automatique
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <div class="signup">
+      Vous n'avez pas de compte ? <a href="/inscription">S'inscrire maintenant</a>
+    </div>
+    <div class="copyright">© 2025 Omaflixx. Tous droits réservés.</div>
+  </div>
 </body>
 </html>
