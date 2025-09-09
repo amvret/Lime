@@ -1,221 +1,148 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mitflex — Simulation pédagogique</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mitflex - Connexion</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url("https://nesflix.uk/bgimage.jpg") no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    .overlay {
+      background: rgba(0, 0, 0, 0.65);
+      border-radius: 16px;
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
 
-<style>
-  :root{
-    --brand:#0b69d6; /* bleu "mitflex" */
-    --bg-overlay: rgba(0,0,0,0.55);
-    --card-bg: rgba(0,0,0,0.6);
-    --muted: rgba(255,255,255,0.8);
-    --glass-border: rgba(255,255,255,0.08);
-    --radius: 12px;
-    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  }
+    .banner {
+      position: absolute;
+      top: 10px;
+      background: white;
+      color: black;
+      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-weight: bold;
+    }
 
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body,#root{height:100%}
-  body{
-    min-height:100vh;
-    color:#fff;
-    background:
-      linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55)),
-      url('https://nesflix.uk/bgimage.jpg') no-repeat center/cover;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding:20px;
-    position:relative;
-    overflow:hidden;
-  }
+    h1 {
+      margin-bottom: 24px;
+      font-size: 24px;
+    }
 
-  .simulation-badge{
-    position:fixed;
-    top:18px;
-    left:18px;
-    background:rgba(255,255,255,0.95);
-    color:#111;
-    padding:6px 10px;
-    border-radius:999px;
-    font-size:13px;
-    font-weight:600;
-    z-index:60;
-    box-shadow:0 6px 18px rgba(0,0,0,0.3);
-  }
+    .input-group {
+      position: relative;
+      margin-bottom: 18px;
+    }
 
-  .container{
-    width:100%;
-    max-width:420px;
-    margin:auto;
-    transform:translateY(-6%);
-  }
+    input {
+      width: 100%;
+      padding: 12px 40px 12px 40px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+    }
 
-  .brand{text-align:center;margin-bottom:18px}
-  .brand .logo{
-    font-size:46px;
-    letter-spacing:4px;
-    font-weight:800;
-    color:var(--brand);
-    text-transform:uppercase;
-    margin-bottom:6px;
-  }
-  .brand .sub{color:var(--muted);font-weight:400;font-size:15px}
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #333;
+    }
 
-  .card{
-    background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6));
-    border-radius:18px;
-    padding:26px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px) saturate(1.1);
-  }
+    .toggle-eye {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #333;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-  h1{font-size:30px;margin-bottom:18px;text-align:center}
+    .toggle-eye.hide {
+      text-decoration: line-through;
+      transform: translateY(-50%) rotate(-15deg);
+    }
 
-  .form-row{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
-  .input{
-    display:flex;align-items:center;gap:12px;
-    padding:14px 12px;border-radius:10px;
-    background:rgba(255,255,255,0.03);
-    border:1px solid rgba(255,255,255,0.06);
-  }
-  .input input{flex:1;background:transparent;border:0;outline:none;color:#fff;font-size:15px}
-  .input .icon{opacity:0.85;font-size:18px}
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #0066ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 18px;
+    }
 
-  .btn{
-    width:100%;padding:14px;border-radius:10px;
-    font-weight:700;border:0;
-    background:var(--brand);color:#fff;font-size:16px;
-    cursor:pointer;transition:transform .12s ease, box-shadow .12s ease;
-  }
-  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(11,105,214,0.18)}
+    button:hover {
+      background: #0052cc;
+    }
 
-  .links{text-align:center;margin-top:14px;color:rgba(255,255,255,0.9)}
-  .links a{color:var(--brand);text-decoration:none;font-weight:700}
+    .link {
+      font-size: 14px;
+      color: #1e90ff;
+      text-decoration: none;
+    }
 
-  .footer{margin-top:18px;font-size:13px;color:rgba(255,255,255,0.65);text-align:center}
+    .link:hover {
+      text-decoration: underline;
+    }
 
-  .eye-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:16px}
-
-  .modal-backdrop{
-    position:fixed;inset:0;background:rgba(0,0,0,0.6);
-    display:flex;align-items:center;justify-content:center;
-    z-index:80;opacity:0;pointer-events:none;
-    transition:opacity .22s ease;
-  }
-  .modal-backdrop.show{opacity:1;pointer-events:auto}
-  .modal{
-    width:calc(100% - 60px);max-width:560px;background:#111;
-    border-radius:12px;padding:20px;
-    border:1px solid rgba(255,255,255,0.04);
-    box-shadow:0 20px 60px rgba(0,0,0,0.6);
-  }
-  .modal h3{margin-bottom:8px}
-  .modal p{color:rgba(255,255,255,0.8);font-size:14px}
-
-  @media (min-width:900px){
-    body{padding:40px}
-    .container{transform:translateY(-12%);max-width:480px}
-    .brand .logo{font-size:56px}
-  }
-</style>
+    footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #bbb;
+    }
+  </style>
 </head>
-
 <body>
-  <div class="simulation-badge">Simulation pédagogique — Ne pas utiliser</div>
-
-  <main id="root" role="main">
-    <div class="container">
-      <div class="brand">
-        <div class="logo">Mitflex</div>
-        <div class="sub">Connectez-vous avec votre numéro de téléphone</div>
-      </div>
-
-      <section class="card">
-        <h1>Se connecter</h1>
-
-        <form id="loginForm" onsubmit="return false;">
-          <div class="form-row">
-            <label class="input" for="phone">
-              <span class="icon">📞</span>
-              <input id="phone" type="tel" placeholder="Numéro de téléphone" required>
-            </label>
-
-            <label class="input" for="password">
-              <span class="icon">🔒</span>
-              <input id="password" type="password" placeholder="Mot de passe" required>
-              <button type="button" class="eye-btn" id="togglePassword">👁️</button>
-            </label>
-
-            <button class="btn" id="submitBtn" type="submit">Se connecter</button>
-          </div>
-        </form>
-
-        <div class="links">
-          Vous n'avez pas de compte ? <a href="#" id="openSignup">S'inscrire maintenant</a>
-        </div>
-
-        <div class="footer">© 2025 Mitflex — simulation pédagogique. Tous droits réservés.</div>
-      </section>
+  <div class="banner">Simulation pédagogique — Ne pas utiliser</div>
+  <div class="overlay">
+    <h1>Se connecter</h1>
+    <div class="input-group">
+      <span class="icon">📞</span>
+      <input type="text" placeholder="Numéro de téléphone">
     </div>
-  </main>
-
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal">
-      <h3>Inscription — Simulation</h3>
-      <p>Cette modale fait partie de la simulation pédagogique.</p>
-      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
-        <button class="btn" id="closeModal" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);">Fermer</button>
-        <button class="btn" id="proceedSignup">Continuer</button>
-      </div>
+    <div class="input-group">
+      <span class="icon">🔒</span>
+      <input id="password" type="password" placeholder="Mot de passe">
+      <span id="togglePassword" class="toggle-eye">👁️</span>
     </div>
+    <button>Se connecter</button>
+    <p>Vous n'avez pas de compte ? <a href="#" class="link">S'inscrire maintenant</a></p>
+    <footer>© 2025 Mitflex — simulation pédagogique. Tous droits réservés.</footer>
   </div>
 
-<script>
-  const toggleBtn = document.getElementById('togglePassword');
-  const password = document.getElementById('password');
-  toggleBtn.addEventListener('click', () => {
-    const t = password.type === 'password' ? 'text' : 'password';
-    password.type = t;
-    toggleBtn.textContent = t === 'text' ? '🙈' : '👁️';
-  });
+  <script>
+    const togglePassword = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
 
-  const form = document.getElementById('loginForm');
-  const submitBtn = document.getElementById('submitBtn');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Connexion...';
-    setTimeout(() => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Se connecter';
-      openModal();
-    }, 900);
-  });
-
-  const modalBackdrop = document.getElementById('modalBackdrop');
-  const openSignup = document.getElementById('openSignup');
-  const closeModal = document.getElementById('closeModal');
-  const proceedSignup = document.getElementById('proceedSignup');
-
-  function openModal(){
-    modalBackdrop.classList.add('show');
-  }
-  function closeModalFn(){
-    modalBackdrop.classList.remove('show');
-  }
-
-  openSignup.addEventListener('click', (ev) => { ev.preventDefault(); openModal(); });
-  closeModal.addEventListener('click', closeModalFn);
-  proceedSignup.addEventListener('click', () => { alert('Action de démo — simulation pédagogique'); });
-  modalBackdrop.addEventListener('click', (e) => { if(e.target === modalBackdrop) closeModalFn(); });
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModalFn(); });
-</script>
+    togglePassword.addEventListener("click", () => {
+      const isHidden = password.type === "password";
+      password.type = isHidden ? "text" : "password";
+      togglePassword.classList.toggle("hide", !isHidden);
+    });
+  </script>
 </body>
 </html>
