@@ -18,6 +18,7 @@
       align-items: center;
       color: white;
       text-align: center;
+      overflow: hidden; /* empêche le scroll */
     }
 
     /* Bandeau pédagogique */
@@ -37,7 +38,7 @@
       padding: 30px 25px;
       border-radius: 15px;
       width: 90%;
-      max-width: 350px;
+      max-width: 350px; /* largeur max pour éviter l’effet infini */
       text-align: center;
     }
 
@@ -47,9 +48,23 @@
       font-weight: bold;
     }
 
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .input-wrapper span {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: black; /* icône noir */
+    }
+
     .overlay input {
       width: 100%;
-      padding: 14px;
+      padding: 14px 14px 14px 40px; /* espace pour les emojis 📞 🔒 */
       margin: 10px 0;
       border: none;
       border-radius: 6px;
@@ -59,11 +74,6 @@
     .password-wrapper {
       position: relative;
       width: 100%;
-    }
-
-    .password-wrapper input {
-      width: 100%;
-      padding-right: 40px;
     }
 
     .toggle-password {
@@ -128,9 +138,14 @@
 
   <div class="overlay">
     <h2>Se connecter</h2>
-    <input type="text" placeholder="Numéro de téléphone">
 
-    <div class="password-wrapper">
+    <div class="input-wrapper">
+      <span>📞</span>
+      <input type="text" placeholder="Numéro de téléphone">
+    </div>
+
+    <div class="password-wrapper input-wrapper">
+      <span>🔒</span>
       <input type="password" id="password" placeholder="Mot de passe">
       <span class="toggle-password" id="togglePassword">👁️</span>
     </div>
@@ -149,9 +164,8 @@
       const type = password.getAttribute("type") === "password" ? "text" : "password";
       password.setAttribute("type", type);
 
-      // Animation œil → œil barré
+      // Effet barré animé
       togglePassword.classList.toggle("hide");
-      togglePassword.textContent = togglePassword.classList.contains("hide") ? "👁️" : "👁️";
     });
   </script>
 </body>
