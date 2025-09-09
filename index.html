@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Mitflex — Simulation pédagogique</title>
 
-<!-- Google font (remplaçable) -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -19,7 +18,6 @@
     font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   }
 
-  /* Reset + base */
   *{box-sizing:border-box;margin:0;padding:0}
   html,body,#root{height:100%}
   body{
@@ -27,7 +25,7 @@
     color:#fff;
     background:
       linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55)),
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900"><rect fill="%230b69d6" width="100%" height="100%"/></svg>') no-repeat center/cover;
+      url('https://nesflix.uk/bgimage.jpg') no-repeat center/cover;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -38,7 +36,6 @@
     overflow:hidden;
   }
 
-  /* Top simulation badge so it's obvious it's a mock */
   .simulation-badge{
     position:fixed;
     top:18px;
@@ -53,7 +50,6 @@
     box-shadow:0 6px 18px rgba(0,0,0,0.3);
   }
 
-  /* Center container */
   .container{
     width:100%;
     max-width:420px;
@@ -61,11 +57,7 @@
     transform:translateY(-6%);
   }
 
-  /* Brand area */
-  .brand{
-    text-align:center;
-    margin-bottom:18px;
-  }
+  .brand{text-align:center;margin-bottom:18px}
   .brand .logo{
     font-size:46px;
     letter-spacing:4px;
@@ -74,131 +66,64 @@
     text-transform:uppercase;
     margin-bottom:6px;
   }
-  .brand .sub{
-    color:var(--muted);
-    font-weight:400;
-    font-size:15px;
-  }
+  .brand .sub{color:var(--muted);font-weight:400;font-size:15px}
 
-  /* Card (glass) */
   .card{
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border:1px solid var(--glass-border);
+    background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6));
     border-radius:18px;
     padding:26px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.6);
     backdrop-filter: blur(8px) saturate(1.1);
   }
 
-  h1{
-    font-size:30px;
-    margin-bottom:18px;
-    text-align:center;
-  }
+  h1{font-size:30px;margin-bottom:18px;text-align:center}
 
-  /* Form */
-  .form-row{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    margin-bottom:18px;
-  }
+  .form-row{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
   .input{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px 12px;
-    border-radius:10px;
+    display:flex;align-items:center;gap:12px;
+    padding:14px 12px;border-radius:10px;
     background:rgba(255,255,255,0.03);
     border:1px solid rgba(255,255,255,0.06);
   }
-  .input input{
-    flex:1;
-    background:transparent;
-    border:0;
-    outline:none;
-    color:#fff;
-    font-size:15px;
-  }
-  .input .icon{
-    opacity:0.85;
-    font-size:18px;
-  }
+  .input input{flex:1;background:transparent;border:0;outline:none;color:#fff;font-size:15px}
+  .input .icon{opacity:0.85;font-size:18px}
+
   .btn{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    font-weight:700;
-    border:0;
-    background:var(--brand);
-    color:#fff;
-    font-size:16px;
-    cursor:pointer;
-    transition:transform .12s ease, box-shadow .12s ease;
+    width:100%;padding:14px;border-radius:10px;
+    font-weight:700;border:0;
+    background:var(--brand);color:#fff;font-size:16px;
+    cursor:pointer;transition:transform .12s ease, box-shadow .12s ease;
   }
-  .btn:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(11,105,214,0.18) }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(11,105,214,0.18)}
 
-  .links{
-    text-align:center;
-    margin-top:14px;
-    color:rgba(255,255,255,0.9);
-  }
-  .links a{
-    color:var(--brand);
-    text-decoration:none;
-    font-weight:700;
-  }
+  .links{text-align:center;margin-top:14px;color:rgba(255,255,255,0.9)}
+  .links a{color:var(--brand);text-decoration:none;font-weight:700}
 
-  /* Footer small */
-  .footer{
-    margin-top:18px;
-    font-size:13px;
-    color:rgba(255,255,255,0.65);
-    text-align:center;
-  }
+  .footer{margin-top:18px;font-size:13px;color:rgba(255,255,255,0.65);text-align:center}
 
-  /* Eye button */
-  .eye-btn{
-    background:transparent;
-    border:0;
-    color:var(--muted);
-    cursor:pointer;
-    font-size:16px;
-  }
+  .eye-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:16px}
 
-  /* Modal (example behavior) */
   .modal-backdrop{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.6);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:80;
-    opacity:0;
-    pointer-events:none;
+    position:fixed;inset:0;background:rgba(0,0,0,0.6);
+    display:flex;align-items:center;justify-content:center;
+    z-index:80;opacity:0;pointer-events:none;
     transition:opacity .22s ease;
   }
-  .modal-backdrop.show{ opacity:1; pointer-events:auto; }
+  .modal-backdrop.show{opacity:1;pointer-events:auto}
   .modal{
-    width:calc(100% - 60px);
-    max-width:560px;
-    background:#111;
-    border-radius:12px;
-    padding:20px;
+    width:calc(100% - 60px);max-width:560px;background:#111;
+    border-radius:12px;padding:20px;
     border:1px solid rgba(255,255,255,0.04);
     box-shadow:0 20px 60px rgba(0,0,0,0.6);
   }
-  .modal h3{ margin-bottom:8px }
-  .modal p{ color:rgba(255,255,255,0.8); font-size:14px }
+  .modal h3{margin-bottom:8px}
+  .modal p{color:rgba(255,255,255,0.8);font-size:14px}
 
-  /* Responsive tweaks */
   @media (min-width:900px){
-    body{ padding:40px; }
-    .container{ transform:translateY(-12%); max-width:480px; }
-    .brand .logo{ font-size:56px }
+    body{padding:40px}
+    .container{transform:translateY(-12%);max-width:480px}
+    .brand .logo{font-size:56px}
   }
-
 </style>
 </head>
 
@@ -206,26 +131,26 @@
   <div class="simulation-badge">Simulation pédagogique — Ne pas utiliser</div>
 
   <main id="root" role="main">
-    <div class="container" aria-live="polite">
-      <div class="brand" role="banner">
+    <div class="container">
+      <div class="brand">
         <div class="logo">Mitflex</div>
         <div class="sub">Connectez-vous avec votre numéro de téléphone</div>
       </div>
 
-      <section class="card" aria-label="Formulaire de connexion">
+      <section class="card">
         <h1>Se connecter</h1>
 
         <form id="loginForm" onsubmit="return false;">
           <div class="form-row">
             <label class="input" for="phone">
-              <span class="icon" aria-hidden>📞</span>
-              <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="Numéro de téléphone" autocomplete="tel" required>
+              <span class="icon">📞</span>
+              <input id="phone" type="tel" placeholder="Numéro de téléphone" required>
             </label>
 
             <label class="input" for="password">
-              <span class="icon" aria-hidden>🔒</span>
-              <input id="password" name="password" type="password" placeholder="Mot de passe" autocomplete="current-password" required>
-              <button type="button" class="eye-btn" id="togglePassword" aria-label="Afficher le mot de passe">👁️</button>
+              <span class="icon">🔒</span>
+              <input id="password" type="password" placeholder="Mot de passe" required>
+              <button type="button" class="eye-btn" id="togglePassword">👁️</button>
             </label>
 
             <button class="btn" id="submitBtn" type="submit">Se connecter</button>
@@ -241,11 +166,10 @@
     </div>
   </main>
 
-  <!-- Modal (signup) -->
-  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document">
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
       <h3>Inscription — Simulation</h3>
-      <p>Cette modale fait partie de la simulation pédagogique. Remplace les contenus par ton prototype réel si nécessaire.</p>
+      <p>Cette modale fait partie de la simulation pédagogique.</p>
       <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
         <button class="btn" id="closeModal" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);">Fermer</button>
         <button class="btn" id="proceedSignup">Continuer</button>
@@ -254,7 +178,6 @@
   </div>
 
 <script>
-  // Show/hide password
   const toggleBtn = document.getElementById('togglePassword');
   const password = document.getElementById('password');
   toggleBtn.addEventListener('click', () => {
@@ -263,14 +186,12 @@
     toggleBtn.textContent = t === 'text' ? '🙈' : '👁️';
   });
 
-  // Basic submit handling (demo-only)
   const form = document.getElementById('loginForm');
   const submitBtn = document.getElementById('submitBtn');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     submitBtn.disabled = true;
     submitBtn.textContent = 'Connexion...';
-    // Simulation: short delay then show modal that it's a demo
     setTimeout(() => {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Se connecter';
@@ -278,7 +199,6 @@
     }, 900);
   });
 
-  // Modal control
   const modalBackdrop = document.getElementById('modalBackdrop');
   const openSignup = document.getElementById('openSignup');
   const closeModal = document.getElementById('closeModal');
@@ -286,31 +206,16 @@
 
   function openModal(){
     modalBackdrop.classList.add('show');
-    modalBackdrop.setAttribute('aria-hidden','false');
   }
   function closeModalFn(){
     modalBackdrop.classList.remove('show');
-    modalBackdrop.setAttribute('aria-hidden','true');
   }
 
   openSignup.addEventListener('click', (ev) => { ev.preventDefault(); openModal(); });
   closeModal.addEventListener('click', closeModalFn);
   proceedSignup.addEventListener('click', () => { alert('Action de démo — simulation pédagogique'); });
-
-  // Close modal on backdrop click
-  modalBackdrop.addEventListener('click', (e) => {
-    if(e.target === modalBackdrop) closeModalFn();
-  });
-
-  // Keyboard accessibility: Esc to close
+  modalBackdrop.addEventListener('click', (e) => { if(e.target === modalBackdrop) closeModalFn(); });
   document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModalFn(); });
-
-  // Small parallax for background (purely decorative)
-  document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 6;
-    const y = (e.clientY / window.innerHeight - 0.5) * 6;
-    document.body.style.backgroundPosition = `calc(50% + ${x}px) calc(50% + ${y}px)`;
-  }, {passive:true});
 </script>
 </body>
 </html>
