@@ -1,171 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mitflex - Connexion</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mockup — Login layout</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: url("https://nesflix.uk/bgimage.jpg") no-repeat center center fixed;
-      background-size: cover;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      color: white;
-      text-align: center;
-      overflow: hidden; /* empêche le scroll */
+    :root{
+      --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --brand-color: #e50914;
+      --text-light: #f3f3f3;
+      --muted: rgba(255,255,255,0.75);
+      --card-radius: 12px;
+      --max-width: 1100px;
+      --space-sm: 12px;
+      --space-md: 20px;
+      --space-lg: 32px;
     }
 
-    /* Bandeau pédagogique */
-    .banner {
-      background: white;
-      color: black;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
+    * { box-sizing: border-box; }
+    body{ margin:0; font-family:var(--font-sans); background:#000; color:var(--text-light); }
 
-    /* Zone centrale */
-    .overlay {
-      background: rgba(0, 0, 0, 0.75);
-      padding: 30px 25px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 350px; /* largeur max pour éviter l’effet infini */
-      text-align: center;
-    }
+    /* Header */
+    .site-header{position:fixed;left:0;right:0;top:0;z-index:40;padding:var(--space-sm) var(--space-md);background:linear-gradient(180deg,rgba(0,0,0,0.35),transparent);}
+    .header-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+    .brand{font-weight:700;font-size:1.25rem;color:var(--brand-color);}
 
-    .overlay h2 {
-      font-size: 22px;
-      margin-bottom: 25px;
-      font-weight: bold;
+    /* Hero */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      padding-top:72px;
+      background:url("https://nesflix.uk/bgimage.jpg") center/cover no-repeat;
     }
-
-    .input-wrapper {
-      position: relative;
-      width: 100%;
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.75));
+      z-index:1;
     }
+    .hero-content{position:relative;z-index:2;max-width:var(--max-width);margin:auto;display:flex;gap:var(--space-lg);align-items:flex-start;padding:var(--space-lg);}
+    .hero-title{font-size:2.4rem;margin:0 0 12px;}
+    .hero-sub{margin:0 0 var(--space-md);color:var(--muted);}
 
-    .input-wrapper span {
-      position: absolute;
-      top: 50%;
-      left: 12px;
-      transform: translateY(-50%);
-      font-size: 18px;
-      color: black; /* icône noir */
+    /* Login card */
+    .login-card{margin-left:auto;width:320px;background:rgba(0,0,0,0.6);padding:var(--space-lg);border-radius:var(--card-radius);backdrop-filter:blur(6px);}
+    .card-title{text-align:center;margin:0 0 12px;font-size:1.25rem;}
+    .login-form{display:flex;flex-direction:column;gap:12px;}
+    input{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#fff;}
+    .pw-row{display:flex;gap:8px;}
+    .eye-btn{background:transparent;border:0;color:var(--muted);cursor:pointer;}
+    .primary-btn{padding:12px;background:var(--brand-color);color:#fff;border:0;border-radius:8px;font-weight:600;cursor:pointer;}
+    .card-footer{text-align:center;margin-top:12px;color:var(--muted);}
+    .card-footer a{color:var(--brand-color);text-decoration:none;}
+
+    /* Footer */
+    .site-footer{padding:24px 0;text-align:center;color:rgba(255,255,255,0.6);}
+
+    /* Watermark */
+    .watermark{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1000;font-size:clamp(14px,3.5vw,36px);letter-spacing:6px;color:rgba(255,255,255,0.12);font-weight:700;text-transform:uppercase;opacity:0;transition:.2s;}
+    body.show-watermark .watermark{opacity:1;}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .hero-content{flex-direction:column;align-items:center;text-align:center;}
+      .login-card{width:92%;margin-left:0;}
+      .hero-title{font-size:2rem;}
     }
-
-    .overlay input {
-      width: 100%;
-      padding: 14px 14px 14px 40px; /* espace pour les emojis 📞 🔒 */
-      margin: 10px 0;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-    }
-
-    .password-wrapper {
-      position: relative;
-      width: 100%;
-    }
-
-    .toggle-password {
-      position: absolute;
-      top: 50%;
-      right: 12px;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 20px;
-      color: black;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .toggle-password.hide {
-      text-decoration: line-through;
-      opacity: 0.7;
-      transform: translateY(-50%) rotate(15deg);
-    }
-
-    .overlay button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 15px;
-      background: #007bff;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      cursor: pointer;
-    }
-
-    .overlay button:hover {
-      background: #0069d9;
-    }
-
-    .overlay p {
-      margin-top: 18px;
-      font-size: 14px;
-    }
-
-    .overlay a {
-      color: #007bff;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .overlay a:hover {
-      text-decoration: underline;
-    }
-
-    /* Pied de page */
-    footer {
-      font-size: 13px;
-      margin-bottom: 12px;
-      opacity: 0.9;
+    @media(max-width:520px){
+      .hero-title{font-size:1.5rem;}
+      .login-card{padding:16px;}
     }
   </style>
 </head>
-<body>
-  <div class="banner">Simulation pédagogique — Ne pas utiliser</div>
-
-  <div class="overlay">
-    <h2>Se connecter</h2>
-
-    <div class="input-wrapper">
-      <span>📞</span>
-      <input type="text" placeholder="Numéro de téléphone">
+<body class="show-watermark">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">MYSTREAM</div>
+      <nav><button class="icon-btn">≡</button></nav>
     </div>
+  </header>
 
-    <div class="password-wrapper input-wrapper">
-      <span>🔒</span>
-      <input type="password" id="password" placeholder="Mot de passe">
-      <span class="toggle-password" id="togglePassword">👁️</span>
+  <main class="hero">
+    <div class="hero-content">
+      <div>
+        <h1 class="hero-title">Lorem Ipsum</h1>
+        <p class="hero-sub">Texte fictif de présentation pour l’espace héros.</p>
+      </div>
+      <section class="login-card">
+        <h2 class="card-title">Connexion</h2>
+        <form class="login-form" onsubmit="return false;">
+          <label><span>Téléphone</span><input type="tel" placeholder="+33 6 12 34 56 78"></label>
+          <label>
+            <span>Mot de passe</span>
+            <div class="pw-row">
+              <input type="password" placeholder="••••••••">
+              <button type="button" class="eye-btn">👁️</button>
+            </div>
+          </label>
+          <button class="primary-btn">Se connecter</button>
+        </form>
+        <div class="card-footer"><p>Pas de compte ? <a href="#">Inscrivez-vous</a></p></div>
+      </section>
     </div>
+  </main>
 
-    <button>Se connecter</button>
-    <p>Vous n'avez pas de compte ? <a href="#">S'inscrire maintenant</a></p>
-  </div>
+  <footer class="site-footer">
+    <p>© 2025 MyStream International. Tous droits réservés.</p>
+  </footer>
 
-  <footer>© 2025 Mitflex — simulation pédagogique. Tous droits réservés.</footer>
+  <div class="watermark">MOCKUP — NOT THE ORIGINAL</div>
 
   <script>
-    const togglePassword = document.getElementById("togglePassword");
-    const password = document.getElementById("password");
-
-    togglePassword.addEventListener("click", () => {
-      const type = password.getAttribute("type") === "password" ? "text" : "password";
-      password.setAttribute("type", type);
-
-      // Effet barré animé
-      togglePassword.classList.toggle("hide");
+    document.querySelectorAll('.eye-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const input=btn.parentElement.querySelector('input');
+        input.type=input.type==="password"?"text":"password";
+      });
     });
   </script>
 </body>
